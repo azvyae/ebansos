@@ -8,9 +8,8 @@ class Beranda extends Controller
     {
         $data['judul'] = 'Home';
         $this->view('templates/header', $data);
+        $this->view('templates/navUmum');
         $this->view('beranda/index', $data);
         $this->view('templates/footer');
     }
 }
-
-?>

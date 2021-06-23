@@ -11,13 +11,22 @@ class App
     {
         $url = $this->parseURL();
 
+        // Check if user and tipe user cookie exist
+        if (isset($_COOKIE['userId'])) {
+            if ($_COOKIE['tipeAkun'] > 0) {
+                $method = 'berandaAdmin';
+            }
+        } else {
+            
+        }
         // Check if controller class exist
         if (isset($url[0])) {
             if (file_exists("../". APP ."/controllers/{$url[0]}.php")) {
                 $this->controller = $url[0];
                 unset($url[0]);
             } else {
-                $this->controller = 'ErrorPage';
+                $this->controller = 'errorpage';
+                unset($url[0]);
             }
         }
 

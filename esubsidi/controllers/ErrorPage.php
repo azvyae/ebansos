@@ -2,7 +2,8 @@
 
 use APP\core\Controller as Controller;
 
-class Error extends Controller {
+class ErrorPage extends Controller
+{
     public function index()
     {
         $data['judul'] = 'Tidak Ditemukan';
