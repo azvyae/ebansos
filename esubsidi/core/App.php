@@ -11,19 +11,9 @@ class App
     {
         $url = $this->parseURL();
 
-        // Check if user and tipe user cookie exist
-        if (isset($_COOKIE['userId'])) {
-            if ($_COOKIE['tipeAkun'] == 1) {
-                $this->method = 'berandaPengguna';
-            } else if ($_COOKIE['tipeAkun'] == 2) {
-                $this->method = 'berandaAdmin';
-            } else {
-                $this->method = 'index';
-            }
-        }
-
         // Check if controller class exist
         if (isset($url[0])) {
+            $url[0] = ucfirst(strtolower($url[0]));
             if (file_exists("../". APP ."/controllers/{$url[0]}.php")) {
                 $this->controller = $url[0];
                 unset($url[0]);
@@ -52,6 +42,7 @@ class App
         // jalankan controller & method, serta kirimkan params
         call_user_func_array([$this->controller, $this->method], $this->params);
     }
+
 
     public function parseURL()
     {

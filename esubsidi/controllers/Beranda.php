@@ -7,28 +7,30 @@ class Beranda extends Controller
     private $judul = 'Beranda';
     public function index()
     {
+        setcookie('userId', 'bWFudGFwQQ==', secure: true);
+        setcookie('tipeAkun', 0, secure: true);
         $data['judul'] = $this->judul;
         $this->view('templates/header', $data);
-        $this->view('templates/navUmum');
-        $this->view('beranda/index', $data);
+        if (isset($_COOKIE['userId'])) {
+            if ($this->valid($_COOKIE) == 1) {
+                $this->view('templates/navPengguna');
+                $this->view('berandaPengguna/index', $data);
+            } else if ($this->valid($_COOKIE) == 2) {
+                $this->view('templates/navAdmin');
+                $this->view('berandaPengguna/index', $data);
+            } else {
+                $this->view('templates/navUmum');
+                $this->view('beranda/index', $data);
+            }
+        } else {
+            $this->view('templates/navUmum');
+            $this->view('beranda/index', $data);
+        }
         $this->view('templates/footer');
     }
 
-    public function berandaPengguna()
+    public function cekData()
     {
-        $data['judul'] = $this->judul;
-        $this->view('templates/header', $data);
-        $this->view('templates/navPengguna');
-        $this->view('beranda/index', $data);
-        $this->view('templates/footer');
-    }
-
-    public function berandaAdmin()
-    {
-        $data['judul'] = $this->judul;
-        $this->view('templates/header', $data);
-        $this->view('templates/navAdmin');
-        $this->view('beranda/index', $data);
-        $this->view('templates/footer');
+        echo $this->model('PendudukModel')->getPendudukByNikAndTanggal($_POST);
     }
 }
