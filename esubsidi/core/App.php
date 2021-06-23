@@ -13,12 +13,15 @@ class App
 
         // Check if user and tipe user cookie exist
         if (isset($_COOKIE['userId'])) {
-            if ($_COOKIE['tipeAkun'] > 0) {
-                $method = 'berandaAdmin';
+            if ($_COOKIE['tipeAkun'] == 1) {
+                $this->method = 'berandaPengguna';
+            } else if ($_COOKIE['tipeAkun'] == 2) {
+                $this->method = 'berandaAdmin';
+            } else {
+                $this->method = 'index';
             }
-        } else {
-            
         }
+
         // Check if controller class exist
         if (isset($url[0])) {
             if (file_exists("../". APP ."/controllers/{$url[0]}.php")) {
@@ -26,7 +29,7 @@ class App
                 unset($url[0]);
             } else {
                 $this->controller = 'errorpage';
-                unset($url[0]);
+                $this->method = 'index';
             }
         }
 
