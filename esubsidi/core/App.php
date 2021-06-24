@@ -13,7 +13,7 @@ class App
 
         // Check if controller class exist
         if (isset($url[0])) {
-            $url[0] = ucfirst(strtolower($url[0]));
+            $url[0] = strtolower($url[0]);
             if (file_exists("../". APP ."/controllers/{$url[0]}.php")) {
                 $this->controller = $url[0];
                 unset($url[0]);
