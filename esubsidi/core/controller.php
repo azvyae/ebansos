@@ -16,7 +16,7 @@ class Controller
         return new $model;
     }
     // Check if user and tipe user cookie exist
-    public function valid(array $data = []) 
+    public function valid($data) 
     {
         if (isset($data['userId'])) {
             if(isset($data['tipeAkun'])) {

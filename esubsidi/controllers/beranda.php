@@ -9,12 +9,25 @@ class Beranda extends Controller
     public function index()
     {
         $data['judul'] = $this->judul;
+
         $this->view('templates/header', $data);
+
         if (isset($_COOKIE['user'])) {
-            if ($this->valid($_COOKIE) == 1) {
+            if ($this->valid($_COOKIE['user']) == 1) {
                 $this->view('templates/navPengguna');
                 $this->view('berandaPengguna/index', $data);
-            } else if ($this->valid($_COOKIE) == 2) {
+            } else if ($this->valid($_COOKIE['user']) == 2) {
+                $this->view('templates/navAdmin');
+                $this->view('berandaPengguna/index', $data);
+            } else {
+                $this->view('templates/navUmum');
+                $this->view('beranda/index', $data);
+            }
+        } else if (isset($_SESSION['user'])) {
+            if ($this->valid($_SESSION['user']) == 1) {
+                $this->view('templates/navPengguna');
+                $this->view('berandaPengguna/index', $data);
+            } else if ($this->valid($_SESSION['user']) == 2) {
                 $this->view('templates/navAdmin');
                 $this->view('berandaPengguna/index', $data);
             } else {

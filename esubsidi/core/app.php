@@ -4,7 +4,7 @@ namespace APP\core;
 
 class App
 {
-    protected $controller = 'Beranda';
+    protected $controller = 'beranda';
     protected $method = 'index';
     protected $params = [];
     public function __construct()

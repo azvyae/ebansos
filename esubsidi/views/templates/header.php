@@ -15,4 +15,4 @@
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="d-flex flex-column bd-highlight h-100">

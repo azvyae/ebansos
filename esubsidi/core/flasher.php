@@ -34,7 +34,7 @@ class Flasher
             <div class='p-2  my-auto'>
             <i class='bi {$icon} fs-4' width='32' height='32'></i>
             </div>
-            <div class='p-2 my-auto flex-fill bd-highlight'>
+            <div class='p-2 text-center my-auto flex-fill bd-highlight'>
                 {$_SESSION['flash']['pesan']} {$_SESSION['flash']['aksi']}
             </div>
             <button type='button' class='btn-close my-auto p-2' data-bs-dismiss='alert' aria-label='Close'></button>

@@ -1,6 +1,36 @@
+html,
 body {
-    font-family: 'Fira Code', monospace !important;
+  /* height: 100%; */
+  font-family: 'Fira Code', monospace !important;
 }
+
+.form-signin {
+  width: 100%;
+  max-width: 380px;
+
+}
+.form-register {
+  width: 100%;
+  max-width: 420px;
+
+}
+
+
+.form-signin .form-register .form-floating:focus-within {
+  z-index: 2;
+}
+
+/* .form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+} */
 
 .btn-ripple {
 	display: inline-block;
