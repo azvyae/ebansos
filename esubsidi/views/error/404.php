@@ -2,7 +2,7 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column my-auto">
         <main class="px-3">
             <h1>Error 404 | Halaman Tidak Ditemukan</h1>
-            <p class="lead">Sepertinya anda tersesat. Yuk, kita kembali ke jalan yang lurus! Tekan tombol di bawah ini untuk kembali ke halaman utama</p>
+            <p class="lead">Sepertinya anda tersesat. Yuk, kita kembali ke jalan yang lurus! Tekan tombol di bawah ini untuk kembali ke halaman utama.</p>
             <p class="lead">
 
                 <a href="<?= BASEURL ?>" class="btn btn-lg btn-secondary fw-bold border-white ">Halaman Utama</a>

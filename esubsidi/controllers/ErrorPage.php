@@ -1,6 +1,6 @@
 <?php
 
-use APP\core\Controller as Controller;
+use APP\core\Controller;
 
 class ErrorPage extends Controller
 {

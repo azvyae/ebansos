@@ -1,17 +1,16 @@
 <?php
 
-use APP\core\Controller as Controller;
+use APP\core\Controller;
+use APP\core\Flasher;
 
 class Beranda extends Controller
 {
     private $judul = 'Beranda';
     public function index()
     {
-        setcookie('userId', 'bWFudGFwQQ==', secure: true);
-        setcookie('tipeAkun', 0, secure: true);
         $data['judul'] = $this->judul;
         $this->view('templates/header', $data);
-        if (isset($_COOKIE['userId'])) {
+        if (isset($_COOKIE['user'])) {
             if ($this->valid($_COOKIE) == 1) {
                 $this->view('templates/navPengguna');
                 $this->view('berandaPengguna/index', $data);
@@ -31,6 +30,13 @@ class Beranda extends Controller
 
     public function cekData()
     {
-        echo $this->model('PendudukModel')->getPendudukByNikAndTanggal($_POST);
+        $data['penduduk'] = $this->model('PendudukModel')->getPendudukByNikAndTanggal($_POST);
+        if ($data['penduduk'] != false) {
+            Flasher::setFlash("NIK <strong>{$data['penduduk']['nik']}</strong> dengan nama <strong>{$data['penduduk']['nama']}</strong>", 'terdaftar di sistem kami.', 'success');
+            header('Location: ' . BASEURL);
+        } else {
+            Flasher::setFlash('Data tersebut', 'tidak terdaftar di sistem kami.', 'danger');
+            header('Location: ' . BASEURL);
+        }
     }
 }

@@ -11,11 +11,11 @@ class PendudukModel {
 
     public function getPendudukByNikAndTanggal($data)
     {
-        $this->db->query("SELECT * FROM {$this->table} WHERE nik = :nik AND tanggalLahir = :tanggalLahir");
+        $this->db->query("SELECT nik, nama FROM {$this->table} WHERE nik = :nik AND tanggalLahir = :tanggalLahir");
         $this->db->bind('nik', $data['nik']);
         $this->db->bind('tanggalLahir', $data['tanggalLahir']);
         $this->db->execute();
-        return $this->db->rowCount();
+        return $this->db->single();
     }
 
 
