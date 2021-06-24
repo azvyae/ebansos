@@ -16,8 +16,3 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-md navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand my-2 fw-bold" href="<?= BASEURL ?>">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Lambang_Kota_Bandung.svg" alt="" height="32">
-            E-Subsidi Sarijadi</a>
