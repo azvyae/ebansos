@@ -3,7 +3,7 @@
     <img class="mb-4 mx-auto d-block" src="<?= BASEURL ?>/img/brand.svg" alt="Logo" width="96">
     <h1 class="h3 mb-3 fw-normal text-center">Log In</h1>
 
-    <div class="form-floating">
+    <div class="form-floating mb-1">
       <input required type="text" class="form-control" id="userId" placeholder="User ID">
       <label for="userId">User ID</label>
     </div>

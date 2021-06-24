@@ -43,12 +43,16 @@ class Beranda extends Controller
 
     public function cekData()
     {
-        $data['penduduk'] = $this->model('PendudukModel')->getPendudukByNikAndTanggal($_POST);
-        if ($data['penduduk'] != false) {
-            Flasher::setFlash("NIK <strong>{$data['penduduk']['nik']}</strong> dengan nama <strong>{$data['penduduk']['nama']}</strong>", 'terdaftar di sistem kami.', 'success');
-            header('Location: ' . BASEURL);
+        if (!empty($_POST)) {
+            $data['penduduk'] = $this->model('PendudukModel')->getPendudukByNikAndTanggal($_POST);
+            if ($data['penduduk'] != false) {
+                Flasher::setFlash("NIK <strong>{$data['penduduk']['nik']}</strong> dengan nama <strong>{$data['penduduk']['nama']}</strong>", 'terdaftar di sistem kami.', 'success');
+                header('Location: ' . BASEURL);
+            } else {
+                Flasher::setFlash('Data tersebut', 'tidak terdaftar di sistem kami.', 'danger');
+                header('Location: ' . BASEURL);
+            }
         } else {
-            Flasher::setFlash('Data tersebut', 'tidak terdaftar di sistem kami.', 'danger');
             header('Location: ' . BASEURL);
         }
     }
