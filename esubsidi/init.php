@@ -1,6 +1,7 @@
 <?php 
 
 require_once "../esubsidi/config/config.php";
+require_once "../vendor/autoload.php";
 
 spl_autoload_register(function ($class) {
     $class = explode('\\', $class);

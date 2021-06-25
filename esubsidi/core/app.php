@@ -9,6 +9,11 @@ class App
     protected $params = [];
     public function __construct()
     {
+        if(isset($_COOKIE['nama']) && isset($_COOKIE['tipeAkun'])) {
+            $_SESSION['user']['nama'] = $_COOKIE['nama'];
+            $_SESSION['user']['tipeAkun'] = $_COOKIE['tipeAkun'];
+        }
+
         $url = $this->parseURL();
 
         // Check if controller class exist

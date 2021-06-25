@@ -11,19 +11,7 @@ class Beranda extends Controller
         $data['judul'] = $this->judul;
 
         $this->view('templates/header', $data);
-
-        if (isset($_COOKIE['user'])) {
-            if ($this->valid($_COOKIE['user']) == 1) {
-                $this->view('templates/navPengguna');
-                $this->view('berandaPengguna/index', $data);
-            } else if ($this->valid($_COOKIE['user']) == 2) {
-                $this->view('templates/navAdmin');
-                $this->view('berandaPengguna/index', $data);
-            } else {
-                $this->view('templates/navUmum');
-                $this->view('beranda/index', $data);
-            }
-        } else if (isset($_SESSION['user'])) {
+        if (isset($_SESSION['user'])) {
             if ($this->valid($_SESSION['user']) == 1) {
                 $this->view('templates/navPengguna');
                 $this->view('berandaPengguna/index', $data);
@@ -46,10 +34,10 @@ class Beranda extends Controller
         if (!empty($_POST)) {
             $data['penduduk'] = $this->model('PendudukModel')->getPendudukByNikAndTanggal($_POST);
             if ($data['penduduk'] != false) {
-                Flasher::setFlash("NIK <strong>{$data['penduduk']['nik']}</strong> dengan nama <strong>{$data['penduduk']['nama']}</strong>", 'terdaftar di sistem kami.', 'success');
+                Flasher::setFlash("<span class='fs-5'>Data berikut sudah terdaftar di sistem.</span><hr><div class='text-start'>NIK: <strong>{$data['penduduk']['nik']}</strong><br>Nama: <strong>{$data['penduduk']['nama']}</strong><br>Alamat: <strong>{$data['penduduk']['alamatRumah']}</strong></div>", '', 'success');
                 header('Location: ' . BASEURL);
             } else {
-                Flasher::setFlash('Data tersebut', 'tidak terdaftar di sistem kami.', 'danger');
+                Flasher::setFlash('<span class="fs-5">Data tersebut', 'tidak terdaftar di sistem kami.</span>', 'danger');
                 header('Location: ' . BASEURL);
             }
         } else {

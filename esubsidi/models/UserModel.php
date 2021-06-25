@@ -16,6 +16,14 @@ class UserModel {
         return $this->db->rowCount();
     }
 
+    public function getUser($data)
+    {
+        $this->db->query("SELECT * FROM {$this->table} WHERE userId = :userId");
+        $this->db->bind('userId', $data['userId']);
+        $this->db->execute();
+        return $this->db->single();
+    }
+
     public function tambahUser($data)
     {
         $query =   "INSERT INTO {$this->table}

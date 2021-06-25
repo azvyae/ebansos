@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 use APP\core\Controller;
 use APP\core\Flasher;
 
@@ -6,16 +7,20 @@ class Register extends Controller
 {
     public function index()
     {
-        $data['judul'] = 'Login';
-        $this->view('templates/header', $data);
-        $this->view('templates/navUmum');
-        $this->view('register/index');
-        $this->view('templates/footer');
+        if (!isset($_SESSION['user'])) {
+            $data['judul'] = 'Login';
+            $this->view('templates/header', $data);
+            $this->view('templates/navUmum');
+            $this->view('register/index');
+            $this->view('templates/footer');
+        } else {
+            header('Location:'. BASEURL);
+        }
     }
 
     public function getUser()
     {
-        if(!empty($_POST)) {
+        if (!empty($_POST)) {
             echo json_encode($this->model('UserModel')->getUserId($_POST['userId']));
         } else {
             header('Location: ' . BASEURL . '/register');
@@ -37,5 +42,3 @@ class Register extends Controller
         }
     }
 }
-
-?>
