@@ -1,16 +1,14 @@
 <?php
 
 namespace Esubsidi\core;
-
 class App
 {
     protected $controller = 'beranda';
     protected $method = 'index';
     protected $params = [];
+    
     public function __construct()
-    {
-
-        
+    {       
         if(isset($_COOKIE['nama']) && isset($_COOKIE['tipeAkun'])) {
             $_SESSION['user']['nama'] = $_COOKIE['nama'];
             $_SESSION['user']['tipeAkun'] = $_COOKIE['tipeAkun'];

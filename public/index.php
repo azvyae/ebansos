@@ -1,11 +1,15 @@
-<?php 
+<?php
+
 if ( !session_id() ) {
     session_start();
 }
-require_once '../main/init.php';
-// use APP\core\App;
+
+use Esubsidi\core\App;
+require_once "../esubsidi/config/config.php";
+require_once '../vendor/autoload.php';
+require_once '../esubsidi/autoload.php';
 
 
 // $faker = Faker\Factory::create();
-$app = new Esubsidi\core\App;
+$app = new App;
 ?>
