@@ -11,7 +11,13 @@ class Keluar extends Controller
         }
         if (isset($_COOKIE['nama']) && isset($_COOKIE['tipeAkun'])) {
             setcookie('nama', null, -1, '/'); 
-            setcookie('tipeAkun', null, -1, '/'); 
+            setcookie('tipeAkun', null, -1, '/');
+            if (isset($_COOKIE['rw'])) {
+                setcookie('rw', null, -1, '/');
+            }
+            if (isset($_COOKIE['rt'])) {
+                setcookie('rt', null, -1, '/');
+            }
         }
 
         header('Location:' . BASEURL . '/login');

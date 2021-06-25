@@ -25,12 +25,37 @@ class Login extends Controller
 
             if ($_POST['userId'] == $data['user']['userId'] && password_verify($_POST['password'], $data['user']['password'])) {
                 if ($data['user']['tipeAkun'] > 0) {
+                    
                     // cek apakah remember me
-                    if ($_POST['tetapMasuk'] == 'true') {
-                        setcookie('nama', $data['user']['nama'], time()+60*60*24*30, secure:true, path:'/');
-                        setcookie('tipeAkun', hash('sha256', $data['user']['tipeAkun']), time()+60*60*24*30, secure:true, path:'/');
+                    if (isset($_POST['tetapMasuk'])) {
+
+                        if ($data['user']['tipeAkun'] == 1) {
+                            $str = explode('_', $data['user']['userId']);
+                            $rw = base64_encode((int)$str[count($str) - 2]);
+                            $rt = base64_encode((int)end($str));
+                            setcookie('rw', $rw, time() + 60 * 60 * 24 * 30, secure: true, path: '/');
+                            setcookie('rt', $rt, time() + 60 * 60 * 24 * 30, secure: true, path: '/');
+                        } else if ($data['user']['tipeAkun'] == 3) {
+                            $str = explode('_', $data['user']['userId']);
+                            $rw = base64_encode((int)end($str));
+                            setcookie('rw', $rw, time() + 60 * 60 * 24 * 30, secure: true, path: '/');
+                        }
+                        setcookie('nama', $data['user']['nama'], time() + 60 * 60 * 24 * 30, secure: true, path: '/');
+                        setcookie('tipeAkun', hash('sha256', $data['user']['tipeAkun']), time() + 60 * 60 * 24 * 30, secure: true, path: '/');
                         header('Location: ' . BASEURL);
                     } else {
+                        if ($data['user']['tipeAkun'] == 1) {
+
+                            $str = explode('_', $data['user']['userId']);
+                            $rw = base64_encode((int)$str[count($str) - 2]);
+                            $rt = base64_encode((int)end($str));
+                            $_SESSION['user']['rw'] = $rw;
+                            $_SESSION['user']['rt'] = $rt;
+                        } else if ($data['user']['tipeAkun'] == 3) {
+                            $str = explode('_', $data['user']['userId']);
+                            $rw = base64_encode((int)end($str));
+                            $_SESSION['user']['rw'] = $rw;
+                        }
                         $_SESSION['user']['nama'] = $data['user']['nama'];
                         $_SESSION['user']['tipeAkun'] = hash('sha256', $data['user']['tipeAkun']);
                         header('Location: ' . BASEURL);

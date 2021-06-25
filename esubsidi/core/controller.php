@@ -23,6 +23,8 @@ class Controller
                 $this->condition = 1;
             } else if ($data['tipeAkun'] == hash('sha256', 2)) {
                 $this->condition = 2;
+            } else if ($data['tipeAkun'] == hash('sha256', 3)) {
+                $this->condition = 3;
             }
         }
 

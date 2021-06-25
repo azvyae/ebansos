@@ -14,9 +14,14 @@ class Beranda extends Controller
         if (isset($_SESSION['user'])) {
             if ($this->valid($_SESSION['user']) == 1) {
                 $this->view('templates/navPengguna');
+                // ada session rt dan rw
                 $this->view('berandaPengguna/index', $data);
             } else if ($this->valid($_SESSION['user']) == 2) {
                 $this->view('templates/navAdmin');
+                $this->view('berandaPengguna/index', $data);
+            } else if ($this->valid($_SESSION['user']) == 3) {
+                $this->view('templates/navPengguna');
+                // ada session rw
                 $this->view('berandaPengguna/index', $data);
             } else {
                 $this->view('templates/navUmum');
