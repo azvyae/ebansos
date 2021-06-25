@@ -1,4 +1,4 @@
-<?php use APP\core\Flasher; ?>
+<?php use Esubsidi\core\Flasher; ?>
 
 <main class="p-5 mx-auto my-auto bg-light form-register rounded-3 border border-3  mt-5">
   <form action="<?= BASEURL ?>/register/daftar" method="POST">

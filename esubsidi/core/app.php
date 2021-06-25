@@ -1,6 +1,6 @@
 <?php
 
-namespace APP\core;
+namespace Esubsidi\core;
 
 class App
 {
@@ -9,6 +9,8 @@ class App
     protected $params = [];
     public function __construct()
     {
+
+        
         if(isset($_COOKIE['nama']) && isset($_COOKIE['tipeAkun'])) {
             $_SESSION['user']['nama'] = $_COOKIE['nama'];
             $_SESSION['user']['tipeAkun'] = $_COOKIE['tipeAkun'];
@@ -19,7 +21,7 @@ class App
         // Check if controller class exist
         if (isset($url[0])) {
             $url[0] = strtolower($url[0]);
-            if (file_exists("../". APP ."/controllers/{$url[0]}.php")) {
+            if (file_exists("../esubsidi/controllers/{$url[0]}.php")) {
                 $this->controller = $url[0];
                 unset($url[0]);
             } else {
@@ -28,7 +30,7 @@ class App
             }
         }
 
-        require_once "../". APP . "/controllers/{$this->controller}.php";
+        require_once "../esubsidi/controllers/{$this->controller}.php";
         $this->controller = new $this->controller;
 
         // Check if method in that controller exist

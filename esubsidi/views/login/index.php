@@ -1,6 +1,6 @@
 <?php
 
-use APP\core\Flasher;
+use Esubsidi\core\Flasher;
 
 ?>
 

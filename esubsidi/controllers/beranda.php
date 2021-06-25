@@ -1,13 +1,16 @@
 <?php
 
-use APP\core\Controller;
-use APP\core\Flasher;
+use Esubsidi\core\Controller;
+use Esubsidi\core\Flasher;
+// use APP\fzaninotto\Faker;/]
 
 class Beranda extends Controller
 {
     private $judul = 'Beranda';
     public function index()
     {
+        // $faker = Faker\Factory::create();
+        
         $data['judul'] = $this->judul;
 
         $this->view('templates/header', $data);

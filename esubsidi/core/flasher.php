@@ -1,6 +1,6 @@
 <?php
 
-namespace APP\core;
+namespace Esubsidi\core;
 
 class Flasher
 {

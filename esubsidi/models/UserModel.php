@@ -1,5 +1,5 @@
 <?php 
-use APP\core\Database as Database;
+use Esubsidi\core\Database;
 
 class UserModel {
     private $db, $table;

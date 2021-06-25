@@ -1,7 +1,7 @@
 <?php
 
-use APP\core\Controller;
-use APP\core\Flasher;
+use Esubsidi\core\Controller;
+use Esubsidi\core\Flasher;
 
 class Register extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-use APP\core\Controller;
+use Esubsidi\core\Controller;
 
 class Keluar extends Controller
 {

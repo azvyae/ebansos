@@ -1,6 +1,6 @@
 <?php
 
-namespace APP\core;
+namespace Esubsidi\core;
 
 class Controller
 {
@@ -8,11 +8,11 @@ class Controller
 
     public function view(String $view, array $data = [])
     {
-        require_once "../" . APP . "/views/{$view}.php";
+        require_once "../esubsidi/views/{$view}.php";
     }
     public function model($model)
     {
-        require_once "../" . APP . "/models/{$model}.php";
+        require_once "../esubsidi/models/{$model}.php";
         return new $model;
     }
     // Check if user and tipe user cookie exist
