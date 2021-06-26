@@ -10,17 +10,7 @@ class App
 
     public function __construct()
     {
-        if (isset($_COOKIE['nama']) && isset($_COOKIE['tipeAkun'])) {
-            if ($_COOKIE['tipeAkun'] == hash('sha256', 1)) {
-                $_SESSION['user']['rw'] = $_COOKIE['rw'];
-                $_SESSION['user']['rt'] = $_COOKIE['rt'];
-            } else if ($_COOKIE['tipeAkun'] == hash('sha256', 3)) {
-                $_SESSION['user']['rw'] = $_COOKIE['rw'];
-            }
-            $_SESSION['user']['nama'] = $_COOKIE['nama'];
-            $_SESSION['user']['tipeAkun'] = $_COOKIE['tipeAkun'];
-        }
-
+        $this->initializeSession($_COOKIE);
 
         $url = $this->parseURL();
 
@@ -64,6 +54,24 @@ class App
             $url = filter_var($url, FILTER_SANITIZE_URL);
             $url = explode('/', $url);
             return $url;
+        }
+    }
+
+    public function initializeSession($data)
+    {
+        if ( !session_id() ) {
+            session_start();
+        }
+        
+        if (isset($data['nama']) && isset($data['tipeAkun'])) {
+            if ($data['tipeAkun'] == hash('sha256', 1)) {
+                $_SESSION['user']['rw'] = $data['rw'];
+                $_SESSION['user']['rt'] = $data['rt'];
+            } else if ($data['tipeAkun'] == hash('sha256', 2)) {
+                $_SESSION['user']['rw'] = $data['rw'];
+            }
+            $_SESSION['user']['nama'] = $data['nama'];
+            $_SESSION['user']['tipeAkun'] = $data['tipeAkun'];
         }
     }
 }

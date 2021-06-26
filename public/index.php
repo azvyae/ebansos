@@ -1,8 +1,6 @@
 <?php
 
-if ( !session_id() ) {
-    session_start();
-}
+
 
 use Esubsidi\core\App;
 require_once "../esubsidi/config/config.php";

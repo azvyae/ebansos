@@ -74,4 +74,9 @@ class Database
     {
         return $this->stmt->rowCount();
     }
+
+    public function checkQuery()
+    {
+        return $this->stmt;
+    }
 }

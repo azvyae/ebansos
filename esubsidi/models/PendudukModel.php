@@ -20,27 +20,55 @@ class PendudukModel
         return $this->db->single();
     }
 
-    public function getDataPendudukKelurahan()
+    public function __call($name, $arg)
     {
-        $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} ORDER BY nama ASC");
-        $this->db->execute();
-        return $this->db->resultSet();
+        if ($name == 'getDataPenduduk') {
+            switch (count($arg)) {
+                case 1:
+                    if (isset($_SESSION['user']['rw'])) {
+                        $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} where rw = :rw ORDER BY nama ASC");
+                        $this->db->bind('rw', $arg[0]);
+                        $this->db->execute();
+                        return $this->db->resultSet();
+                    } else {
+                        $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} where nik LIKE :q or nama LIKE :q ORDER BY nama ASC");
+                        $this->db->bind('q', '%' . $arg[0] . '%');
+                        $this->db->execute();
+                        return $this->db->resultSet();
+                    }
+                    break;
+                case 2:
+                    if (isset($_SESSION['user']['rt'])) {
+                        $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} WHERE rt = :rt and rw = :rw ORDER BY nama ASC");
+                        $this->db->bind('rw', $arg[0]);
+                        $this->db->bind('rt', $arg[1]);
+                        $this->db->execute();
+                        return $this->db->resultSet();
+                    } else {
+                        $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} where rw = :rw and ( nik like :q or nama like :q )  ORDER BY nama ASC");
+                        $this->db->bind('q', '%' . $arg[0] . '%');
+                        $this->db->bind('rw', $arg[1]);
+                        $this->db->execute();
+                        return $this->db->resultSet();
+                    }
+                    break;
+                case 3:
+                    $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} where ( rt = :rt and rw = :rw ) and ( nik LIKE :q or nama LIKE :q ) ORDER BY nama ASC");
+                    $this->db->bind('q', '%' . $arg[0] . '%');
+                    $this->db->bind('rw', $arg[1]);
+                    $this->db->bind('rt', $arg[2]);
+                    $this->db->execute();
+                    return $this->db->resultSet();
+                    break;
+                default:
+                    $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} ORDER BY nama ASC");
+                    $this->db->execute();
+                    return $this->db->resultSet();
+                    break;
+            }
+        }
     }
-    public function getDataPendudukRW($data)
-    {
-        $this->db->query("SELECT nik, nama, alamatRumah FROM {$this->table} where rw = :rw");
-        $this->db->bind('rw', $data['rw']);
-        $this->db->execute();
-        return $this->db->resultSet();
-    }
-    public function getDataPendudukRT($data)
-    {
-        $this->db->query("SELECT nik, nama, alamatRumah FROM {$this->table} WHERE rt = :rt and rw = :rw");
-        $this->db->bind('rw', $data['rw']);
-        $this->db->bind('rt', $data['rt']);
-        $this->db->execute();
-        return $this->db->resultSet();
-    }
+
 
     public function tambahDataPenduduk($data)
     {
@@ -62,10 +90,10 @@ class PendudukModel
         $this->db->bind('kecamatan', $data['kecamatan']);
         $this->db->bind('statusPerkawinan', $data['statusPerkawinan']);
         $this->db->bind('pekerjaan', $data['pekerjaan']);
-        
+
 
         $this->db->execute();
 
-        return $this->db->rowCount(); 
+        return $this->db->rowCount();
     }
 }

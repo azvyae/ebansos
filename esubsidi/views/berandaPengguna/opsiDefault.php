@@ -7,13 +7,13 @@
     </div>
     <div class="col-md-2 mb-2">
         <form method='post' action='<?= BASEURL?>/beranda/hapusData' class="d-grid gap-2">
-            <button type="submit" id='tombolHapus' class="btn btn-danger disabled">Hapus Data</button>
+            <button type="submit" id='tombolHapus' class="btn btn-danger disabled">Hapus</button>
         
 
     </div>
     <div class="col-md-2">
         <span class="  d-grid gap-2">
-            <a href="<?= BASEURL ?>/beranda/tambahdata" class="btn btn-primary">Tambah Data</a>
+            <a href="<?= BASEURL ?>/beranda/tambahdata" class="btn btn-primary">Tambah</a>
         </span>
 
     </div>

@@ -10,7 +10,7 @@ use Esubsidi\core\Flasher;
     <h1 class="h3 mb-3 fw-normal text-center">Log In</h1>
 
     <div class="form-floating mb-1">
-      <input required autocomplete="off" type="text" name="userId" class="form-control" id="userId" placeholder="User ID">
+      <input value="<?= $data['uname'] ?>" required autocomplete="off" type="text" name="userId" class="form-control" id="userId" placeholder="User ID">
       <label for="userId">User ID</label>
     </div>
     <div class="form-floating">

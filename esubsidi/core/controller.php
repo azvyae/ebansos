@@ -30,4 +30,39 @@ class Controller
 
         return $this->condition;
     }
+
+    public function __call($name, $arg)
+    {
+        if ($name == 'setSession') {
+            switch (count($arg)) {
+                case 5:
+                    if (end($arg)) {
+                        if ($arg[2] != null) {
+                            setcookie('rw', $arg[2], time() + 60 * 60 * 24 * 30, secure: true, path: '/');
+                        }
+                        if ($arg[3] != null) {
+                            setcookie('rt', $arg[3], time() + 60 * 60 * 24 * 30, secure: true, path: '/');
+                        }
+                        setcookie('nama', $arg[0], time() + 60 * 60 * 24 * 30, secure: true, path: '/');
+                        setcookie('tipeAkun', $arg[1], time() + 60 * 60 * 24 * 30, secure: true, path: '/');
+                    } else {
+                        
+                        if ($arg[2] != null) {
+                            $_SESSION['user']['rw'] = $arg[2];
+                        }
+                        if ($arg[3] != null) {
+                            $_SESSION['user']['rt'] = $arg[3];
+                        }
+                        $_SESSION['user']['nama'] = $arg[0];
+                        $_SESSION['user']['tipeAkun'] = $arg[1];
+                    }
+                    break;
+                default:
+                    header('Location: ' . BASEURL);
+                    break;
+            }
+        }
+
+        header('Location: ' . BASEURL);
+    }
 }
