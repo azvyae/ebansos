@@ -7,4 +7,4 @@
 </div>
 </div>
 </div>
-<script src="<?= BASEURL ?>/js/tabel.js" defer="defer"></script>
+<script src="<?= BASEURL ?>/js/tabelPenduduk.js" defer="defer"></script>

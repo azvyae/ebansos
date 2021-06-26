@@ -24,44 +24,49 @@ class PendudukModel
     {
         if ($name == 'getDataPenduduk') {
             switch (count($arg)) {
-                case 1:
-                    if (isset($_SESSION['user']['rw'])) {
-                        $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} where rw = :rw ORDER BY nama ASC");
-                        $this->db->bind('rw', $arg[0]);
-                        $this->db->execute();
-                        return $this->db->resultSet();
-                    } else {
-                        $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} where nik LIKE :q or nama LIKE :q ORDER BY nama ASC");
-                        $this->db->bind('q', '%' . $arg[0] . '%');
-                        $this->db->execute();
-                        return $this->db->resultSet();
-                    }
-                    break;
                 case 2:
-                    if (isset($_SESSION['user']['rt'])) {
-                        $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} WHERE rt = :rt and rw = :rw ORDER BY nama ASC");
+                    if (isset($_SESSION['user']['rw'])) {
+                        $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} where rw = :rw ORDER BY nama ASC limit :halaman, 25");
                         $this->db->bind('rw', $arg[0]);
-                        $this->db->bind('rt', $arg[1]);
+                        $this->db->bind('halaman', end($arg));
                         $this->db->execute();
                         return $this->db->resultSet();
                     } else {
-                        $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} where rw = :rw and ( nik like :q or nama like :q )  ORDER BY nama ASC");
+                        $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} where nik LIKE :q or nama LIKE :q ORDER BY nama ASC limit :halaman , 25");
                         $this->db->bind('q', '%' . $arg[0] . '%');
-                        $this->db->bind('rw', $arg[1]);
+                        $this->db->bind('halaman', end($arg));
                         $this->db->execute();
                         return $this->db->resultSet();
                     }
                     break;
                 case 3:
-                    $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} where ( rt = :rt and rw = :rw ) and ( nik LIKE :q or nama LIKE :q ) ORDER BY nama ASC");
+                    if (isset($_SESSION['user']['rt'])) {
+                        $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} WHERE rt = :rt and rw = :rw ORDER BY nama ASC limit :halaman, 25");
+                        $this->db->bind('rw', $arg[0]);
+                        $this->db->bind('rt', $arg[1]);
+                        $this->db->bind('halaman', end($arg));
+                        $this->db->execute();
+                        return $this->db->resultSet();
+                    } else {
+                        $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} where rw = :rw and ( nik like :q or nama like :q )  ORDER BY nama ASC limit :halaman, 25");
+                        $this->db->bind('q', '%' . $arg[0] . '%');
+                        $this->db->bind('rw', $arg[1]);
+                        $this->db->bind('halaman', end($arg));
+                        $this->db->execute();
+                        return $this->db->resultSet();
+                    }
+                    break;
+                case 4:
+                    $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} where ( rt = :rt and rw = :rw ) and ( nik LIKE :q or nama LIKE :q ) ORDER BY nama ASC limit :halaman, 25");
                     $this->db->bind('q', '%' . $arg[0] . '%');
                     $this->db->bind('rw', $arg[1]);
                     $this->db->bind('rt', $arg[2]);
+                    $this->db->bind('halaman', end($arg));
                     $this->db->execute();
                     return $this->db->resultSet();
                     break;
                 default:
-                    $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} ORDER BY nama ASC");
+                    $this->db->query("SELECT hashId, nik, nama, alamatRumah FROM {$this->table} ORDER BY nama ASC limit 0 OFFSET 25");
                     $this->db->execute();
                     return $this->db->resultSet();
                     break;
@@ -94,6 +99,42 @@ class PendudukModel
 
         $this->db->execute();
 
+        return $this->db->rowCount();
+    }
+
+    public function getDataRW()
+    {
+        $this->db->query("SELECT DISTINCT rw FROM {$this->table} ORDER BY rw ASC");
+        $this->db->execute();
+        return $this->db->resultSet();
+    }
+
+    public function getDataRT($rw)
+    {
+        $this->db->query("SELECT DISTINCT rt FROM {$this->table} where rw = :rw ORDER BY rt ASC");
+        $this->db->bind('rw', $rw);
+        $this->db->execute();
+        return $this->db->resultSet();
+    }
+
+    public function hitungBarisDikueri($data)
+    {
+        $query = '';
+        if (!empty($data['rt'])) {
+            $query = "SELECT nik FROM {$this->table} where ( rt = :rt and rw = :rw ) and ( nik LIKE :q or nama LIKE :q )";
+            $this->db->query($query);
+            $this->db->bind('rw', $data['rw']);
+            $this->db->bind('rt', $data['rt']);
+        } else if (!empty($data['rw'])) {
+            $query = "SELECT nik FROM {$this->table} where rw = :rw  and ( nik LIKE :q or nama LIKE :q )";
+            $this->db->query($query);
+            $this->db->bind('rw', $data['rw']);
+        } else {
+            $query = "SELECT nik FROM {$this->table} where  nik LIKE :q or nama LIKE :q ";
+            $this->db->query($query);
+        }
+        $this->db->bind('q', '%' . $data['q'] . '%');
+        $this->db->execute();
         return $this->db->rowCount();
     }
 }
