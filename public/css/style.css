@@ -1,62 +1,129 @@
 html,
 body {
-  /* height: 100%; */
-  font-family: 'Fira Code', monospace !important;
+    /* height: 100%; */
+    font-family: 'Fira Code', monospace !important;
 }
 
 .form-signin {
-  width: 100%;
-  max-width: 380px;
-
+    width: 100%;
+    max-width: 380px;
 }
+
 .form-register {
-  width: 100%;
-  max-width: 420px;
-
+    width: 100%;
+    max-width: 420px;
 }
 
+#tabel-container,
+table,
+#message {
+    animation: fadeIn 1s;
+    -webkit-animation: fadeIn 1s;
+    -moz-animation: fadeIn 1s;
+    -o-animation: fadeIn 1s;
+    -ms-animation: fadeIn 1s;
+}
+
+#loading,
+#rw,
+#rt {
+    animation: fadeIn 0.5s;
+    -webkit-animation: fadeIn 0.5s;
+    -moz-animation: fadeIn 0.5s;
+    -o-animation: fadeIn 0.5s;
+    -ms-animation: fadeIn 0.5s;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 
 .form-signin .form-register .form-floating:focus-within {
-  z-index: 2;
+    z-index: 2;
 }
 
 tr {
-	line-height: 25px;
-	min-height: 25px;
-	height: 25px;
- }
+    line-height: 25px;
+    min-height: 25px;
+    height: 25px;
+}
 
 .btn-ripple {
-	display: inline-block;
-	position: relative;
-	overflow: hidden;
-	transition: all ease-in-out .5s;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    transition: all ease-in-out .5s;
 }
 
 .btn-ripple::after {
-	content: "";
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 25%;
-	height: 100%;
-	width: 50%;
-	background-color: #000;
-	border-radius: 50%;
-	opacity: 0;
-	pointer-events: none;
-	transition: all ease-in-out 1s;
-	transform: scale(5, 5);
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 25%;
+    height: 100%;
+    width: 50%;
+    background-color: #000;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    transition: all ease-in-out 1s;
+    transform: scale(5, 5);
 }
 
 .btn-ripple:active::after {
-	padding: 0;
-	margin: 0;
-	opacity: .2;
-	transition: 0s;
-	transform: scale(0, 0);
+    padding: 0;
+    margin: 0;
+    opacity: .2;
+    transition: 0s;
+    transform: scale(0, 0);
 }
 
 .rounded-32 {
-	border-radius: 32px;
+    border-radius: 32px;
 }

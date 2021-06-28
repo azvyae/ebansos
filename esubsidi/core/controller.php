@@ -31,6 +31,19 @@ class Controller
         return $this->condition;
     }
 
+    public function runMethod($object, $method, $args)
+    {
+        if (method_exists($object, $method)) {
+            if (is_bool($args[0] ?? false) && (($args[0] ?? false) == true)) {
+                return true;
+            } else {
+                call_user_func_array([$object, $method], $args);
+            }
+        } else {
+            return false;
+        }
+    }
+
     public function __call($name, $arg)
     {
         if ($name == 'setSession') {
@@ -46,7 +59,7 @@ class Controller
                         setcookie('nama', $arg[0], time() + 60 * 60 * 24 * 30, secure: true, path: '/');
                         setcookie('tipeAkun', $arg[1], time() + 60 * 60 * 24 * 30, secure: true, path: '/');
                     } else {
-                        
+
                         if ($arg[2] != null) {
                             $_SESSION['user']['rw'] = $arg[2];
                         }

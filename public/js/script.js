@@ -33,4 +33,5 @@ $(function () {
             $('#message').html('Minimal 8 karakter').css('color', 'red');
         }
     });
+    
 })

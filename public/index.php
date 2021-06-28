@@ -10,4 +10,5 @@ require_once '../esubsidi/autoload.php';
 
 // $faker = Faker\Factory::create();
 $app = new App;
+// var_dump($app);
 ?>
