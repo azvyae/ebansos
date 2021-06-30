@@ -1,5 +1,6 @@
 {
     "require": {
-        "fakerphp/faker": "^1.14"
+        "fakerphp/faker": "^1.14",
+        "spatie/macroable": "^2.0"
     }
 }

@@ -1,7 +1,17 @@
 html,
-body {
+body,
+button {
     /* height: 100%; */
-    font-family: 'Fira Code', monospace !important;
+    font-family: 'Poppins', sans-serif !important;
+    letter-spacing: 0.1em;
+}
+
+input {
+    letter-spacing: 0.2em;
+}
+
+footer {
+    font-size: 0.8em;
 }
 
 .form-signin {

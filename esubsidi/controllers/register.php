@@ -31,6 +31,11 @@ class Register extends Controller
     {
         if (!empty($_POST)) {
             if ($this->model('UserModel')->tambahUser($_POST) > 0) {
+                $data['datetime'] = date('Y-m-d H:i:s');
+                $data['userId'] = $_POST['userId'];
+                $data['aksi'] = 'Melakukan Pendaftaran';
+                $data['nikDipengaruhi'] = 'Tidak ada keterangan';
+                $this->model('RiwayatModel')->tambahRiwayat($data);
                 Flasher::setFlash('Anda berhasil', 'terdaftar di sistem. Mohon menunggu administrator untuk melakukan konfirmasi.', 'success');
                 header('Location: ' . BASEURL . '/register');
             } else {

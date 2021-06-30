@@ -14,7 +14,7 @@ class Login extends Controller
             $data['uname'] = '';
             if (isset($_SESSION['input']['userId'])) {
                 $data['uname'] = $_SESSION['input']['userId'];
-                unset($_SESSION['input']['userId']);
+                unset($_SESSION['input']);
             }
             $this->view('templates/header', $data);
             $this->view('templates/navUmum');

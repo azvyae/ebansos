@@ -8,14 +8,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
-                <i class="bi bi-emoji-smile fs-5 my-auto text-secondary"></i>
-                <li class="nav-item ms-1 me-3">
-                    <span class="nav-link active">Halo, <?= $_SESSION['user']['nama'] ?> </span>
+                
+                <li class="nav-item ms-1 me-3 my-auto text-center">
+                <span class="nav-link active p-3">Halo, <?= $_SESSION['user']['nama'] ?> <i class="bi bi-emoji-smile"></i></span>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item my-auto text-center">
                     <a class="nav-link active" href="<?= BASEURL ?>">Beranda</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item my-auto text-center">
                     <a class="nav-link" href="<?= BASEURL ?>/keluar">Log Out</a>
                 </li>
             </ul>
