@@ -12,7 +12,7 @@
 
 <div class="col-lg-2 mb-2">
     <span class="  d-grid gap-2">
-        <button type="submit" id='tombolHapus' class="btn btn-danger" disabled>Hapus</button>
+        <button type="submit" id='tombolHapus' onclick="return confirm('Anda yakin ingin menghapusnya?');" class="btn btn-danger" disabled>Hapus</button>
     </span>
 
 </div>

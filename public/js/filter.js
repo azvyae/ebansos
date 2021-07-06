@@ -271,9 +271,4 @@ $(function() {
         gantiTabelPenduduk($('#cari').val(), $('#rw').val(), $('#rt').val(), $('#halaman').val());
     })
 
-
-
-
-
-
 });

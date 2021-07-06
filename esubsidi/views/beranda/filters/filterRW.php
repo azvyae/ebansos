@@ -1,6 +1,6 @@
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {
-        siapkanFilterRT('<?= $data['rw'] ?>');
+        siapkanFilterRT('<?= $data['user']['rw'] ?>');
     })
 </script>
 <div class="row justify-content-between">

@@ -28,6 +28,29 @@ class PendudukModel
         return $this->db->single();
     }
 
+    public function getNikArray($data)
+    {
+        if (!empty($data['rt'])) {
+            $data['rw'] = $data['rw'];
+            $data['rt'] = $data['rt'];
+            $query = "SELECT nik FROM {$this->table} WHERE hashId = :hashId AND ( rt = :rt and rw = :rw )";
+            $this->db->query($query);
+            $this->db->bind('rw', $data['rw']);
+            $this->db->bind('rt', $data['rt']);
+        } else if (!empty($data['rw'])) {
+            $data['rw'] = $data['rw'];
+            $query = "SELECT nik FROM {$this->table} WHERE hashId = :hashId AND ( rw = :rw )";
+            $this->db->query($query);
+            $this->db->bind('rw', $data['rw']);
+        } else {
+            $query = "SELECT nik FROM {$this->table} WHERE hashId = :hashId";
+            $this->db->query($query);
+        }
+        $this->db->bind('hashId', $data['hashId']);
+        $this->db->execute();
+        return $this->db->single();
+    }
+
     public function cekNikSudahAda($data)
     {
         if (!empty($data['nik'])) {
@@ -43,29 +66,29 @@ class PendudukModel
 
     public function tambahDataPenduduk($data)
     {
-    $query =   "INSERT INTO {$this->table}
+        $query =   "INSERT INTO {$this->table}
                 VALUES
                 (:hashId, :nik, :nama, :tempatLahir, :tanggalLahir, :jenisKelamin, :alamatRumah, :rt, :rw, :kelurahan, :kecamatan, :statusPerkawinan, :pekerjaan)";
 
-    $this->db->query($query);
-    $this->db->bind('hashId', $data['hashId']);
-    $this->db->bind('nik', $data['nik']);
-    $this->db->bind('nama', $data['nama']);
-    $this->db->bind('tempatLahir', $data['tempatLahir']);
-    $this->db->bind('tanggalLahir', $data['tanggalLahir']);
-    $this->db->bind('jenisKelamin', $data['jenisKelamin']);
-    $this->db->bind('alamatRumah', $data['alamatRumah']);
-    $this->db->bind('rt', $data['rt']);
-    $this->db->bind('rw', $data['rw']);
-    $this->db->bind('kelurahan', $data['kelurahan']);
-    $this->db->bind('kecamatan', $data['kecamatan']);
-    $this->db->bind('statusPerkawinan', $data['statusPerkawinan']);
-    $this->db->bind('pekerjaan', $data['pekerjaan']);
+        $this->db->query($query);
+        $this->db->bind('hashId', $data['hashId']);
+        $this->db->bind('nik', $data['nik']);
+        $this->db->bind('nama', $data['nama']);
+        $this->db->bind('tempatLahir', $data['tempatLahir']);
+        $this->db->bind('tanggalLahir', $data['tanggalLahir']);
+        $this->db->bind('jenisKelamin', $data['jenisKelamin']);
+        $this->db->bind('alamatRumah', $data['alamatRumah']);
+        $this->db->bind('rt', $data['rt']);
+        $this->db->bind('rw', $data['rw']);
+        $this->db->bind('kelurahan', $data['kelurahan']);
+        $this->db->bind('kecamatan', $data['kecamatan']);
+        $this->db->bind('statusPerkawinan', $data['statusPerkawinan']);
+        $this->db->bind('pekerjaan', $data['pekerjaan']);
 
 
-    $this->db->execute();
+        $this->db->execute();
 
-    return $this->db->rowCount();
+        return $this->db->rowCount();
     }
 
     public function getDataRW()
@@ -131,5 +154,28 @@ class PendudukModel
         $this->db->bind('q', '%' . $data['q'] . '%');
         $this->db->execute();
         return $this->db->resultSet();
+    }
+
+    public function hapusDataPenduduk($data)
+    {
+        if (!empty($data['rt'])) {
+            $data['rw'] = $data['rw'];
+            $data['rt'] = $data['rt'];
+            $query = "DELETE FROM {$this->table} WHERE hashId = :hashId AND ( rt = :rt and rw = :rw )";
+            $this->db->query($query);
+            $this->db->bind('rw', $data['rw']);
+            $this->db->bind('rt', $data['rt']);
+        } else if (!empty($data['rw'])) {
+            $data['rw'] = $data['rw'];
+            $query = "DELETE FROM {$this->table} WHERE hashId = :hashId AND ( rw = :rw )";
+            $this->db->query($query);
+            $this->db->bind('rw', $data['rw']);
+        } else {
+            $query = "DELETE FROM {$this->table} WHERE hashId = :hashId";
+            $this->db->query($query);
+        }
+        $this->db->bind('hashId', $data['hashId']);
+        $this->db->execute();
+        return $this->db->rowCount();
     }
 }
