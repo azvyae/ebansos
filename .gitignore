@@ -4,7 +4,6 @@
 
 ### Composer ###
 composer.phar
-vendor/
 esubsidi/controllers/preview.php
 esubsidi/views/preview/index.php
 
