@@ -6,8 +6,9 @@ button {
     letter-spacing: 0.1em;
 }
 
-input {
-    letter-spacing: 0.2em;
+input,
+textarea {
+    letter-spacing: 0.15em;
 }
 
 footer {

@@ -28,12 +28,15 @@ class UserModel {
     {
         $query =   "INSERT INTO {$this->table}
                     VALUES
-                    (:userId, :nama, :password, 0)";
+                    (:userId, :nama, :password, :tipeAkun, :rw, :rt)";
 
         $this->db->query($query);
         $this->db->bind('userId', $data['userId']);
         $this->db->bind('nama', $data['nama']);
         $this->db->bind('password', password_hash($data['password'],PASSWORD_ARGON2ID));
+        $this->db->bind('tipeAkun', $data['tipeAkun']);
+        $this->db->bind('rw', $data['rw']);
+        $this->db->bind('rt', $data['rt']);
         $this->db->execute();
 
         return $this->db->rowCount(); 

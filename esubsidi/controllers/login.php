@@ -7,43 +7,25 @@ class Login extends Controller
 {
     public function index()
     {
-        if (!isset($_SESSION['user'])) {
-            
-            
-            $data['judul'] = 'Login';
-            $data['uname'] = '';
-            if (isset($_SESSION['input']['userId'])) {
-                $data['uname'] = $_SESSION['input']['userId'];
-                unset($_SESSION['input']);
-            }
-            $this->view('templates/header', $data);
-            $this->view('templates/navUmum');
-            $this->view('login/index', $data);
-            $this->view('templates/footer');
-        } else {
-            header('Location:' . BASEURL);
+        $data['judul'] = 'Login';
+        $data['uname'] = '';
+        if (isset($_SESSION['input']['userId'])) {
+            $data['uname'] = $_SESSION['input']['userId'];
+            unset($_SESSION['input']);
         }
+        $this->view('templates/header', $data);
+        $this->view('templates/navUmum');
+        $this->view('login/index', $data);
+        $this->view('templates/footer');
     }
-
     public function redirect()
     {
         if (!empty($_POST)) {
-            $data['user'] = $this->model('UserModel')->getUser($_POST);
-            $rw = null;
-            $rt = null;
-            if ($_POST['userId'] == $data['user']['userId'] && password_verify($_POST['password'], $data['user']['password'])) {
-
+            $data['input'] = $_POST;
+            $data['user'] = $this->model('UserModel')->getUser($data['input']);
+            if ($data['input']['userId'] == $data['user']['userId'] && password_verify($data['input']['password'], $data['user']['password'])) {
                 if ($data['user']['tipeAkun'] > 0) {
-                    if ($data['user']['tipeAkun'] == 1) {
-                        $str = explode('_', $data['user']['userId']);
-                        $rw = base64_encode((int)$str[count($str) - 2]);
-                        $rt = base64_encode((int)end($str));
-                    }
-                    if ($data['user']['tipeAkun'] == 2) {
-                        $str = explode('_', $data['user']['userId']);
-                        $rw = base64_encode((int)end($str));
-                    }
-                    $this->setSession($data['user']['nama'], hash('sha256', $data['user']['tipeAkun']), $rw, $rt, isset($_POST['tetapMasuk']));
+                    $this->setSession([$data['user']['userId'], $data['user']['nama'], $data['user']['tipeAkun'], $data['user']['rw'], $data['user']['rt']]);
                 } else {
                     Flasher::setFlash('Anda sudah', 'terdaftar di sistem. Tunggu konfirmasi dari administrator. <i class="bi bi-emoji-smile"></i>', 'warning');
                     header('Location: ' . BASEURL . '/login');
@@ -52,9 +34,18 @@ class Login extends Controller
                 Flasher::setFlash('Username atau password', 'salah!', 'danger');
                 header('Location: ' . BASEURL . '/login');
             }
-            $_SESSION['input']['userId'] = $_POST['userId'];
+            $_SESSION['input']['userId'] = $data['input']['userId'];
         } else {
             header('Location: ' . BASEURL . '/login');
         }
+    }
+}
+
+
+class LoginAuth extends Login
+{
+    public function index()
+    {
+        header('Location: ' . BASEURL);
     }
 }

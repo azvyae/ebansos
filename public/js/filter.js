@@ -13,7 +13,7 @@ function siapkanFilterRW() {
             if (data.length > 0) {
                 top = `<option selected value=''>Semua RW</option>`;
                 $.each(data, function(i, data) {
-                    bot += `<option value="` + btoa(data['rw']) + `">RW ` + data['rw'] + `</option>`
+                    bot += `<option value="` + data['rw'] + `">RW ` + data['rw'] + `</option>`
                 })
                 $('#rw').prop('hidden', false);
             } else {
@@ -42,7 +42,7 @@ function siapkanFilterRT(rw = '') {
                 if (data.length > 0) {
                     top = `<option selected value=''>Semua RT</option>`;
                     $.each(data, function(i, data) {
-                        bot += `<option value="` + btoa(data['rt']) + `">RT ` + data['rt'] + `</option>`
+                        bot += `<option value="` + data['rt'] + `">RT ` + data['rt'] + `</option>`
                     })
                     $('#rt').prop('hidden', false);
                 } else {
@@ -123,8 +123,8 @@ function tampilkanTabelPenduduk(q = '', rw = null, rt = null, halaman = 1) {
                 <td>` + data.nama + `</td>
                 <td>` + data.alamatRumah + `</td>
                 <td class='text-center'>
-                    <a class=' link-primary text-decoration-none fw-bold' href='beranda/detail/` + data.hashId + `'>Detail</a>
-                    <a class=' link-dark text-decoration-none fw-bold' href='beranda/ubah/` + data.hashId + `'>Ubah</a>
+                    <a class=' link-primary text-decoration-none fw-bold' href='detail/index/` + data.hashId + `'>Detail</a>
+                    <a class=' link-dark text-decoration-none fw-bold' href='ubah/index/` + data.hashId + `'>Ubah</a>
                 </td>
                 </tr >`
                 })
@@ -176,8 +176,8 @@ function gantiTabelPenduduk(q = '', rw = null, rt = null, halaman = 1) {
                 <td>` + data.nama + `</td>
                 <td>` + data.alamatRumah + `</td>
                 <td class='text-center'>
-                <a class=' link-primary text-decoration-none fw-bold' href='beranda/detail/` + data.hashId + `'>Detail</a>
-                    <a class=' link-dark text-decoration-none fw-bold' href='beranda/ubah/` + data.hashId + `'>Ubah</a>
+                <a class=' link-primary text-decoration-none fw-bold' href='detail/index/` + data.hashId + `'>Detail</a>
+                    <a class=' link-dark text-decoration-none fw-bold' href='ubah/index/` + data.hashId + `'>Ubah</a>
                 </td>
                 </tr >`
             })

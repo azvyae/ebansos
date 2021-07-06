@@ -13,7 +13,7 @@ class PendudukModel
     }
 
     public function getPenduduk($data)
-    {   
+    {
         if (!empty($data['nik']) && !empty($data['tanggalLahir'])) {
             $query = "SELECT nik, nama, alamatRumah, {$this->table2}.tanggalMenerima, {$this->table2}.jenisSubsidi FROM {$this->table} LEFT JOIN {$this->table2} ON {$this->table}.hashId = {$this->table2}.hashId  WHERE nik = :nik AND tanggalLahir = :tanggalLahir ORDER BY {$this->table2}.tanggalMenerima DESC LIMIT 0, 1";
             $this->db->query($query);
@@ -28,32 +28,45 @@ class PendudukModel
         return $this->db->single();
     }
 
-    // public function tambahDataPenduduk($data)
-    // {
-    // $query =   "INSERT INTO {$this->table}
-    //             VALUES
-    //             (:hashId, :nik, :nama, :tempatLahir, :tanggalLahir, :jenisKelamin, :alamatRumah, :rt, :rw, :kelurahan, :kecamatan, :statusPerkawinan, :pekerjaan)";
+    public function cekNikSudahAda($data)
+    {
+        if (!empty($data['nik'])) {
+            $query = "SELECT nik FROM {$this->table} WHERE nik = :nik LIMIT 0, 1";
+            $this->db->query($query);
+            $this->db->bind('nik', $data['nik']);
+            $this->db->execute();
+            return $this->db->rowCount();
+        } else {
+            return 0;
+        }
+    }
 
-    // $this->db->query($query);
-    // $this->db->bind('hashId', $data['hashId']);
-    // $this->db->bind('nik', $data['nik']);
-    // $this->db->bind('nama', $data['nama']);
-    // $this->db->bind('tempatLahir', $data['tempatLahir']);
-    // $this->db->bind('tanggalLahir', $data['tanggalLahir']);
-    // $this->db->bind('jenisKelamin', $data['jenisKelamin']);
-    // $this->db->bind('alamatRumah', $data['alamatRumah']);
-    // $this->db->bind('rt', $data['rt']);
-    // $this->db->bind('rw', $data['rw']);
-    // $this->db->bind('kelurahan', $data['kelurahan']);
-    // $this->db->bind('kecamatan', $data['kecamatan']);
-    // $this->db->bind('statusPerkawinan', $data['statusPerkawinan']);
-    // $this->db->bind('pekerjaan', $data['pekerjaan']);
+    public function tambahDataPenduduk($data)
+    {
+    $query =   "INSERT INTO {$this->table}
+                VALUES
+                (:hashId, :nik, :nama, :tempatLahir, :tanggalLahir, :jenisKelamin, :alamatRumah, :rt, :rw, :kelurahan, :kecamatan, :statusPerkawinan, :pekerjaan)";
+
+    $this->db->query($query);
+    $this->db->bind('hashId', $data['hashId']);
+    $this->db->bind('nik', $data['nik']);
+    $this->db->bind('nama', $data['nama']);
+    $this->db->bind('tempatLahir', $data['tempatLahir']);
+    $this->db->bind('tanggalLahir', $data['tanggalLahir']);
+    $this->db->bind('jenisKelamin', $data['jenisKelamin']);
+    $this->db->bind('alamatRumah', $data['alamatRumah']);
+    $this->db->bind('rt', $data['rt']);
+    $this->db->bind('rw', $data['rw']);
+    $this->db->bind('kelurahan', $data['kelurahan']);
+    $this->db->bind('kecamatan', $data['kecamatan']);
+    $this->db->bind('statusPerkawinan', $data['statusPerkawinan']);
+    $this->db->bind('pekerjaan', $data['pekerjaan']);
 
 
-    // $this->db->execute();
+    $this->db->execute();
 
-    // return $this->db->rowCount();
-    // }
+    return $this->db->rowCount();
+    }
 
     public function getDataRW()
     {
@@ -65,7 +78,7 @@ class PendudukModel
 
     public function getDataRT($data)
     {
-        $data['rw'] = base64_decode($data['rw']);
+        $data['rw'] = $data['rw'];
         $query = "SELECT DISTINCT rt FROM {$this->table} where rw = :rw ORDER BY rt ASC";
         $this->db->query($query);
         $this->db->bind('rw', $data['rw']);
@@ -76,14 +89,14 @@ class PendudukModel
     public function hitungBarisDikueri($data)
     {
         if (!empty($data['rt'])) {
-            $data['rw'] = base64_decode($data['rw']);
-            $data['rt'] = base64_decode($data['rt']);
+            $data['rw'] = $data['rw'];
+            $data['rt'] = $data['rt'];
             $query = "SELECT nik FROM {$this->table} where ( rt = :rt and rw = :rw ) and ( nik LIKE :q or nama LIKE :q )";
             $this->db->query($query);
             $this->db->bind('rw', $data['rw']);
             $this->db->bind('rt', $data['rt']);
         } else if (!empty($data['rw'])) {
-            $data['rw'] = base64_decode($data['rw']);
+            $data['rw'] = $data['rw'];
             $query = "SELECT nik FROM {$this->table} where rw = :rw  and ( nik LIKE :q or nama LIKE :q )";
             $this->db->query($query);
             $this->db->bind('rw', $data['rw']);
@@ -99,14 +112,14 @@ class PendudukModel
     public function getDataPenduduk($data)
     {
         if (!empty($data['rt'])) {
-            $data['rw'] = base64_decode($data['rw']);
-            $data['rt'] = base64_decode($data['rt']);
+            $data['rw'] = $data['rw'];
+            $data['rt'] = $data['rt'];
             $query = "SELECT hashId, nik, nama, alamatRumah FROM {$this->table} where ( rt = :rt and rw = :rw ) and ( nik LIKE :q or nama LIKE :q ) ORDER BY nama LIMIT :halaman, 25";
             $this->db->query($query);
             $this->db->bind('rw', $data['rw']);
             $this->db->bind('rt', $data['rt']);
         } else if (!empty($data['rw'])) {
-            $data['rw'] = base64_decode($data['rw']);
+            $data['rw'] = $data['rw'];
             $query = "SELECT hashId, nik, nama, alamatRumah FROM {$this->table} where rw = :rw  and ( nik LIKE :q or nama LIKE :q ) ORDER BY nama LIMIT :halaman, 25";
             $this->db->query($query);
             $this->db->bind('rw', $data['rw']);

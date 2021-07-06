@@ -12,16 +12,14 @@ class Beranda extends Controller
 
         $data['nikVal'] =  $data['hhVal'] = $data['bbVal'] = $data['ttttVal'] = '';
         if (isset($_SESSION['input'])) {
-            $data['nikVal'] = $_SESSION['input']['nikVal'];
-            $data['hhVal'] = $_SESSION['input']['hhVal'];
-            $data['bbVal'] = $_SESSION['input']['bbVal'];
-            $data['ttttVal'] = $_SESSION['input']['ttttVal'];
+            $data = array_merge($data, $_SESSION['input']);
             unset($_SESSION['input']);
         }
 
         // Arrange HTML
         $this->view('templates/header', $data);
         $this->view('templates/navUmum');
+
         $this->view('beranda/index', $data);
         $this->view(('templates/footer'));
     }
@@ -33,7 +31,6 @@ class Beranda extends Controller
             $data = $_POST;
             $data['status'] = 'success';
             $data['tanggalLahir'] = "{$data['tahun']}-{$data['bulan']}-{$data['hari']}";
-            // NANTI SELECT DISTINCT
             $data['penduduk'] = $this->model('PendudukModel')->getPenduduk($data);
 
             if ($data['penduduk']) {
@@ -59,10 +56,12 @@ class Beranda extends Controller
                 Flasher::setFlash('<span class="fs-5">Data tersebut', 'tidak terdaftar di sistem kami.</span>', 'danger');
                 header('Location: ' . BASEURL);
             }
-            $_SESSION['input']['nikVal'] = $data['nik'];
-            $_SESSION['input']['hhVal'] = $data['hari'];
-            $_SESSION['input']['bbVal'] = $data['bulan'];
-            $_SESSION['input']['ttttVal'] = $data['tahun'];
+            $_SESSION['input'] = array(
+                'nikVal' => $data['nik'],
+                'hhVal' => $data['hari'],
+                'bbVal' => $data['bulan'],
+                'ttttVal' => $data['tahun']
+            );
         } else {
             header('Location: ' . BASEURL);
         }
@@ -76,37 +75,36 @@ class BerandaAuth extends Beranda
         $data['judul'] = $this->judul;
         $data['distrik'] = '';
         $data['lebar-cari'] = 'col-lg-3';
+        $data['user'] = $_SESSION['user'];
+
 
         $this->view('templates/header', $data);
-        if ($this->valid($_SESSION['user']) == 1) {
+        if ($data['user']['tipeAkun'] == 1) {
             // When RT officer login
             $this->view('templates/navPengguna');
-            $data['rw'] = $_SESSION['user']['rw'];
-            $data['rt'] = $_SESSION['user']['rt'];
             $data['lebar-cari'] = 'col-lg-7';
-            $data['distrik'] = 'RW 0' . base64_decode($data['rw']) . ' RT 0' . base64_decode($data['rt']);
+            $data['distrik'] = 'RW 0' . $data['user']['rw'] . ' RT 0' . $data['user']['rt'];
             $this->view('beranda/indexofficer', $data);
             $this->view('beranda/filters/filterRT', $data);
             $this->view('beranda/tabel', $data);
-        } else if ($this->valid($_SESSION['user']) == 2) {
+        } else if ($data['user']['tipeAkun'] == 2) {
             // When RW officer login
-            $data['rw'] = $_SESSION['user']['rw'];
             $data['lebar-cari'] = 'col-lg-5';
-            $data['distrik'] = 'RW 0' . base64_decode($data['rw']);
+            $data['distrik'] = 'RW 0' . $data['user']['rw'];
             $this->view('templates/navPengguna');
             $this->view('beranda/indexofficer', $data);
             $this->view('beranda/filters/filterRW', $data);
             $this->view('beranda/tabel', $data);
-        } else if ($this->valid($_SESSION['user']) == 3) {
+        } else if ($data['user']['tipeAkun'] == 3) {
             // When Superadmin login
             $data['riwayat'] = $this->model('RiwayatModel')->getRiwayat(5);
             $data['riwayat'] = $this->translateTime($data['riwayat']);
-           
+
             $this->view('templates/navAdmin', $data);
             $this->view('beranda/indexofficer', $data);
             $this->view('beranda/filters/filter');
             $this->view('beranda/tabel', $data);
-        } else if ($this->valid($_SESSION['user']) == 4) {
+        } else if ($data['user']['tipeAkun'] == 4) {
             // When Special Officer login
         } else {
             $this->view('templates/navPengguna');
@@ -114,93 +112,6 @@ class BerandaAuth extends Beranda
         }
         $this->view('templates/footer');
     }
-
-    public function tambahData()
-    {
-        //         $data['penduduk'] = [
-        //             'hashId' => hash('md5', $nik),i
-        //             'nik' => $nik,
-        //             'nama' => $faker->name(),
-        //             'tempatLahir' => $faker->city(),
-        //             'tanggalLahir' => $faker->date(),
-        //             'jenisKelamin' => end($jenisKelamin),
-        //             'alamatRumah' => $faker->address(),
-        //             'rt' => rand(1, 12),
-        //             'rw' => rand(1, 12),
-        //             'kelurahan' => 'Sarijadi',
-        //             'kecamatan' => 'Sukasari',
-        //             'statusPerkawinan' => end($statusPerkawinan),
-        //             'pekerjaan' => $faker->jobTitle()
-        //         ];
-    }
-
-    public function hapusData()
-    {
-        echo "mnas";
-        // if (!empty($_POST)) {
-        //     var_dump($_POST['penduduk']);
-        // } else {
-        //     header('Location: ' . BASEURL);
-        // }
-
-    }
-
-    public function detail($hashId = '')
-    {
-        $data['judul'] = 'Detail';
-        $data['hashId'] = $hashId;
-
-        $data['penduduk'] = $this->model('PendudukModel')->getPenduduk($data);
-        $data['penduduk']['tanggalLahir'] = $this->translateDate($data['penduduk']['tanggalLahir']);
-
-        $this->view('templates/header', $data);
-        if ($data['penduduk']) {
-
-            if ($data['penduduk']['tanggalMenerima'] == null && $data['penduduk']['jenisSubsidi'] == null) {
-                $data['penduduk']['tanggalMenerima'] = $data['penduduk']['jenisSubsidi'] = 'Belum pernah menerima subsidi';
-                $data['status'] = 'warning';
-            } else {
-
-                $data['penduduk']['tanggalMenerima'] = $this->translateDate($data['penduduk']['tanggalMenerima']);
-            }
-
-            if ($this->valid($_SESSION['user']) == 1) {
-
-                // if RT officer logged in
-                if (
-                    $data['penduduk']['rw'] != base64_decode($_SESSION['user']['rw']) ||
-                    $data['penduduk']['rt'] != base64_decode($_SESSION['user']['rt'])
-                ) {
-                    header('Location: ' . BASEURL);
-                }
-                $this->view('templates/navPengguna');
-            } else if ($this->valid($_SESSION['user']) == 2) {
-
-                // When RW officer logged in
-                if ($data['penduduk']['rw'] != base64_decode($_SESSION['user']['rw'])) {
-                    header('Location: ' . BASEURL);
-                }
-                $this->view('templates/navPengguna');
-            } else if ($this->valid($_SESSION['user']) == 3) {
-
-                // When Superadmin logged in
-                $data['riwayat'] = $this->model('RiwayatModel')->getRiwayat(5);
-                $data['riwayat'] = $this->translateTime($data['riwayat']);
-                $this->view('templates/navAdmin', $data);
-            } else {
-
-                header('Location: ' . BASEURL);
-            }
-
-            $this->view('beranda/detail', $data);
-            $this->view('templates/footer');
-        } else {
-
-            header('Location: ' . BASEURL);
-        }
-    }
-
-
 
     public function getRW()
     {

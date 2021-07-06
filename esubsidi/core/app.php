@@ -11,7 +11,7 @@ class App
 
     public function __construct()
     {
-        $this->initializeSession($_COOKIE);
+        $this->initializeSession();
         $url = $this->parseURL();
         // Check if controller class exist
         if (isset($url[0])) {
@@ -44,7 +44,6 @@ class App
             $this->params = array_values($url);
         }
 
-        // jalankan controller & method, serta kirimkan params
         call_user_func_array([$this->controller, $this->method], $this->params);
     }
 
@@ -60,22 +59,24 @@ class App
         }
     }
 
-    public function initializeSession($data)
+    public function initializeSession()
     {
         if (!session_id()) {
             session_start();
         }
 
-        if (isset($data['nama']) && isset($data['tipeAkun'])) {
-            if ($data['tipeAkun'] == hash('sha256', 1)) {
-                $_SESSION['user']['rw'] = $data['rw'];
-                $_SESSION['user']['rt'] = $data['rt'];
-            } else if ($data['tipeAkun'] == hash('sha256', 2)) {
-                $_SESSION['user']['rw'] = $data['rw'];
-            }
-            $_SESSION['user']['nama'] = $data['nama'];
-            $_SESSION['user']['tipeAkun'] = $data['tipeAkun'];
-        }
+        // COOKIES ARE DISABLED
+        // if (isset($data['nama']) && isset($data['tipeAkun'])) {
+        //     if ($data['tipeAkun'] == hash('sha256', 1)) {
+        //         $_SESSION['user']['rw'] = $data['rw'];
+        //         $_SESSION['user']['rt'] = $data['rt'];
+        //     } else if ($data['tipeAkun'] == hash('sha256', 2)) {
+        //         $_SESSION['user']['rw'] = $data['rw'];
+        //     }
+        //     $_SESSION['user']['nama'] = $data['nama'];
+        //     $_SESSION['user']['tipeAkun'] = $data['tipeAkun'];
+        //     unset($_COOKIE['tipeAkun']);
+        // }
     }
 
     public function handlingErrorPage($data)

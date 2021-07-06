@@ -13,15 +13,11 @@ use Esubsidi\core\Flasher;
       <input value="<?= $data['uname'] ?>" required autocomplete="off" type="text" name="userId" class="form-control" id="userId" placeholder="User ID">
       <label for="userId">User ID</label>
     </div>
-    <div class="form-floating">
+    <div class="form-floating my-3">
       <input required type="password" name="password" class="form-control" id="password" placeholder="Password">
       <label for="password">Password</label>
     </div>
 
-    <div class="checkbox my-3">
-
-      <input class="form-check-input me-1" type="checkbox" name="tetapMasuk" value="true"> Tetap Masuk
-    </div>
     <button class="w-100 btn mb-3 btn-lg btn-primary" type="submit">Log In</button>
 
   </form>

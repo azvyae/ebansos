@@ -68,6 +68,10 @@ $penduduk = $data['penduduk'];
                         </tr>
                     </tbody>
                 </table>
+                <div class="justify-content-center d-flex">
+                    <a class="btn btn-warning w-50 my-3" href="javascript:history.back()" role="button">Kembali</a>
+                </div>
+
             </div>
         </div>
 

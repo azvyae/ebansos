@@ -30,7 +30,7 @@ class Flasher
                     break;
             }
             echo "
-            <div class='mt-5 alert alert-dismissable fade show alert-{$_SESSION['flash']['tipe']} d-flex bd-highlight' role='alert'>
+            <div class='my-2 alert alert-dismissable fade show alert-{$_SESSION['flash']['tipe']} d-flex bd-highlight' role='alert'>
             <div class='p-2  my-auto'>
             <i class='bi {$icon} fs-4' width='32' height='32'></i>
             </div>

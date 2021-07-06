@@ -18,7 +18,7 @@
 </div>
 <div class="col-lg-2">
     <span class="  d-grid gap-2">
-        <a href="<?= BASEURL ?>/beranda/tambahdata" class="btn btn-primary">Tambah</a>
+        <a href="<?= BASEURL ?>/tambahpenduduk" class="btn btn-primary">Tambah</a>
     </span>
 
 </div>

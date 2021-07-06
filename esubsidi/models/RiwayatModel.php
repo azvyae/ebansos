@@ -11,6 +11,25 @@ class RiwayatModel
         $this->db = new Database;
     }
 
+    public function hitungRiwayat()
+    {
+        $query =   "SELECT id FROM {$this->table} ORDER BY timestamp ASC";
+        $this->db->query($query);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+
+    public function hapusRiwayatTerakhir()
+    {
+        $query = "DELETE FROM riwayat WHERE id IN (
+                    SELECT * FROM (
+                        SELECT id FROM riwayat ORDER BY timestamp ASC LIMIT 1
+                    ) as sorted
+                )";
+        $this->db->query($query);
+        $this->db->execute();
+    }
+
     public function tambahRiwayat($data)
     {
         $query =   "INSERT INTO {$this->table}

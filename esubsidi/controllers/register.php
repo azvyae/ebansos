@@ -7,21 +7,18 @@ class Register extends Controller
 {
     public function index()
     {
-        if (!isset($_SESSION['user'])) {
-            $data['judul'] = 'Login';
-            $this->view('templates/header', $data);
-            $this->view('templates/navUmum');
-            $this->view('register/index');
-            $this->view('templates/footer');
-        } else {
-            header('Location:'. BASEURL);
-        }
+        $data['judul'] = 'Login';
+        $this->view('templates/header', $data);
+        $this->view('templates/navUmum');
+        $this->view('register/index');
+        $this->view('templates/footer');
     }
 
     public function getUser()
     {
         if (!empty($_POST)) {
-            echo json_encode($this->model('UserModel')->getUserId($_POST['userId']));
+            $data = $_POST;
+            echo json_encode($this->model('UserModel')->getUserId($data['userId']));
         } else {
             header('Location: ' . BASEURL . '/register');
         }
@@ -30,12 +27,14 @@ class Register extends Controller
     public function daftar()
     {
         if (!empty($_POST)) {
-            if ($this->model('UserModel')->tambahUser($_POST) > 0) {
-                $data['datetime'] = date('Y-m-d H:i:s');
-                $data['userId'] = $_POST['userId'];
-                $data['aksi'] = 'Melakukan Pendaftaran';
-                $data['nikDipengaruhi'] = 'Tidak ada keterangan';
-                $this->model('RiwayatModel')->tambahRiwayat($data);
+            $data = $_POST;
+            $data['rw'] = $data['rt'] = null;
+            $data['tipeAkun'] = 0;
+            if ($this->model('UserModel')->getUserId($data['userId']) == 0) {
+                $this->model('UserModel')->tambahUser($data);
+
+                $this->registerRiwayat($data, 'Melakukan Pendaftaran');
+
                 Flasher::setFlash('Anda berhasil', 'terdaftar di sistem. Mohon menunggu administrator untuk melakukan konfirmasi.', 'success');
                 header('Location: ' . BASEURL . '/register');
             } else {
@@ -45,5 +44,12 @@ class Register extends Controller
         } else {
             header('Location: ' . BASEURL . '/register');
         }
+    }
+}
+
+class RegisterAuth extends Register {
+    public function index()
+    {
+        header('Location:' . BASEURL);
     }
 }

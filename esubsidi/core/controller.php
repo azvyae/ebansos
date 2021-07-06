@@ -2,11 +2,13 @@
 
 namespace Esubsidi\core;
 
+use Faker;
 use DateTime;
+use ErrorPage;
 
 class Controller
 {
-    private $condition = 0;
+
 
     public function view(String $view, array $data = [])
     {
@@ -17,24 +19,17 @@ class Controller
         require_once "../esubsidi/models/{$model}.php";
         return new $model;
     }
-    // Check if user and tipe user cookie exist
-    public function valid($data)
-    {
-        if (isset($data['tipeAkun'])) {
-            if ($data['tipeAkun'] == hash('sha256', 1)) {
-                $this->condition = 1;
-            } else if ($data['tipeAkun'] == hash('sha256', 2)) {
-                $this->condition = 2;
-            } else if ($data['tipeAkun'] == hash('sha256', 3)) {
-                $this->condition = 3;
-            } else if ($data['tipeAkun'] == hash('sha256', 4)) {
-                $this->condition = 4;
-            } else {
-                $this->condition = 0;
-            }
-        }
 
-        return $this->condition;
+
+    public function registerRiwayat($data, $aksi, $nikDipengaruhi = 'Tidak Ada Keterangan.')
+    {
+        $data['datetime'] = date('Y-m-d H:i:s');
+        $data['aksi'] = $aksi;
+        $data['nikDipengaruhi'] = $nikDipengaruhi;
+        if ($this->model('RiwayatModel')->hitungRiwayat() >= 10) {
+            $this->model('RiwayatModel')->hapusRiwayatTerakhir();
+        }
+        $this->model('RiwayatModel')->tambahRiwayat($data);
     }
 
     public function translateDate($tanggal)
@@ -92,7 +87,7 @@ class Controller
 
     public function translateTime($arrayTimestamp)
     {
-        
+
         if (!$arrayTimestamp) {
             $arrayTimestamp['0']['userId'] = 'Tidak';
             $arrayTimestamp['0']['aksi'] = 'Ada Notifikasi';
@@ -139,38 +134,35 @@ class Controller
         return $arrayTimestamp;
     }
 
-    public function __call($name, $arg)
+    public function handlePrivilege()
     {
-        if ($name == 'setSession') {
-            switch (count($arg)) {
-                case 5:
-                    if (end($arg)) {
-                        if ($arg[2] != null) {
-                            setcookie('rw', $arg[2], time() + 60 * 60 * 24 * 30, secure: true, path: '/');
-                        }
-                        if ($arg[3] != null) {
-                            setcookie('rt', $arg[3], time() + 60 * 60 * 24 * 30, secure: true, path: '/');
-                        }
-                        setcookie('nama', $arg[0], time() + 60 * 60 * 24 * 30, secure: true, path: '/');
-                        setcookie('tipeAkun', $arg[1], time() + 60 * 60 * 24 * 30, secure: true, path: '/');
-                    } else {
+        require_once "../esubsidi/controllers/errorpage.php";
+        $handle = new ErrorPage;
+        $handle->error401();
+    }
 
-                        if ($arg[2] != null) {
-                            $_SESSION['user']['rw'] = $arg[2];
-                        }
-                        if ($arg[3] != null) {
-                            $_SESSION['user']['rt'] = $arg[3];
-                        }
-                        $_SESSION['user']['nama'] = $arg[0];
-                        $_SESSION['user']['tipeAkun'] = $arg[1];
-                    }
-                    break;
-                default:
-                    header('Location: ' . BASEURL);
-                    break;
-            }
+    public function setSession($arg)
+    {
+        $_SESSION['user']['userId'] = $arg[0];
+        $_SESSION['user']['namaAkun'] = $arg[1];
+        $_SESSION['user']['tipeAkun'] = $arg[2];
+        if ($arg[3] != null) {
+            $_SESSION['user']['rw'] = $arg[3];
         }
-
+        if ($arg[4] != null) {
+            $_SESSION['user']['rt'] = $arg[4];
+        }
         header('Location: ' . BASEURL);
+    }
+
+    public function generatePassword()
+    {
+        $faker = Faker\Factory::create('id_ID');
+        do {
+            $str = (preg_split('/( |,|-)/', $faker->name()))[0];
+            $num = $faker->numberBetween(100, 999);
+        } while (strlen($str) < 4);
+
+        return "{$str}@{$num}";
     }
 }

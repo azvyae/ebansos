@@ -15,7 +15,7 @@ use Esubsidi\core\Flasher;
                         <div class="my-3 row">
                             <div class="col-sm-12 mb-3">
                                 <label for="nik" class="form-label fw-bold">Nomor Induk Kependudukan</label>
-                                <input type="text" autocomplete="off" class="form-control" id="nik" name='nik' placeholder="3273000011110000" minlength="16" value="<?= $data['nikVal'] ?>" maxlength="16" required>
+                                <input type="text" autocomplete="off" class="form-control" pattern="[0-9]+" title="Masukkan hanya angka" id="nik" name='nik' placeholder="3273000011110000" minlength="16" value="<?= $data['nikVal'] ?>" maxlength="16" required>
                             </div>
                         </div>
                         <div class="my-3 row">
@@ -31,7 +31,7 @@ use Esubsidi\core\Flasher;
                             </div>
                         </div>
                         <div class="mx-auto">
-                            <button type="submit" class="checkButton btn mx-auto w-100 btn-primary btn-lg btn-ripple">Periksa Data</button>
+                            <button type="submit" class="checkButton btn mx-auto my-3 w-100 btn-primary btn-lg btn-ripple">Periksa Data</button>
                         </div>
                     </form>
                     <?php Flasher::flash(); ?>

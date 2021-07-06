@@ -15,11 +15,14 @@ class RiwayatAuth extends Riwayat
 
     public function index()
     {
-        if ($this->valid($_SESSION['user']) == 3) {
+        $data['user'] = $_SESSION['user'];
+        if ($data['user']['tipeAkun'] == 3) {
             $data['judul'] = 'Riwayat Aktivitas';
+
             $data['riwayat'] = $this->model('RiwayatModel')->getRiwayat(5);
-            $data['riwayatFull'] = $this->model('RiwayatModel')->getRiwayat(100);
             $data['riwayat'] = $this->translateTime($data['riwayat']);
+
+            $data['riwayatFull'] = $this->model('RiwayatModel')->getRiwayat(100);
             $data['riwayatFull'] = $this->translateTime($data['riwayatFull']);
             $this->view('templates/header', $data);
             $this->view('templates/navAdmin', $data);
@@ -32,8 +35,9 @@ class RiwayatAuth extends Riwayat
 
     public function reset()
     {
+        $data['user'] = $_SESSION['user'];
         // CHANGE THIS FEATURE
-        if (isset($_POST) && $this->valid($_SESSION['user']) == 3) {
+        if (isset($_POST) && $data['user']['tipeAkun'] == 3) {
             $GLOBALS['notif'] = $_POST['zero'];
         } else {
             header('Location: ' . BASEURL);
