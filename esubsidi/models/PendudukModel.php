@@ -28,6 +28,15 @@ class PendudukModel
         return $this->db->single();
     }
 
+    public function cekPenerimaanSubsidi($data)
+    {
+        $query = "SELECT * FROM {$this->table2} WHERE hashId = :hashId ORDER BY tanggalMenerima DESC LIMIT 0, 1";
+        $this->db->query($query);
+        $this->db->bind('hashId', $data['hashId']);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+
     public function getNikArray($data)
     {
         if (!empty($data['rt'])) {
