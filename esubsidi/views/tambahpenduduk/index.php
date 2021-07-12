@@ -9,7 +9,7 @@ use Esubsidi\core\Flasher;
             <div class="container py-2">
                 <h1 class="display-5 text-center fw-bold my-3 ">Tambah Data Penerima Subsidi</h1>
                 <p class="text-center">Isi identitas calon penerima subsidi berdasarkan <b><u>data tempat tinggal saat ini.</u></b> Tidak boleh ada kolom yang dikosongkan</p>
-                <form action="<?= BASEURL ?>/tambah/tambahdata" method="POST" class="row g-3 mx-auto">
+                <form action="<?= BASEURL ?>/tambahpenduduk/tambahdata" method="POST" class="row g-3 mx-auto">
                     <div class="col-lg-12 d-block">
                         <?php
                         Flasher::flash();

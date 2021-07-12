@@ -114,7 +114,7 @@ class Controller
                 } else if ($diff->d > 1) {
                     $s = "{$diff->d} hari yang lalu";
                 } else if ($diff->d == 1) {
-                    $s = "Sehari yang lalu";
+                    $s = "Kemarin";
                 } else if ($diff->h > 1) {
                     $s = "{$diff->h} jam yang lalu";
                 } else if ($diff->h == 1) {

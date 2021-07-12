@@ -44,9 +44,9 @@ class TambahPendudukAuth extends TambahPenduduk
             header('Location: ' . BASEURL);
         }
 
-        $this->view('tambah/index', $data);
+        $this->view('tambahpenduduk/index', $data);
         $this->view('templates/footer');
-        
+
         // USED FOR GENERATING DATA
         //         $data['penduduk'] = [
         //             'hashId' => hash('md5', $nik),i
@@ -80,15 +80,17 @@ class TambahPendudukAuth extends TambahPenduduk
                 if ($this->model('PendudukModel')->tambahDataPenduduk($data) > 0) {
                     $this->registerRiwayat($data, 'Menambahkan Data', $data['nik']);
                     Flasher::setFlash('Anda berhasil', "menambahkan {$data['nama']} dengan NIK {$data['nik']} ke sistem", 'success');
-                    header('Location: ' . BASEURL . '/tambah');
+                    header('Location: ' . BASEURL . '/tambahpenduduk');
                 } else {
                     Flasher::setFlash('Anda gagal', 'menambahkan data.', 'danger');
-                    header('Location: ' . BASEURL . '/tambah');
+                    header('Location: ' . BASEURL . '/tambahpenduduk');
                 }
             } else {
                 Flasher::setFlash('NIK', 'sudah terdaftar!', 'danger');
-                header('Location: ' . BASEURL . '/tambah');
+                header('Location: ' . BASEURL . '/tambahpenduduk');
             }
+        } else {
+            header('Location: ' . BASEURL . '/tambahpenduduk');
         }
     }
 }

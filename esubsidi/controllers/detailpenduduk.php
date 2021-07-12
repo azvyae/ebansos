@@ -2,7 +2,7 @@
 
 use Esubsidi\core\Controller;
 
-class Detail extends Controller
+class DetailPenduduk extends Controller
 {
     public function index()
     {
@@ -10,7 +10,7 @@ class Detail extends Controller
     }
 }
 
-class DetailAuth extends Detail
+class DetailPendudukAuth extends DetailPenduduk
 {
     public function index($hashId = '')
     {
@@ -57,7 +57,7 @@ class DetailAuth extends Detail
                 header('Location: ' . BASEURL);
             }
 
-            $this->view('detail/index', $data);
+            $this->view('detailpenduduk/index', $data);
             $this->view('templates/footer');
         } else {
 

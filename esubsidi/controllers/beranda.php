@@ -9,7 +9,6 @@ class Beranda extends Controller
     public function index()
     {
         $data['judul'] = $this->judul;
-
         $data['nikVal'] =  $data['hhVal'] = $data['bbVal'] = $data['ttttVal'] = '';
         if (isset($_SESSION['input'])) {
             $data = array_merge($data, $_SESSION['input']);
@@ -19,7 +18,6 @@ class Beranda extends Controller
         // Arrange HTML
         $this->view('templates/header', $data);
         $this->view('templates/navUmum');
-
         $this->view('beranda/index', $data);
         $this->view(('templates/footer'));
     }
@@ -56,6 +54,7 @@ class Beranda extends Controller
                 Flasher::setFlash('<span class="fs-5">Data tersebut', 'tidak terdaftar di sistem kami.</span>', 'danger');
                 header('Location: ' . BASEURL);
             }
+            
             $_SESSION['input'] = array(
                 'nikVal' => $data['nik'],
                 'hhVal' => $data['hari'],
@@ -76,7 +75,6 @@ class BerandaAuth extends Beranda
         $data['distrik'] = '';
         $data['lebar-cari'] = 'col-lg-3';
         $data['user'] = $_SESSION['user'];
-
 
         $this->view('templates/header', $data);
         if ($data['user']['tipeAkun'] == 1) {

@@ -14,15 +14,15 @@ class PendudukModel
 
     public function getPenduduk($data)
     {
-        if (!empty($data['nik']) && !empty($data['tanggalLahir'])) {
+        if (!empty($data['hashId'])) {
+            $query = "SELECT {$this->table}.*, {$this->table2}.tanggalMenerima, {$this->table2}.jenisSubsidi FROM {$this->table} LEFT JOIN {$this->table2} ON {$this->table}.hashId = {$this->table2}.hashId WHERE {$this->table}.hashId = :hashId ORDER BY {$this->table2}.tanggalMenerima DESC LIMIT 0, 1";
+            $this->db->query($query);
+            $this->db->bind('hashId', $data['hashId']);
+        } else {
             $query = "SELECT nik, nama, alamatRumah, {$this->table2}.tanggalMenerima, {$this->table2}.jenisSubsidi FROM {$this->table} LEFT JOIN {$this->table2} ON {$this->table}.hashId = {$this->table2}.hashId  WHERE nik = :nik AND tanggalLahir = :tanggalLahir ORDER BY {$this->table2}.tanggalMenerima DESC LIMIT 0, 1";
             $this->db->query($query);
             $this->db->bind('nik', $data['nik']);
             $this->db->bind('tanggalLahir', $data['tanggalLahir']);
-        } else {
-            $query = "SELECT {$this->table}.*, {$this->table2}.tanggalMenerima, {$this->table2}.jenisSubsidi FROM {$this->table} LEFT JOIN {$this->table2} ON {$this->table}.hashId = {$this->table2}.hashId WHERE {$this->table}.hashId = :hashId ORDER BY {$this->table2}.tanggalMenerima DESC LIMIT 0, 1";
-            $this->db->query($query);
-            $this->db->bind('hashId', $data['hashId']);
         }
         $this->db->execute();
         return $this->db->single();
@@ -81,6 +81,34 @@ class PendudukModel
 
         $this->db->query($query);
         $this->db->bind('hashId', $data['hashId']);
+        $this->db->bind('nik', $data['nik']);
+        $this->db->bind('nama', $data['nama']);
+        $this->db->bind('tempatLahir', $data['tempatLahir']);
+        $this->db->bind('tanggalLahir', $data['tanggalLahir']);
+        $this->db->bind('jenisKelamin', $data['jenisKelamin']);
+        $this->db->bind('alamatRumah', $data['alamatRumah']);
+        $this->db->bind('rt', $data['rt']);
+        $this->db->bind('rw', $data['rw']);
+        $this->db->bind('kelurahan', $data['kelurahan']);
+        $this->db->bind('kecamatan', $data['kecamatan']);
+        $this->db->bind('statusPerkawinan', $data['statusPerkawinan']);
+        $this->db->bind('pekerjaan', $data['pekerjaan']);
+
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
+    public function ubahDataPenduduk($data)
+    {
+        $query =   "UPDATE {$this->table}
+                SET
+                hashId=:hashId, nik=:nik, nama=:nama, tempatLahir=:tempatLahir, tanggalLahir=:tanggalLahir, jenisKelamin=:jenisKelamin, alamatRumah=:alamatRumah, rt=:rt, rw=:rw, kelurahan=:kelurahan, kecamatan=:kecamatan, statusPerkawinan=:statusPerkawinan, pekerjaan=:pekerjaan WHERE hashId = :hashIdBefore";
+
+        $this->db->query($query);
+        $this->db->bind('hashId', $data['hashId']);
+        $this->db->bind('hashIdBefore', $data['hashIdBefore']);
         $this->db->bind('nik', $data['nik']);
         $this->db->bind('nama', $data['nama']);
         $this->db->bind('tempatLahir', $data['tempatLahir']);

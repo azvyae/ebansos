@@ -123,8 +123,8 @@ function tampilkanTabelPenduduk(q = '', rw = null, rt = null, halaman = 1) {
                 <td>` + data.nama + `</td>
                 <td>` + data.alamatRumah + `</td>
                 <td class='text-center'>
-                    <a class=' link-primary text-decoration-none fw-bold' href='detail/index/` + data.hashId + `'>Detail</a>
-                    <a class=' link-dark text-decoration-none fw-bold' href='ubah/index/` + data.hashId + `'>Ubah</a>
+                    <a class=' link-primary text-decoration-none fw-bold' href='detailpenduduk/index/` + data.hashId + `'>Detail</a>
+                    <a class=' link-dark text-decoration-none fw-bold' href='ubahpenduduk/index/` + data.hashId + `'>Ubah</a>
                 </td>
                 </tr >`
                 })
@@ -176,8 +176,8 @@ function gantiTabelPenduduk(q = '', rw = null, rt = null, halaman = 1) {
                 <td>` + data.nama + `</td>
                 <td>` + data.alamatRumah + `</td>
                 <td class='text-center'>
-                <a class=' link-primary text-decoration-none fw-bold' href='detail/index/` + data.hashId + `'>Detail</a>
-                    <a class=' link-dark text-decoration-none fw-bold' href='ubah/index/` + data.hashId + `'>Ubah</a>
+                <a class=' link-primary text-decoration-none fw-bold' href='detailpenduduk/index/` + data.hashId + `'>Detail</a>
+                    <a class=' link-dark text-decoration-none fw-bold' href='ubahpenduduk/index/` + data.hashId + `'>Ubah</a>
                 </td>
                 </tr >`
             })

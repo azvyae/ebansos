@@ -15,7 +15,7 @@
                     <a class="nav-link active" href="<?= BASEURL ?>">Beranda</a>
                 </li>
                 <li class="nav-item my-auto text-center">
-                    <a class="nav-link" href="<?= BASEURL ?>/user">Pengguna</a>
+                    <a class="nav-link" href="<?= BASEURL ?>/admin">Administrasi</a>
                 </li>
                 <li class="nav-item dropdown my-auto text-center">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
