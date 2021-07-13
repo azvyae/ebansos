@@ -1,69 +1,29 @@
-$("#aktifkanRegistrasi").on('change', function() {
-    setTimeout(function() {
-        $("#updateStatusRegistrasi").submit();
-    }, 250)
-
-})
-
-function siapkanFilterRT(rw = '') {
-    var top = bot = '';
-    $.ajax({
-            url: '/beranda/getRT',
-            data: {
-                rw: rw
-            },
-            method: 'post',
-            dataType: 'json'
-        })
-        .done(function(data) {
-            top = bot = '';
-            $('#rt').empty();
-            if (rw !== null && rw !== '') {
-
-                if (data.length > 0) {
-                    top = `<option selected value=''>Semua RT</option>`;
-                    $.each(data, function(i, data) {
-                        bot += `<option value="` + data['rt'] + `">RT ` + data['rt'] + `</option>`
-                    })
-                    $('#rt').prop('hidden', false);
-                } else {
-
-                    $('#rt').prop('hidden', true);
-                }
-                $('#rt').prepend(top + bot);
-            } else {
-                $('#rt').prop('hidden', true);
-            }
-            periksaChecklist();
-        })
-}
-
-function siapkanHalaman(q = '', rw = null, rt = null) {
+function siapkanHalaman(q = '', tipeAkun = null) {
     var top = '';
     $.ajax({
-            url: '/beranda/getHalaman',
-            data: {
-                rw: rw,
-                rt: rt,
-                q: q
-            },
-            method: 'post',
-            dataType: 'json'
-        })
-        .done(function(data) {
+        url: '/admin/getHalaman',
+        data: {
+            tipeAkun: tipeAkun,
+            q: q
+        },
+        method: 'post',
+        dataType: 'json'
+    })
+        .done(function (data) {
             top = bot = '';
             $('#halaman').empty();
             bot += `<option selected value="1">1</option>`
-            for (let i = 2; i <= Math.ceil(data / 25); i++) {
+            for (let i = 2; i <= Math.ceil(data / 10); i++) {
                 bot += `<option value="` + i + `"> ` + i + `</option>`
             }
             $('#halaman').prepend(top + bot);
             periksaChecklist();
+            cekStatusKonfirmasi();
+
         })
 }
 
-function tampilkanTabelPenduduk(q = '', rw = null, rt = null, halaman = 1) {
-    $('#tabel-container').prop('hidden', true)
+function tampilkanTabelUser(q = '', tipeAkunParams = null, halaman = 1, init = 0) {
     if ($('#loading').is(':empty')) {
 
         $('#loading').prepend(
@@ -72,112 +32,93 @@ function tampilkanTabelPenduduk(q = '', rw = null, rt = null, halaman = 1) {
         </div>`
         );
     }
-    var top = mid = bot = '';
+    var top = mid = bot = tipeAkunTampilan = checked = '';
     $.ajax({
-            url: '/beranda/getDataTabelPenduduk',
-            data: {
-                q: q,
-                rw: rw,
-                rt: rt,
-                halaman: halaman
-            },
-            method: 'post',
-            dataType: 'json'
-        })
-        .done(function(data) {
+        url: '/admin/getDataTabelUser',
+        data: {
+            q: q,
+            tipeAkun: tipeAkunParams,
+            halaman: halaman
+        },
+        method: 'post',
+        dataType: 'json'
+    })
+        .done(function (data) {
             if (data.length > 0) {
                 top = `<table class='table table-striped overflow-auto'>
                 <thead>
                     <tr>
                         <th scope='col' style='min-width:2.68%; max-width:2.68%; width:2.68%;'><input class='form-check-input pilih-semua usercheckbox' type='checkbox'></th>
-                        <th scope='col' style='min-width:15%; max-width:15%; width:15%;'>NIK</th>
-                        <th scope='col' style='min-width:21%; max-width:21%; width:21%;'>Nama</th>
-                        <th scope='col' style='min-width:51.82%; max-width:51.82%; width:51.82%;'>Alamat</th>
-                        <th scope='col' style='min-width:9.5%; max-width:9.5%; width:9.5%;'>Opsi</th>
+                        <th scope='col' style='min-width:18%; max-width:18%; width:18%;'>User ID</th>
+                        <th scope='col' style='min-width:30%; max-width:30%; width:30%;'>Nama</th>
+                        <th scope='col' style='min-width:39.82%; max-width:39.82%; width:39.82%;'>Jenis Akun</th>
+                        <th scope='col' style='min-width:9.5%; max-width:9.5%; width:9.5%;'>Aktif</th>
                     </tr>
                 </thead>
                 <tbody>`;
-                $.each(data, function(i, data) {
+                $.each(data, function (i, data) {
+                    switch (data.tipeAkun) {
+                        case '0':
+                            tipeAkunTampilan = 'Pendaftar';
+                            break;
+                        case '1':
+                            tipeAkunTampilan = 'Petugas RT';
+                            break;
+                        case '2':
+                            tipeAkunTampilan = 'Petugas RW';
+                            break;
+                        case '3':
+                            tipeAkunTampilan = 'Petugas Kelurahan/Khusus';
+                            break;
+                        case '4':
+                            tipeAkunTampilan = 'Petugas Pemrosesan Subsidi';
+                            break;
+                        default:
+                            tipeAkunTampilan = 'Pendaftar';
+                            break;
+                    }
+                    switch (data.statusKonfirmasi) {
+                        case '1':
+                            checked = 'checked';
+                            break;
+                        default:
+                            checked = '';
+                            break;
+                    }
                     mid += `<tr class='align-middle'>
-                <th scope='row'><input class='form-check-input tabel-check usercheckbox' type='checkbox' value='` + data.hashId + `' name='penduduk[]'></th>
-                <td>` + data.nik + `</td>
-                <td>` + data.nama + `</td>
-                <td>` + data.alamatRumah + `</td>
-                <td class='text-center'>
-                    <a class=' link-primary text-decoration-none fw-bold' href='detailpenduduk/index/` + data.hashId + `'>Detail</a>
-                    <a class=' link-dark text-decoration-none fw-bold' href='ubahpenduduk/index/` + data.hashId + `'>Ubah</a>
-                </td>
-                </tr >`
+                            <th scope='row'><input class='form-check-input tabel-check usercheckbox' type='checkbox' value='` + data.userId + `' name='user[]'></th>
+                            <td>` + data.userId + `</td>
+                            <td>` + data.nama + `</td>
+                            <td>` + tipeAkunTampilan + `</td>
+                            <td class='text-center'>
+                            <span class='form-check form-switch'>
+                                <input class="form-check-input statusKonfirmasi" ` + checked + ` value='` + data.userId + `' type="checkbox">
+                            </span>
+                            </td>
+                            </tr >`
                 })
                 bot = `</tbody >
         </table >`;
                 $('#message').addClass('hidden')
                 $('#message').empty();
-                $('#tabel-container').append(top + mid + bot);
+                if (init == 0) {
+                    $('#tabel-container').append(top + mid + bot);
+                } else {
+                    $('tbody').html(mid);
+                }
                 $('#tabel-container').prop('hidden', false)
             } else {
                 bot = `<p class='display-6 mt-5'>Tidak ada data</p>`
                 $('#tabel-container').prop('hidden', true)
-                $('#tabel-container').html('');
+                $('tbody').html('');
                 $('#message').empty();
                 $('#message').append(bot);
                 $('#message').removeClass('hidden')
             }
             $('#loading').empty()
             periksaChecklist();
+            cekStatusKonfirmasi();
         })
-}
-
-function gantiTabelPenduduk(q = '', rw = null, rt = null, halaman = 1) {
-    if ($('#loading').is(':empty')) {
-
-        $('#loading').prepend(
-            `<div class="spinner-border text-primary mt-3" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>`
-        );
-    }
-    var mid = '';
-    $.ajax({
-        url: '/beranda/getDataTabelPenduduk',
-        data: {
-            q: q,
-            rw: rw,
-            rt: rt,
-            halaman: halaman
-        },
-        method: 'post',
-        dataType: 'json'
-    }).done(function(data) {
-        if (data.length > 0) {
-            $.each(data, function(i, data) {
-                mid += `<tr class='align-middle'>
-                <th scope='row'><input class='form-check-input tabel-check usercheckbox' type='checkbox' value='` + data.hashId + `' name='penduduk[]'></th>
-                <td>` + data.nik + `</td>
-                <td>` + data.nama + `</td>
-                <td>` + data.alamatRumah + `</td>
-                <td class='text-center'>
-                <a class=' link-primary text-decoration-none fw-bold' href='detailpenduduk/index/` + data.hashId + `'>Detail</a>
-                    <a class=' link-dark text-decoration-none fw-bold' href='ubahpenduduk/index/` + data.hashId + `'>Ubah</a>
-                </td>
-                </tr >`
-            })
-            $('#message').addClass('hidden')
-            $('#message').empty();
-            $('tbody').html(mid);
-            $('#tabel-container').prop('hidden', false)
-
-        } else {
-            mid = `<p class='display-6 mt-5'>Tidak ada data</p>`;
-            $('#tabel-container').prop('hidden', true)
-            $('tbody').html('');
-            $('#message').empty();
-            $('#message').append(mid);
-            $('#message').removeClass('hidden')
-        }
-        $('#loading').empty();
-        periksaChecklist();
-    })
 }
 
 function periksaChecklist() {
@@ -189,7 +130,7 @@ function periksaChecklist() {
         $('.pilih-semua').removeAttr('disabled');
     }
 
-    $('.pilih-semua').change('click', function() {
+    $('.pilih-semua').change('click', function () {
         if ($(this).is(':checked')) {
             $('.tabel-check').prop('checked', true);
         } else {
@@ -197,7 +138,7 @@ function periksaChecklist() {
         }
 
     })
-    $('.tabel-check').change('click', function() {
+    $('.tabel-check').change('click', function () {
         if ($('.tabel-check:checked').length < $('.tabel-check').length) {
             $('.pilih-semua').prop('checked', false)
         } else {
@@ -205,7 +146,7 @@ function periksaChecklist() {
         }
 
     })
-    $('input[type=checkbox].usercheckbox').change('click', function() {
+    $('input[type=checkbox].usercheckbox').change('click', function () {
         if ($('input[type=checkbox].usercheckbox:checked').length > 0) {
             $('#tombolHapus').removeAttr('disabled');
         } else {
@@ -216,39 +157,48 @@ function periksaChecklist() {
 
 }
 
-$(function() {
-    siapkanHalaman();
-    tampilkanTabelPenduduk();
+function cekStatusKonfirmasi() {
+    $('.statusKonfirmasi').change('click', function () {
+        const userId = $(this).val()
+        const toggle = $(this).prop('checked')
+        $.ajax({
+            url: '/admin/konfirmasiUser',
+            data: {
+                userId: userId,
+                toggle: toggle
+            },
+            method: 'post'
+        })
+    })
+}
 
-    $('#rw').on('change', function() {
-        $('#tabel-container').prop('hidden', true)
-        siapkanFilterRT($('#rw').val())
-        siapkanHalaman($('#cari').val(), $('#rw').val(), $('#rt').val());
-        $('#rt').val('')
-        $('#cari').val('')
-        $('#halaman').val(1)
-
-        gantiTabelPenduduk($('#cari').val(), $('#rw').val(), $('#rt').val(), $('#halaman').val());
-    });
-
-    $('#rt').on('change', function() {
-        $('#tabel-container').prop('hidden', true)
-        siapkanHalaman($('#cari').val(), $('#rw').val(), $('#rt').val());
-        $('#cari').val('')
-        $('#halaman').val(1)
-        gantiTabelPenduduk($('#cari').val(), $('#rw').val(), $('#rt').val(), $('#halaman').val());
-    });
-
-    $('#halaman').on('change', function() {
-        $('#tabel-container').prop('hidden', true)
-        $('#cari').val('')
-        gantiTabelPenduduk($('#cari').val(), $('#rw').val(), $('#rt').val(), $('#halaman').val());
-    });
-
-    $('#cari').on('keyup', function() {
-        siapkanHalaman($('#cari').val(), $('#rw').val(), $('#rt').val());
-        $('#halaman').val(1)
-        gantiTabelPenduduk($('#cari').val(), $('#rw').val(), $('#rt').val(), $('#halaman').val());
+$(function () {
+    $("#aktifkanRegistrasi").on('change', function () {
+        setTimeout(function () {
+            $("#updateStatusRegistrasi").submit();
+        }, 250)
     })
 
+    siapkanHalaman();
+    tampilkanTabelUser();
+
+    $('#tipeAkun').on('change', function () {
+        $('#tabel-container').prop('hidden', true)
+        siapkanHalaman($('#cari').val(), $('#tipeAkun').val());
+        $('#cari').val('')
+        $('#halaman').val(1)
+        tampilkanTabelUser($('#cari').val(), $('#tipeAkun').val(), $('#halaman').val(), 1);
+    });
+
+    $('#halaman').on('change', function () {
+        $('#tabel-container').prop('hidden', true)
+        $('#cari').val('')
+        tampilkanTabelUser($('#cari').val(), $('#tipeAkun').val(), $('#halaman').val(), 1);
+    });
+
+    $('#cari').on('keyup', function () {
+        siapkanHalaman($('#cari').val(), $('#tipeAkun').val());
+        $('#halaman').val(1)
+        tampilkanTabelUser($('#cari').val(), $('#tipeAkun').val(), $('#halaman').val(), 1);
+    })
 });

@@ -34,7 +34,7 @@ class Register extends Controller
         if (!empty($_POST)) {
             $data = $_POST;
             $data['rw'] = $data['rt'] = null;
-            $data['tipeAkun'] = 0;
+            $data['tipeAkun'] = 3;
             $data['statusKonfirmasi'] = 0;
             if ($this->model('UserModel')->getUserId($data['userId']) == 0) {
                 $this->model('UserModel')->tambahUser($data);

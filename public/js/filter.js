@@ -81,8 +81,11 @@ function siapkanHalaman(q = '', rw = null, rt = null) {
         })
 }
 
-function tampilkanTabelPenduduk(q = '', rw = null, rt = null, halaman = 1) {
-    $('#tabel-container').prop('hidden', true)
+function tampilkanHeaderTabel() {
+
+}
+
+function tampilkanTabelPenduduk(q = '', rw = null, rt = null, halaman = 1, init = 0) {
     if ($('#loading').is(':empty')) {
 
         $('#loading').prepend(
@@ -106,38 +109,42 @@ function tampilkanTabelPenduduk(q = '', rw = null, rt = null, halaman = 1) {
         .done(function(data) {
             if (data.length > 0) {
                 top = `<table class='table table-striped overflow-auto'>
-                <thead>
-                    <tr>
-                        <th scope='col' style='min-width:2.68%; max-width:2.68%; width:2.68%;'><input class='form-check-input pilih-semua' type='checkbox'></th>
-                        <th scope='col' style='min-width:15%; max-width:15%; width:15%;'>NIK</th>
-                        <th scope='col' style='min-width:21%; max-width:21%; width:21%;'>Nama</th>
-                        <th scope='col' style='min-width:51.82%; max-width:51.82%; width:51.82%;'>Alamat</th>
-                        <th scope='col' style='min-width:9.5%; max-width:9.5%; width:9.5%;'>Opsi</th>
-                    </tr>
-                </thead>
-                <tbody>`;
+                        <thead>
+                            <tr>
+                                <th scope='col' style='min-width:2.68%; max-width:2.68%; width:2.68%;'><input class='form-check-input pilih-semua' type='checkbox'></th>
+                                <th scope='col' style='min-width:15%; max-width:15%; width:15%;'>NIK</th>
+                                <th scope='col' style='min-width:21%; max-width:21%; width:21%;'>Nama</th>
+                                <th scope='col' style='min-width:51.82%; max-width:51.82%; width:51.82%;'>Alamat</th>
+                                <th scope='col' style='min-width:9.5%; max-width:9.5%; width:9.5%;'>Opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
                 $.each(data, function(i, data) {
                     mid += `<tr class='align-middle'>
-                <th scope='row'><input class='form-check-input tabel-check' type='checkbox' value='` + data.hashId + `' name='penduduk[]'></th>
-                <td>` + data.nik + `</td>
-                <td>` + data.nama + `</td>
-                <td>` + data.alamatRumah + `</td>
-                <td class='text-center'>
-                    <a class=' link-primary text-decoration-none fw-bold' href='detailpenduduk/index/` + data.hashId + `'>Detail</a>
-                    <a class=' link-dark text-decoration-none fw-bold' href='ubahpenduduk/index/` + data.hashId + `'>Ubah</a>
-                </td>
-                </tr >`
+                            <th scope='row'><input class='form-check-input tabel-check' type='checkbox' value='` + data.hashId + `' name='penduduk[]'></th>
+                            <td>` + data.nik + `</td>
+                            <td>` + data.nama + `</td>
+                            <td>` + data.alamatRumah + `</td>
+                            <td class='text-center'>
+                                <a class=' link-primary text-decoration-none fw-bold' href='detailpenduduk/index/` + data.hashId + `'>Detail</a>
+                                <a class=' link-dark text-decoration-none fw-bold' href='ubahpenduduk/index/` + data.hashId + `'>Ubah</a>
+                            </td>
+                            </tr >`
                 })
                 bot = `</tbody >
-        </table >`;
+                    </table >`;
                 $('#message').addClass('hidden')
                 $('#message').empty();
-                $('#tabel-container').append(top + mid + bot);
+                if (init == 0) {
+                    $('#tabel-container').append(top + mid + bot);
+                } else {
+                    $('tbody').html(mid);
+                }
                 $('#tabel-container').prop('hidden', false)
             } else {
                 bot = `<p class='display-6 mt-5'>Tidak ada data</p>`
                 $('#tabel-container').prop('hidden', true)
-                $('#tabel-container').html('');
+                $('tbody').html('');
                 $('#message').empty();
                 $('#message').append(bot);
                 $('#message').removeClass('hidden')
@@ -145,58 +152,6 @@ function tampilkanTabelPenduduk(q = '', rw = null, rt = null, halaman = 1) {
             $('#loading').empty()
             periksaChecklist();
         })
-}
-
-function gantiTabelPenduduk(q = '', rw = null, rt = null, halaman = 1) {
-    if ($('#loading').is(':empty')) {
-
-        $('#loading').prepend(
-            `<div class="spinner-border text-primary mt-3" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>`
-        );
-    }
-    var mid = '';
-    $.ajax({
-        url: '/beranda/getDataTabelPenduduk',
-        data: {
-            q: q,
-            rw: rw,
-            rt: rt,
-            halaman: halaman
-        },
-        method: 'post',
-        dataType: 'json'
-    }).done(function(data) {
-        if (data.length > 0) {
-            $.each(data, function(i, data) {
-                mid += `<tr class='align-middle'>
-                <th scope='row'><input class='form-check-input tabel-check' type='checkbox' value='` + data.hashId + `' name='penduduk[]'></th>
-                <td>` + data.nik + `</td>
-                <td>` + data.nama + `</td>
-                <td>` + data.alamatRumah + `</td>
-                <td class='text-center'>
-                <a class=' link-primary text-decoration-none fw-bold' href='detailpenduduk/index/` + data.hashId + `'>Detail</a>
-                    <a class=' link-dark text-decoration-none fw-bold' href='ubahpenduduk/index/` + data.hashId + `'>Ubah</a>
-                </td>
-                </tr >`
-            })
-            $('#message').addClass('hidden')
-            $('#message').empty();
-            $('tbody').html(mid);
-            $('#tabel-container').prop('hidden', false)
-
-        } else {
-            mid = `<p class='display-6 mt-5'>Tidak ada data</p>`;
-            $('#tabel-container').prop('hidden', true)
-            $('tbody').html('');
-            $('#message').empty();
-            $('#message').append(mid);
-            $('#message').removeClass('hidden')
-        }
-        $('#loading').empty();
-        periksaChecklist();
-    })
 }
 
 function periksaChecklist() {
@@ -246,8 +201,7 @@ $(function() {
         $('#rt').val('')
         $('#cari').val('')
         $('#halaman').val(1)
-
-        gantiTabelPenduduk($('#cari').val(), $('#rw').val(), $('#rt').val(), $('#halaman').val());
+        tampilkanTabelPenduduk($('#cari').val(), $('#rw').val(), $('#rt').val(), $('#halaman').val(), 1);
     });
 
     $('#rt').on('change', function() {
@@ -255,19 +209,19 @@ $(function() {
         siapkanHalaman($('#cari').val(), $('#rw').val(), $('#rt').val());
         $('#cari').val('')
         $('#halaman').val(1)
-        gantiTabelPenduduk($('#cari').val(), $('#rw').val(), $('#rt').val(), $('#halaman').val());
+        tampilkanTabelPenduduk($('#cari').val(), $('#rw').val(), $('#rt').val(), $('#halaman').val(), 1);
     });
 
     $('#halaman').on('change', function() {
         $('#tabel-container').prop('hidden', true)
         $('#cari').val('')
-        gantiTabelPenduduk($('#cari').val(), $('#rw').val(), $('#rt').val(), $('#halaman').val());
+        tampilkanTabelPenduduk($('#cari').val(), $('#rw').val(), $('#rt').val(), $('#halaman').val(), 1);
     });
 
     $('#cari').on('keyup', function() {
         siapkanHalaman($('#cari').val(), $('#rw').val(), $('#rt').val());
         $('#halaman').val(1)
-        gantiTabelPenduduk($('#cari').val(), $('#rw').val(), $('#rt').val(), $('#halaman').val());
+        tampilkanTabelPenduduk($('#cari').val(), $('#rw').val(), $('#rt').val(), $('#halaman').val(), 1);
     })
 
 });

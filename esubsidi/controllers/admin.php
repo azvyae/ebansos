@@ -64,6 +64,27 @@ class AdminAuth extends Admin
         }
     }
 
+    public function getHalaman()
+    {
+        if (!empty($_POST)) {
+            $data = $_POST;
+            echo json_encode($this->model('UserModel')->hitungBarisDikueri($data));
+        } else {
+            header('Location: ' . BASEURL);
+        }
+    }
+
+    public function getDataTabelUser()
+    {
+        if (!empty($_POST)) {
+            $data = $_POST;
+            $data['halaman'] = (($data['halaman']) - 1) * 10;
+            echo json_encode($this->model('UserModel')->getDataUser($data));
+        } else {
+            header('Location: ' . BASEURL);
+        }
+    }
+
     public function generateRW($data)
     {
         $data['user'] = $_SESSION['user'];
@@ -94,8 +115,45 @@ class AdminAuth extends Admin
         }
     }
 
+    public function konfirmasiUser()
+    {
+        $data['user'] = $_SESSION['user'];
+        if (!empty($_POST) && ($data['user']['tipeAkun'] == 5)) {
+            $data = $_POST;
+            if ($data['toggle'] == 'true') {
+                $data['statusKonfirmasi'] = 1;
+            } else {
+                $data['statusKonfirmasi'] = 0;
+            }
+            $this->model('UserModel')->terimaUser($data);            
+        } else {
+            header('Location: ' . BASEURL);
+        }
+    }
+
     public function hapus()
     {
-        var_dump($_POST);
+        if (!empty($_POST['user']) && $_SESSION['user']['tipeAkun'] == 5) {
+            $data = $_POST;
+            $data['barisDipengaruhi'] = 0;
+            $data['userId'] = $data['user'][0];
+            $data['barisDipengaruhi'] += $this->model('UserModel')->hapusDataUser($data);
+            if (count($data['user']) > 1) {
+                for ((int)$i = 1; $i < count($data['user']); $i++) {
+                    $data['userId'] = $data['user'][$i];
+                    $data['barisDipengaruhi'] += $this->model('UserModel')->hapusDataUser($data);
+                }
+            }
+
+            if ($data['barisDipengaruhi'] > 0) {
+                Flasher::setFlash('Anda berhasil', "menghapus {$data['barisDipengaruhi']} data pengguna.", 'success');
+                header('Location: ' . BASEURL . "/admin");
+            } else {
+                Flasher::setFlash('Anda gagal', "menghapus data.", 'danger');
+                header('Location: ' . BASEURL . "/admin");
+            }
+        } else {
+            header('Location: ' . BASEURL . "/admin");
+        }
     }
 }

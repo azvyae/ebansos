@@ -5,7 +5,7 @@
                 <div class="row justify-content-between">
                     <div class="col-lg-3 mb-2">
                         <select class="form-select filter mb-2" id="tipeAkun" name='tipeAkun'>
-                            <option selected value=''>Semua Akun</option>;
+                            <option selected value=''>Semua Akun</option>
                             <option value="0">Pendaftar</option>
                             <option value="1">Petugas RT</option>
                             <option value="2">Petugas RW</option>
@@ -13,13 +13,13 @@
                             <option value="4">Petugas Subsidi</option>
                         </select>
                     </div>
-                    <div class="col-lg-4 mb-2">
+                    <div class="col-lg-5 mb-2">
                         <span class="d-flex input-group">
                             <input class="input-group form-control filter" id='cari' name='cari' type="search" placeholder="Cari" aria-label="Search">
                             <label class="input-group-text" for="cari"><i class="bi bi-search"></i></label>
                         </span>
                     </div>
-                    <div class="col-lg-1 mb-2">
+                    <div class="col-lg-2 mb-2">
                         <select class="form-select filter mb-2" id="halaman" name='halaman'>
                             <option value="1" selected>1</option>
                         </select>
@@ -30,18 +30,18 @@
                         </span>
                     </div>
                 </div>
-                <div class="row overflow-scroll">
+                <div class="row overflow-scroll " style='min-height: 500px; max-height: 500px; height:500px'>
                     <div id='tabel-container'>
 
                     </div>
                     <span id='message'></span>
-
-                </div>
-                <div class="text-center" id="loading">
-                    <div class="spinner-border mt-3 text-primary" role="status">
-                        <span class="visually-hidden">Loading...</span>
+                    <div class="text-center" id="loading">
+                        <div class="spinner-border mt-3 text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
                     </div>
                 </div>
+
             </form>
         </div>
     </div>
