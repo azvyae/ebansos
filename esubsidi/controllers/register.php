@@ -8,10 +8,15 @@ class Register extends Controller
     public function index()
     {
         $data['judul'] = 'Login';
-        $this->view('templates/header', $data);
-        $this->view('templates/navUmum');
-        $this->view('register/index');
-        $this->view('templates/footer');
+        $data['statusRegistrasi'] = $this->model('AdministrasiModel')->getStatusRegister()['registrasi'];
+        if ($data['statusRegistrasi'] == 'true') {
+            $this->view('templates/header', $data);
+            $this->view('templates/navUmum', $data);
+            $this->view('register/index');
+            $this->view('templates/footer');
+        } else {
+            header('Location: ' . BASEURL);
+        }
     }
 
     public function getUser()
@@ -30,11 +35,10 @@ class Register extends Controller
             $data = $_POST;
             $data['rw'] = $data['rt'] = null;
             $data['tipeAkun'] = 0;
+            $data['statusKonfirmasi'] = 0;
             if ($this->model('UserModel')->getUserId($data['userId']) == 0) {
                 $this->model('UserModel')->tambahUser($data);
-
                 $this->registerRiwayat($data, 'Melakukan Pendaftaran');
-
                 Flasher::setFlash('Anda berhasil', 'terdaftar di sistem. Mohon menunggu administrator untuk melakukan konfirmasi.', 'success');
                 header('Location: ' . BASEURL . '/register');
             } else {
@@ -47,7 +51,8 @@ class Register extends Controller
     }
 }
 
-class RegisterAuth extends Register {
+class RegisterAuth extends Register
+{
     public function index()
     {
         header('Location:' . BASEURL);

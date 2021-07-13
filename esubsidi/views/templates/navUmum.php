@@ -11,9 +11,13 @@
                 <li class="nav-item my-auto text-center">
                     <a class="nav-link active" href="<?= BASEURL ?>">Beranda</a>
                 </li>
-                <li class="nav-item my-auto text-center">
-                    <a class="nav-link" href="<?= BASEURL ?>/register">Register</a>
-                </li>
+                <?php
+                if ($data['statusRegistrasi'] == 'true') {
+                    echo "<li class='nav-item my-auto text-center'>
+                                <a class='nav-link' href='". BASEURL ."/register'>Register</a>
+                            </li>";
+                }
+                ?>
                 <li class="nav-item my-auto text-center">
                     <a class="nav-link" href="<?= BASEURL ?>/login">Log In</a>
                 </li>

@@ -8,9 +8,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
-                
+
                 <li class="nav-item ms-1 me-3 my-auto text-center">
-                <span class="nav-link active p-3">Halo, <?= $_SESSION['user']['namaAkun'] ?> <i class="bi bi-emoji-smile"></i></span>
+                    <span class="nav-link active p-3">Halo, <?= $_SESSION['user']['namaAkun'] ?> <i class="bi bi-emoji-smile"></i></span>
                 </li>
                 <li class="nav-item my-auto text-center">
                     <a class="nav-link active" href="<?= BASEURL ?>">Beranda</a>

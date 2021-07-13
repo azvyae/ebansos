@@ -33,7 +33,7 @@ class TambahPendudukAuth extends TambahPenduduk
             $data['disabled'] = 'disabled';
             $data['rwVal'] = $data['user']['rw'];
             $this->view('templates/navPengguna');
-        } else if ($data['user']['tipeAkun'] == 3) {
+        } else if ($data['user']['tipeAkun'] == 3 || $data['user']['tipeAkun'] == 5) {
 
             // When Superadmin logged in
             $data['riwayat'] = $this->model('RiwayatModel')->getRiwayat(5);

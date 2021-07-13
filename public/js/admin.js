@@ -1,28 +1,9 @@
-function siapkanFilterRW() {
-    var top = bot = '';
-    $('#rw').empty();
-    $.ajax({
-            url: '/beranda/getRW',
-            data: {
-                init: $(location).attr("href")
-            },
-            method: 'post',
-            dataType: 'json'
-        })
-        .done(function(data) {
-            if (data.length > 0) {
-                top = `<option selected value=''>Semua RW</option>`;
-                $.each(data, function(i, data) {
-                    bot += `<option value="` + data['rw'] + `">RW ` + data['rw'] + `</option>`
-                })
-                $('#rw').prop('hidden', false);
-            } else {
-                $('#rw').prop('hidden', true);
-            }
-            $('#rw').prepend(top + bot);
-            periksaChecklist();
-        })
-}
+$("#aktifkanRegistrasi").on('change', function() {
+    setTimeout(function() {
+        $("#updateStatusRegistrasi").submit();
+    }, 250)
+
+})
 
 function siapkanFilterRT(rw = '') {
     var top = bot = '';
@@ -108,7 +89,7 @@ function tampilkanTabelPenduduk(q = '', rw = null, rt = null, halaman = 1) {
                 top = `<table class='table table-striped overflow-auto'>
                 <thead>
                     <tr>
-                        <th scope='col' style='min-width:2.68%; max-width:2.68%; width:2.68%;'><input class='form-check-input pilih-semua' type='checkbox'></th>
+                        <th scope='col' style='min-width:2.68%; max-width:2.68%; width:2.68%;'><input class='form-check-input pilih-semua usercheckbox' type='checkbox'></th>
                         <th scope='col' style='min-width:15%; max-width:15%; width:15%;'>NIK</th>
                         <th scope='col' style='min-width:21%; max-width:21%; width:21%;'>Nama</th>
                         <th scope='col' style='min-width:51.82%; max-width:51.82%; width:51.82%;'>Alamat</th>
@@ -118,7 +99,7 @@ function tampilkanTabelPenduduk(q = '', rw = null, rt = null, halaman = 1) {
                 <tbody>`;
                 $.each(data, function(i, data) {
                     mid += `<tr class='align-middle'>
-                <th scope='row'><input class='form-check-input tabel-check' type='checkbox' value='` + data.hashId + `' name='penduduk[]'></th>
+                <th scope='row'><input class='form-check-input tabel-check usercheckbox' type='checkbox' value='` + data.hashId + `' name='penduduk[]'></th>
                 <td>` + data.nik + `</td>
                 <td>` + data.nama + `</td>
                 <td>` + data.alamatRumah + `</td>
@@ -171,7 +152,7 @@ function gantiTabelPenduduk(q = '', rw = null, rt = null, halaman = 1) {
         if (data.length > 0) {
             $.each(data, function(i, data) {
                 mid += `<tr class='align-middle'>
-                <th scope='row'><input class='form-check-input tabel-check' type='checkbox' value='` + data.hashId + `' name='penduduk[]'></th>
+                <th scope='row'><input class='form-check-input tabel-check usercheckbox' type='checkbox' value='` + data.hashId + `' name='penduduk[]'></th>
                 <td>` + data.nik + `</td>
                 <td>` + data.nama + `</td>
                 <td>` + data.alamatRumah + `</td>
@@ -200,9 +181,9 @@ function gantiTabelPenduduk(q = '', rw = null, rt = null, halaman = 1) {
 }
 
 function periksaChecklist() {
-    $('input[type=checkbox]').prop('checked', false);
+    $('input[type=checkbox].usercheckbox').prop('checked', false);
     $('#tombolHapus').attr('disabled', true);
-    if ($('input[type=checkbox]').length == 1) {
+    if ($('input[type=checkbox].usercheckbox').length == 1) {
         $('.pilih-semua').attr('disabled', true);
     } else {
         $('.pilih-semua').removeAttr('disabled');
@@ -224,8 +205,8 @@ function periksaChecklist() {
         }
 
     })
-    $('input[type=checkbox]').change('click', function() {
-        if ($('input[type=checkbox]:checked').length > 0) {
+    $('input[type=checkbox].usercheckbox').change('click', function() {
+        if ($('input[type=checkbox].usercheckbox:checked').length > 0) {
             $('#tombolHapus').removeAttr('disabled');
         } else {
             $('#tombolHapus').attr('disabled', true);

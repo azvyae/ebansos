@@ -46,7 +46,7 @@ class DetailPendudukAuth extends DetailPenduduk
                 } else {
                     header('Location: ' . BASEURL);
                 }
-            } else if ($data['user']['tipeAkun'] == 3) {
+            } else if ($data['user']['tipeAkun'] == 3 || $data['user']['tipeAkun'] == 5) {
 
                 // When Superadmin logged in
                 $data['riwayat'] = $this->model('RiwayatModel')->getRiwayat(5);

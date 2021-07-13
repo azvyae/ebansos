@@ -14,9 +14,15 @@
                 <li class="nav-item my-auto text-center">
                     <a class="nav-link active" href="<?= BASEURL ?>">Beranda</a>
                 </li>
-                <li class="nav-item my-auto text-center">
-                    <a class="nav-link" href="<?= BASEURL ?>/admin">Administrasi</a>
-                </li>
+                
+                <?php 
+                if ($_SESSION['user']['tipeAkun'] == 5) {
+                    echo "<li class='nav-item my-auto text-center'>
+                            <a class='nav-link' href='".  BASEURL. "/admin'>Administrasi</a>
+                        </li>";
+                }
+                
+                ?>
                 <li class="nav-item dropdown my-auto text-center">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <b class="bi bi-clock-history fw-bold fs-5"></b>

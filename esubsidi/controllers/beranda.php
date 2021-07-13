@@ -10,6 +10,7 @@ class Beranda extends Controller
     {
         $data['judul'] = $this->judul;
         $data['nikVal'] =  $data['hhVal'] = $data['bbVal'] = $data['ttttVal'] = '';
+        $data['statusRegistrasi'] = $this->model('AdministrasiModel')->getStatusRegister()['registrasi'];
         if (isset($_SESSION['input'])) {
             $data = array_merge($data, $_SESSION['input']);
             unset($_SESSION['input']);
@@ -17,7 +18,7 @@ class Beranda extends Controller
 
         // Arrange HTML
         $this->view('templates/header', $data);
-        $this->view('templates/navUmum');
+        $this->view('templates/navUmum', $data);
         $this->view('beranda/index', $data);
         $this->view(('templates/footer'));
     }
@@ -93,7 +94,7 @@ class BerandaAuth extends Beranda
             $this->view('beranda/indexofficer', $data);
             $this->view('beranda/filters/filterRW', $data);
             $this->view('beranda/tabel', $data);
-        } else if ($data['user']['tipeAkun'] == 3) {
+        } else if ($data['user']['tipeAkun'] == 3 || $data['user']['tipeAkun'] == 5) {
             // When Superadmin login
             $data['riwayat'] = $this->model('RiwayatModel')->getRiwayat(5);
             $data['riwayat'] = $this->translateTime($data['riwayat']);

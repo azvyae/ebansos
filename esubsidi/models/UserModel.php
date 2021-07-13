@@ -10,7 +10,8 @@ class UserModel {
 
     public function getUserId($data)
     {
-        $this->db->query("SELECT userId FROM {$this->table} WHERE userId = :userId");
+        $query = "SELECT userId FROM {$this->table} WHERE userId = :userId";
+        $this->db->query($query);
         $this->db->bind('userId', $data);
         $this->db->execute();
         return $this->db->rowCount();
@@ -24,11 +25,19 @@ class UserModel {
         return $this->db->single();
     }
 
+    public function getPetugasRW()
+    {
+        $query = "SELECT DISTINCT rw FROM {$this->table} WHERE rw is NOT NULL ORDER BY rw ASC";
+        $this->db->query($query);
+        $this->db->execute();
+        return $this->db->resultSet();
+    }
+
     public function tambahUser($data)
     {
         $query =   "INSERT INTO {$this->table}
                     VALUES
-                    (:userId, :nama, :password, :tipeAkun, :rw, :rt)";
+                    (:userId, :nama, :password, :tipeAkun, :rw, :rt, :statusKonfirmasi)";
 
         $this->db->query($query);
         $this->db->bind('userId', $data['userId']);
@@ -37,6 +46,7 @@ class UserModel {
         $this->db->bind('tipeAkun', $data['tipeAkun']);
         $this->db->bind('rw', $data['rw']);
         $this->db->bind('rt', $data['rt']);
+        $this->db->bind('statusKonfirmasi', $data['statusKonfirmasi']);
         $this->db->execute();
 
         return $this->db->rowCount(); 
