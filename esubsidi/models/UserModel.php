@@ -43,7 +43,7 @@ class UserModel {
 
     public function getPetugasRW()
     {
-        $query = "SELECT DISTINCT rw FROM {$this->table} WHERE rw is NOT NULL ORDER BY rw ASC";
+        $query = "SELECT DISTINCT rw FROM {$this->table} WHERE rw is NOT NULL AND rt is NULL ORDER BY rw ASC";
         $this->db->query($query);
         $this->db->execute();
         return $this->db->resultSet();

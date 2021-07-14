@@ -171,6 +171,61 @@ function cekStatusKonfirmasi() {
         })
     })
 }
+function tampilkanFormPetugasRT() {
+    const location = window.location.href
+    var options = ''
+    $.ajax({
+        url: '/admin/getRW',
+        data: {
+            location: location
+        },
+        method: 'post',
+        dataType: 'json'
+    })
+        .done(function (data) {
+            $.each(data, function (i, data) {
+                options += `<option value="` + data.rw + `">RW 0` + data.rw + `</option>`
+            })
+            $('#judulModal').html('Tambahkan Petugas RT');
+            $('.modal-content form').attr('action', 'admin/generateRT')
+            $('#isianInput').html(`
+                    <div class="mb-3">
+                        <label for="nomorRW" class="form-label">Nomor RW</label>
+                        <select required class="form-select" id='nomorRW' name='nomorRW' aria-label="Nomor RW">
+                            <option disabled value selected>Pilih Nomor RW</option>` +
+                options
+                + `</select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="jumlahRT" class="form-label">Jumlah Petugas RT</label>
+                        <input required class="form-control input-groupinput-group-addon" id="jumlahRT" name="jumlahRT" autocomplete="off" placeholder="Jumlah RT" maxlength="3" min="1" type="number" oninput="this.value=this.value.slice(0,this.maxLength)" />
+                    </div>`);
+        })
+}
+
+function tampilkanFormPetugasRW() {
+    $('#judulModal').html('Tambahkan Petugas RW');
+    $('.modal-content form').attr('action', 'admin/generateRW')
+    $('#isianInput').html(`
+                    <div class="mb-3">
+                        <label for="jumlahRW" class="form-label">Jumlah Petugas RW</label>
+                        <input required class="form-control input-groupinput-group-addon" id="jumlahRW" name="jumlahRW" autocomplete="off" placeholder="Jumlah RW" maxlength="3" min="1" type="number" oninput="this.value=this.value.slice(0,this.maxLength)" />
+                    </div>
+        `);
+}
+
+function tampilkanFormPetugasSubsidi() {
+    $('#judulModal').html('Tambahkan Petugas Subsidi');
+    $('.modal-content form').attr('action', 'admin/generateSubsidi')
+    $('#isianInput').html(`
+        <div class="my-3 row">
+            <div class="col-sm-12 mb-3">
+                <label for="namaSubsidi" class="form-label fw-bold">Nama Subsidi</label>
+                <input type="text" autocomplete="off" class="form-control" id="namaSubsidi" name='namaSubsidi' placeholder="Subsidi ABC" required>
+            </div>
+        </div>`);
+
+}
 
 $(function () {
     $("#aktifkanRegistrasi").on('change', function () {
@@ -178,6 +233,19 @@ $(function () {
             $("#updateStatusRegistrasi").submit();
         }, 250)
     })
+
+    $('.generateRW').on('click', function () {
+        tampilkanFormPetugasRW();
+    })
+
+    $('.generateRT').on('click', function () {
+        tampilkanFormPetugasRT();
+    })
+
+    $('.generateSubsidi').on('click', function () {
+        tampilkanFormPetugasSubsidi();
+    })
+
 
     siapkanHalaman();
     tampilkanTabelUser();

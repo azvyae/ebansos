@@ -42,7 +42,6 @@ class RiwayatModel
         $this->db->bind('aksi', $data['aksi']);
         $this->db->bind('nikDipengaruhi', $data['nikDipengaruhi']);
         $this->db->execute();
-        $GLOBALS['notif'] = 1;
     }
 
     public function getRiwayat($data)

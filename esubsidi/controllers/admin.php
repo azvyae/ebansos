@@ -85,34 +85,73 @@ class AdminAuth extends Admin
         }
     }
 
-    public function generateRW($data)
+    public function generateRW()
     {
         $data['user'] = $_SESSION['user'];
         if (!empty($_POST) && ($data['user']['tipeAkun'] == 5)) {
-            $GLOBALS['notif'] = $_POST['zero'];
+            $faker = Faker\Factory::create();
+            $_SESSION['adminGenerator'] = true;
+            echo "Generate RW";
+            $data['jumlahRW'] = (int)$_POST['jumlahRW'];
+            for ($i = 0; $i <= $data['jumlahRW']; $i++) {
+                $nama = 'Petugas RW 0' . $i;
+                
+                $this->tambahkanUser($nama = '', $userId = '', $password = '', $tipeAkun = 0, $rw = null, $rt = null);
+            }
+            var_dump($data);
+            // $this->registerRiwayat($data, 'Membuat Petugas RW');
+            unset($_SESSION['adminGenerator']);
         } else {
             header('Location: ' . BASEURL);
         }
     }
 
-    public function generateRT($data)
+    public function generateRT()
     {
         $data['user'] = $_SESSION['user'];
         if (!empty($_POST) && ($data['user']['tipeAkun'] == 5)) {
-            $GLOBALS['notif'] = $_POST['zero'];
+            $_SESSION['adminGenerator'] = true;
+            echo "Generate RT";
+            $data = $_POST;
+            var_dump($data);
+            // $this->registerRiwayat($data, 'Membuat Petugas RT untuk RW 0' . $data['rw']);
+            unset($_SESSION['adminGenerator']);
         } else {
             header('Location: ' . BASEURL);
         }
     }
 
-    public function generatePetugasSubsidi($data)
+    public function generateSubsidi()
     {
         $data['user'] = $_SESSION['user'];
         if (!empty($_POST) && ($data['user']['tipeAkun'] == 5)) {
-            $GLOBALS['notif'] = $_POST['zero'];
+            $_SESSION['adminGenerator'] = true;
+            echo "Generate Petugas Subsidi";
+            $data = $_POST;
+            var_dump($data);
+            // $this->registerRiwayat($data, 'Membuat Event Subsidi');
+            unset($_SESSION['adminGenerator']);
         } else {
             header('Location: ' . BASEURL);
         }
+    }
+
+    public function tambahkanUser($nama = '', $userId = '', $password = '', $tipeAkun = 0, $rw = null, $rt = null)
+    {
+        $data = '';
+        if (isset($_SESSION['adminGenerator'])) {
+            $data['nama'] = $nama;
+            $data['userId'] = $userId;
+            $data['password'] = $password;
+            $data['tipeAkun'] = $tipeAkun;
+            $data['rw'] = $rw;
+            $data['rt'] = $rt;
+            $data['statusKonfirmasi'] = 1;
+            // $this->model('UserModel')->tambahUser($data);
+        } else {
+            header('Location: ' . BASEURL);
+        }
+        return $data;
     }
 
     public function konfirmasiUser()

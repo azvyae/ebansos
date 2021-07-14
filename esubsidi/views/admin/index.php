@@ -4,7 +4,7 @@ use Esubsidi\core\Flasher;
 
 ?>
 
-<script type="text/javascript" src="<?= BASEURL ?>/js/admin.js" defer>  
+<script type="text/javascript" src="<?= BASEURL ?>/js/admin.js" defer>
 </script>
 
 <div class="container-fluid">
@@ -52,8 +52,8 @@ use Esubsidi\core\Flasher;
                                 <i class="bi bi-briefcase-fill fs-2 mx-1 text-warning"></i>
                             </div>
                             <div>
-                                <h2 class='fs-5'>Petugas Subsidi</h2>
-                                <p>Pilih tombol berikut ini untuk menampilkan opsi menambahkan petugas subsidi</p>
+                                <h2 class='fs-5'>Acara Subsidi</h2>
+                                <p>Pilih tombol berikut ini untuk menampilkan opsi menambahkan subsidi</p>
                                 <button type="button" class="btn btn-warning generateSubsidi" data-bs-toggle="modal" data-bs-target="#showModal">
                                     Tambah
                                 </button>
@@ -70,15 +70,20 @@ use Esubsidi\core\Flasher;
         <div class="modal-content">
             <form action="admin/generateRW" method="post">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalPetugas">Tambahkan Petugas RW</h5>
+                    <h5 class="modal-title" id="judulModal">Tambahkan Petugas RW</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
+                    <div class="container" id='isianInput'>
+                        <div class="mb-3">
+                            <label for="jumlahRW" class="form-label">Jumlah Petugas RW</label>
+                            <input required class="form-control input-groupinput-group-addon" id="jumlahRW" name="jumlahRW" autocomplete="off" placeholder="Jumlah RW" maxlength="3" min="1" type="number" oninput="this.value=this.value.slice(0,this.maxLength)" />
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-primary">Tambah</button>
+                    <button type="submit" class="btn btn-primary">Tambah</button>
                 </div>
             </form>
         </div>
