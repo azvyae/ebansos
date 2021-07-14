@@ -4,6 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Aplikasi web pendataan dan pencatatan subsidi untuk masyarakat secara elektronik, efisien, dan cepat.">
+  <meta name="keywords" content="Subsidi, Elektronik, E-Subsidi, Sistem Informasi">
+  <meta name="author" content="Azvya Erstevan I">
+  <meta name="application-name" content="Esubsidi">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="<?= BASEURL ?>/img/favicon.ico" type="image/x-icon">
   <title>E-Subsidi <?= KELURAHAN ?> | <?= $data['judul'] ?></title>
