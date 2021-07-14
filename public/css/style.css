@@ -6,6 +6,15 @@ button {
     letter-spacing: 0.1em;
 }
 
+@media print {
+    button, .btn, #cetak, #cetakTabel {
+      display: none;
+    }
+    #wadahTabel {
+        min-width: 100%;
+    }
+}
+
 input,
 textarea {
     letter-spacing: 0.15em;

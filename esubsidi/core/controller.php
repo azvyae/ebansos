@@ -140,6 +140,12 @@ class Controller
         $handle = new ErrorPage;
         $handle->error401();
     }
+    public function handle404()
+    {
+        require_once "../esubsidi/controllers/errorpage.php";
+        $handle = new ErrorPage;
+        $handle->error404();
+    }
 
     public function setSession($arg)
     {

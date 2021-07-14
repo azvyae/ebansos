@@ -11,7 +11,7 @@
 
         <footer class="mt-auto text-white-50">
             <p>Copyright <?= date("Y") ?> | Made With <i class="bi bi-heart-fill"></i> by
-                <a target="_blank" href="https://twitter.com/erstevn" class="text-white">Erstevn</a> | UI Design By <a target="_blank" href="https://twitter.com/erstevn" class="text-white">Taifun</a>
+                <a target="_blank" href="https://twitter.com/erstevn" class="text-white">Erstevn</a>
             </p>
         </footer>
     </div>

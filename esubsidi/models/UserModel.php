@@ -17,9 +17,39 @@ class UserModel {
         return $this->db->rowCount();
     }
 
+    public function cekUserRW($data)
+    {
+        $query = "SELECT userId FROM {$this->table} WHERE (tipeAkun = 2 AND rw = :rw) OR userId = :userId";
+        $this->db->query($query);
+        $this->db->bind('rw', $data['rw']);
+        $this->db->bind('userId', $data['userId']);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+
+    public function cekUserRT($data)
+    {
+        $query = "SELECT userId FROM {$this->table} WHERE (tipeAkun = 1 AND rw = :rw AND rt = :rt) OR userId = :userId";
+        $this->db->query($query);
+        $this->db->bind('rw', $data['rw']);
+        $this->db->bind('rt', $data['rt']);
+        $this->db->bind('userId', $data['userId']);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+
+    public function cekUserSubsidi()
+    {
+        $query = "SELECT userId FROM {$this->table} WHERE tipeAkun = 4";
+        $this->db->query($query);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+
     public function getUser($data)
     {
-        $this->db->query("SELECT * FROM {$this->table} WHERE userId = :userId");
+        $query = "SELECT * FROM {$this->table} WHERE userId = :userId";
+        $this->db->query($query);
         $this->db->bind('userId', $data['userId']);
         $this->db->execute();
         return $this->db->single();
@@ -28,11 +58,11 @@ class UserModel {
     public function getDataUser($data)
     {
         if ($data['tipeAkun'] != '') {
-            $query = "SELECT * FROM {$this->table} where (tipeAkun < 5 AND tipeAkun = :tipeAkun)  and ( userId LIKE :q or nama LIKE :q ) ORDER BY userId LIMIT :halaman, 10";
+            $query = "SELECT * FROM {$this->table} where (tipeAkun < 5 AND tipeAkun = :tipeAkun)  and ( userId LIKE :q or nama LIKE :q ) ORDER BY userId LIMIT :halaman, 20";
             $this->db->query($query);
             $this->db->bind('tipeAkun', $data['tipeAkun']);
         } else {
-            $query = "SELECT * FROM {$this->table} where  tipeAkun < 5 AND (userId LIKE :q or nama LIKE :q) ORDER BY userId LIMIT :halaman, 10";
+            $query = "SELECT * FROM {$this->table} where  tipeAkun < 5 AND (userId LIKE :q or nama LIKE :q) ORDER BY userId LIMIT :halaman, 20";
             $this->db->query($query);
         }
         $this->db->bind('halaman', $data['halaman']);

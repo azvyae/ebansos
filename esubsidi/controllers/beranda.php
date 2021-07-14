@@ -55,7 +55,7 @@ class Beranda extends Controller
                 Flasher::setFlash('<span class="fs-5">Data tersebut', 'tidak terdaftar di sistem kami.</span>', 'danger');
                 header('Location: ' . BASEURL);
             }
-            
+
             $_SESSION['input'] = array(
                 'nikVal' => $data['nik'],
                 'hhVal' => $data['hari'],
@@ -105,11 +105,52 @@ class BerandaAuth extends Beranda
             $this->view('beranda/tabel', $data);
         } else if ($data['user']['tipeAkun'] == 4) {
             // When Special Officer login
+            $data['nikVal'] =  $data['hhVal'] = $data['bbVal'] = $data['ttttVal'] = '';
+            $data['statusRegistrasi'] = $this->model('AdministrasiModel')->getStatusRegister()['registrasi'];
+            if (isset($_SESSION['input'])) {
+                $data = array_merge($data, $_SESSION['input']);
+                unset($_SESSION['input']);
+            }
+            $this->view('templates/navPengguna');
+            $this->view('beranda/indexspecial', $data);
         } else {
             $this->view('templates/navPengguna');
             $this->view('beranda/index', $data);
         }
         $this->view('templates/footer');
+    }
+
+    public function tambahSubsidi()
+    {
+        if (!empty($_POST)) {
+            $data = $_POST;
+            $data['date'] = date('Y-m-d');
+            $data['hashId'] = hash('md5', $data['nik']);
+            $data['jenisSubsidi'] = $_SESSION['user']['namaAkun'];
+            $data['penduduk'] = $this->model('PendudukModel')->getPenduduk($data);
+            if ($data['penduduk']) {
+                if ($data['penduduk']['tanggalMenerima'] == null && $data['penduduk']['jenisSubsidi'] == null) {
+                    $this->model('SubsidiModel')->tambahSubsidiBaru($data);
+                } else {
+                    $this->model('SubsidiModel')->updateSubsidi($data);
+                }
+                $this->registerRiwayat($_SESSION['user'], 'Menambahkan Data Subsidi', $data['nik']);
+                Flasher::setFlash('<span class="fs-5">Anda telah menambahkan', 'subsidi ' . $data['jenisSubsidi'] . ' kepada ' . $data['nik'] . '</span>', 'success');
+                header('Location: ' . BASEURL);
+            } else {
+                Flasher::setFlash('<span class="fs-5">Anda gagal menambahkan', 'subsidi ' . $data['jenisSubsidi'] . '</span>', 'danger');
+                header('Location: ' . BASEURL);
+            }
+
+            $_SESSION['input'] = array(
+                'nikVal' => $data['nik'],
+                'hhVal' => $data['hari'],
+                'bbVal' => $data['bulan'],
+                'ttttVal' => $data['tahun']
+            );
+        } else {
+            header('Location: ' . BASEURL);
+        }
     }
 
     public function getRW()

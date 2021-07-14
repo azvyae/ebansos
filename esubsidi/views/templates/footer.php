@@ -1,8 +1,8 @@
 <div class="divider my-4"></div>
 <footer class="footer mt-auto py-3 bg-light fixed-bottom">
     <div class=" d-flex justify-content-between ">
-        <span class="text-muted ms-3">© <?= date("Y") ?></span>
-        <span class="text-muted me-3">Made With <i class="bi bi-heart-fill"></i> By <a target="_blank" href="https://twitter.com/erstevn" class="text-decoration-none text-muted">Erstevn</a> | UI Design By <a target="_blank" href="https://twitter.com/erstevn" class="text-decoration-none text-muted">Taifun</a></span>
+        <span class="text-muted ms-3">© <?= date("Y") ?> V<?= VERSION ?></span>
+        <span class="text-muted me-3">Made With <i class="bi bi-heart-fill"></i> By <a target="_blank" href="https://twitter.com/erstevn" class="text-decoration-none text-muted">Erstevn</a>
     </div>
 </footer>
 

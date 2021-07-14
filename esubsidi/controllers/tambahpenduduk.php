@@ -48,22 +48,29 @@ class TambahPendudukAuth extends TambahPenduduk
         $this->view('templates/footer');
 
         // USED FOR GENERATING DATA
-        //         $data['penduduk'] = [
-        //             'hashId' => hash('md5', $nik),i
-        //             'nik' => $nik,
-        //             'nama' => $faker->name(),
-        //             'tempatLahir' => $faker->city(),
-        //             'tanggalLahir' => $faker->date(),
-        //             'jenisKelamin' => end($jenisKelamin),
-        //             'alamatRumah' => $faker->address(),
-        //             'rt' => rand(1, 12),
-        //             'rw' => rand(1, 12),
-        //             'kelurahan' => 'Sarijadi',
-        //             'kecamatan' => 'Sukasari',
-        //             'statusPerkawinan' => end($statusPerkawinan),
-        //             'pekerjaan' => $faker->jobTitle()
-        //         ];
-
+        // $faker = Faker\Factory::create('id_ID');
+        // for ($i = 0; $i < 50; $i++) {
+        //     $nik = $faker->nik();
+        //     $jenisKelamin = ['Pria', 'Wanita'];
+        //     $statusPerkawinan = ['Belum Kawin', 'Kawin', 'Cerai Hidup', 'Cerai Mati'];
+        //     $data['penduduk'] = [
+        //         'hashId' => hash('md5', $nik),
+        //         'nik' => $nik,
+        //         'nama' => $faker->name(),
+        //         'tempatLahir' => $faker->city(),
+        //         'tanggalLahir' => $faker->date(),
+        //         'jenisKelamin' => $jenisKelamin[array_rand($jenisKelamin)],
+        //         'alamatRumah' => $faker->address(),
+        //         'rt' => rand(1, 12),
+        //         'rw' => rand(1, 12),
+        //         'kelurahan' => 'Sarijadi',
+        //         'kecamatan' => 'Sukasari',
+        //         'statusPerkawinan' => $statusPerkawinan[array_rand($statusPerkawinan)],
+        //         'pekerjaan' => $faker->jobTitle()
+        //     ];
+        //     $this->model('PendudukModel')->tambahDataPenduduk($data['penduduk']);
+            // var_dump($data['penduduk']);
+        // }
     }
 
     public function tambahData()

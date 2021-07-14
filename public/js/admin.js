@@ -13,7 +13,7 @@ function siapkanHalaman(q = '', tipeAkun = null) {
             top = bot = '';
             $('#halaman').empty();
             bot += `<option selected value="1">1</option>`
-            for (let i = 2; i <= Math.ceil(data / 10); i++) {
+            for (let i = 2; i <= Math.ceil(data / 20); i++) {
                 bot += `<option value="` + i + `"> ` + i + `</option>`
             }
             $('#halaman').prepend(top + bot);
@@ -184,10 +184,14 @@ function tampilkanFormPetugasRT() {
     })
         .done(function (data) {
             $.each(data, function (i, data) {
-                options += `<option value="` + data.rw + `">RW 0` + data.rw + `</option>`
+                rw = data.rw
+                if (parseInt(data.rw) < 10) {
+                    rw = '0' + rw
+                }
+                options += `<option value="` + data.rw + `">RW ` + rw + `</option>`
             })
             $('#judulModal').html('Tambahkan Petugas RT');
-            $('.modal-content form').attr('action', 'admin/generateRT')
+            $('.modal-content form').attr('action', 'admin/generatert')
             $('#isianInput').html(`
                     <div class="mb-3">
                         <label for="nomorRW" class="form-label">Nomor RW</label>
@@ -205,7 +209,7 @@ function tampilkanFormPetugasRT() {
 
 function tampilkanFormPetugasRW() {
     $('#judulModal').html('Tambahkan Petugas RW');
-    $('.modal-content form').attr('action', 'admin/generateRW')
+    $('.modal-content form').attr('action', 'admin/generaterw')
     $('#isianInput').html(`
                     <div class="mb-3">
                         <label for="jumlahRW" class="form-label">Jumlah Petugas RW</label>
@@ -216,7 +220,7 @@ function tampilkanFormPetugasRW() {
 
 function tampilkanFormPetugasSubsidi() {
     $('#judulModal').html('Tambahkan Petugas Subsidi');
-    $('.modal-content form').attr('action', 'admin/generateSubsidi')
+    $('.modal-content form').attr('action', 'admin/generatesubsidi')
     $('#isianInput').html(`
         <div class="my-3 row">
             <div class="col-sm-12 mb-3">
