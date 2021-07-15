@@ -6,7 +6,7 @@ class Riwayat extends Controller
 {
     public function index()
     {
-        header('Location: ' . BASEURL);
+        $this->handlePrivilege();
     }
 }
 

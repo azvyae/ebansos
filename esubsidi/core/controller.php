@@ -136,9 +136,10 @@ class Controller
 
     public function handlePrivilege()
     {
+        $data['validity'] = $_SESSION['adminGenerator'] = hash('sha256', time());
         require_once "../esubsidi/controllers/errorpage.php";
         $handle = new ErrorPage;
-        $handle->error401();
+        $handle->error401($data['validity']);
     }
     public function handle404()
     {

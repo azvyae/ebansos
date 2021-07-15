@@ -10,20 +10,26 @@ class ErrorPage extends Controller
         $data['judul'] = 'Tidak Ditemukan';
         $this->view('templates/header', $data);
         $this->view('error/404');
-        // $this->view('templates/footer');
     }
     public function error404()
     {
         $data['judul'] = 'Tidak Ditemukan';
         $this->view('templates/header', $data);
         $this->view('error/404');
-        // $this->view('templates/footer');
     }
-    public function error401()
+    public function error401($validity = '')
     {
-        $data['judul'] = 'Tidak Diizinkan';
-        $this->view('templates/header', $data);
-        $this->view('error/401');
-        // $this->view('templates/footer');
+        if(isset($_SESSION['adminGenerator'])) {
+            if ($validity == $_SESSION['adminGenerator']) {
+                $data['judul'] = 'Tidak Diizinkan';
+                $this->view('templates/header', $data);
+                $this->view('error/401');
+                unset($_SESSION['adminGenerator']);
+            } else {
+                $this->handle404();
+            }
+        } else {
+            $this->handle404();
+        }
     }
 }

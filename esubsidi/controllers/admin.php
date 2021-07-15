@@ -7,7 +7,7 @@ class Admin extends Controller
 {
     public function index()
     {
-        header('Location: ' . BASEURL);
+        $this->handlePrivilege();
     }
 }
 
