@@ -15,6 +15,10 @@ button {
     }
 }
 
+.z-50 {
+    z-index: 50;
+}
+
 input,
 textarea {
     letter-spacing: 0.15em;
