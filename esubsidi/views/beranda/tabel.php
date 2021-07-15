@@ -23,7 +23,7 @@
 
 </div>
 </div>
-<div class="row overflow-auto">
+<div class="overflow-auto">
     <div id='tabel-container' class='mt-3 w-100'>
 
     </div>

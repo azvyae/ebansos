@@ -6,9 +6,9 @@
                 <h2 class="display-5 d-inline position-relative">Tabel Pengguna</h2>
             </div>
             <form action="<?= BASEURL ?>/admin/hapus" method="post" class="position-relative">
-                <div class="row justify-content-between ">
+                <div class="row justify-content-between">
                     <div class="col-lg-3 mb-2">
-                        <select class="form-select filter mb-2" id="tipeAkun" name='tipeAkun'>
+                        <select class="form-select filter" id="tipeAkun" name='tipeAkun'>
                             <option selected value=''>Semua Akun</option>
                             <option value="0">Pendaftar</option>
                             <option value="1">Petugas RT</option>
@@ -34,7 +34,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="row overflow-scroll " style='min-height: 500px; max-height: 500px; height:500px'>
+                <div class="overflow-scroll"  style='min-height: 500px; max-height: 500px; height:500px'>
                     <div id='tabel-container'>
 
                     </div>
