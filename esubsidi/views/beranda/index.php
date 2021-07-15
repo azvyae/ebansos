@@ -7,8 +7,6 @@ use Esubsidi\core\Flasher;
     <div class="row d-block justify-content-center">
         <div class="col-sm-6 mx-auto position-relative">
             <h1 class="display-5 text-center fw-bold">Data Penerima Subsidi</h1>
-        </div>
-        <div class="col-sm-6 mx-auto position-relative">
             <p class="fs-5 text-center">Masukkan NIK dan tanggal lahir anda, lalu tekan tombol konfirmasi untuk mengetahui apakah warga tersebut sudah terdaftar.</p>
         </div>
         <div class="col-sm-6 mx-auto position-relative"><?php Flasher::flash(); ?></div>

@@ -73,11 +73,11 @@ $penduduk = $data['penduduk'];
 
                     <div class="col-6">
                         <label for="rt" class="form-label fw-bold">RT</label>
-                        <input required class="form-control input-groupinput-group-addon" id="rt" name="rt" <?= $data['disabled'] ?> autocomplete="off" placeholder="RT" value='<?= $penduduk['rt'] ?>' type="number" oninput="this.value=this.value.slice(0,this.maxLength)" maxlength="3" min="1" />
+                        <input required class="form-control input-groupinput-group-addon" id="rt" name="rt" <?= $data['disabledRT'] ?> autocomplete="off" placeholder="RT" value='<?= $penduduk['rt'] ?>' type="number" oninput="this.value=this.value.slice(0,this.maxLength)" maxlength="3" min="1" />
                     </div>
                     <div class="col-6">
                         <label for="rw" class="form-label fw-bold">RW</label>
-                        <input required class="form-control input-groupinput-group-addon" value='<?= $penduduk['rw'] ?>' id="rw" name="rw" <?= $data['disabled'] ?> autocomplete="off" placeholder="RW" type="number" oninput="this.value=this.value.slice(0,this.maxLength)" maxlength="3" min="1" />
+                        <input required class="form-control input-groupinput-group-addon" value='<?= $penduduk['rw'] ?>' id="rw" name="rw" <?= $data['disabledRW'] ?> autocomplete="off" placeholder="RW" type="number" oninput="this.value=this.value.slice(0,this.maxLength)" maxlength="3" min="1" />
                     </div>
                     <div class="col-lg-6 ">
                         <label for="pekerjaan" class="form-label fw-bold">Pekerjaan</label>

@@ -10,7 +10,7 @@
 
                         <div class="accordion-item overflow-auto">
                             <h2 class="accordion-header overflow-auto" id="flush-heading<?= $i ?>">
-                                <button class="accordion-button collapsed bg-light overflow-hidden" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?= $i ?>" aria-expanded="false" aria-controls="flush-collapseOne">
+                                <button class="accordion-button collapsed bg-light overflow-auto" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?= $i ?>" aria-expanded="false" aria-controls="flush-collapseOne">
                                     <span class='badge bg-secondary me-3'><?= $r['timestamp'] ?? '' ?></span><?= $r['userId'] . ' ' . $r['aksi'] ?>
                                 </button>
                             </h2>

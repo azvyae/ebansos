@@ -26,7 +26,7 @@ class Controller
         $data['datetime'] = date('Y-m-d H:i:s');
         $data['aksi'] = $aksi;
         $data['nikDipengaruhi'] = $nikDipengaruhi;
-        if ($this->model('RiwayatModel')->hitungRiwayat() >= 100) {
+        if ($this->model('RiwayatModel')->hitungRiwayat() >= 500) {
             $this->model('RiwayatModel')->hapusRiwayatTerakhir();
         }
         $this->model('RiwayatModel')->tambahRiwayat($data);

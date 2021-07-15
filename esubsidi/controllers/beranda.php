@@ -75,6 +75,7 @@ class BerandaAuth extends Beranda
     {
         $data['judul'] = $this->judul;
         $data['navActive'] = 'beranda';
+        
         $data['distrik'] = '';
         $data['lebar-cari'] = 'col-lg-3';
         $data['user'] = $_SESSION['user'];
@@ -82,7 +83,7 @@ class BerandaAuth extends Beranda
         $this->view('templates/header', $data);
         if ($data['user']['tipeAkun'] == 1) {
             // When RT officer login
-            $this->view('templates/navPengguna');
+            $this->view('templates/navPengguna', $data);
             $data['lebar-cari'] = 'col-lg-7';
             $data['distrik'] = 'RW 0' . $data['user']['rw'] . ' RT 0' . $data['user']['rt'];
             $this->view('beranda/indexofficer', $data);
@@ -92,7 +93,7 @@ class BerandaAuth extends Beranda
             // When RW officer login
             $data['lebar-cari'] = 'col-lg-5';
             $data['distrik'] = 'RW 0' . $data['user']['rw'];
-            $this->view('templates/navPengguna');
+            $this->view('templates/navPengguna', $data);
             $this->view('beranda/indexofficer', $data);
             $this->view('beranda/filters/filterRW', $data);
             $this->view('beranda/tabel', $data);
@@ -113,10 +114,10 @@ class BerandaAuth extends Beranda
                 $data = array_merge($data, $_SESSION['input']);
                 unset($_SESSION['input']);
             }
-            $this->view('templates/navPengguna');
+            $this->view('templates/navPengguna', $data);
             $this->view('beranda/indexspecial', $data);
         } else {
-            $this->view('templates/navPengguna');
+            $this->view('templates/navPengguna', $data);
             $this->view('beranda/index', $data);
         }
         $this->view('templates/footer');

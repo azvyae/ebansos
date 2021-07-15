@@ -16,21 +16,21 @@ class TambahPendudukAuth extends TambahPenduduk
     public function index($hashId = '')
     {
         $data['judul'] = 'Tambah Data Penerima';
-        $data['disabled'] = $data['rwVal'] = $data['rtVal'] = '';
+        $data['disabledRT'] = $data['disabledRW'] = $data['rwVal'] = $data['rtVal'] = '';
         $data['user'] = $_SESSION['user'];
         $this->view('templates/header', $data);
 
         if ($data['user']['tipeAkun'] == 1) {
 
             // if RT officer logged in
-            $data['disabled'] = 'disabled';
+            $data['disabledRT'] = $data['disabledRW'] = 'disabled';
             $data['rwVal'] = $data['user']['rw'];
             $data['rtVal'] = $data['user']['rt'];
             $this->view('templates/navPengguna');
         } else if ($data['user']['tipeAkun'] == 2) {
 
             // When RW officer logged in
-            $data['disabled'] = 'disabled';
+            $data['disabledRW'] = 'disabled';
             $data['rwVal'] = $data['user']['rw'];
             $this->view('templates/navPengguna');
         } else if ($data['user']['tipeAkun'] == 3 || $data['user']['tipeAkun'] == 5) {

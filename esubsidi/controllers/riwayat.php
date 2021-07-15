@@ -23,7 +23,7 @@ class RiwayatAuth extends Riwayat
             $data['riwayat'] = $this->model('RiwayatModel')->getRiwayat(5);
             $data['riwayat'] = $this->translateTime($data['riwayat']);
 
-            $data['riwayatFull'] = $this->model('RiwayatModel')->getRiwayat(100);
+            $data['riwayatFull'] = $this->model('RiwayatModel')->getRiwayat(500);
             $data['riwayatFull'] = $this->translateTime($data['riwayatFull']);
             $this->view('templates/header', $data);
             $this->view('templates/navAdmin', $data);

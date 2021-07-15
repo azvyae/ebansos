@@ -17,7 +17,7 @@ class UbahPendudukAuth extends UbahPenduduk
     {
         $data['judul'] = 'Detail';
         $data['hashId'] = $hashId;
-        $data['disabled'] = '';
+        $data['disabledRT'] = $data['disabledRW'] = '';
         $data['penduduk'] = $this->model('PendudukModel')->getPenduduk($data);
 
         $this->view('templates/header', $data);
@@ -32,7 +32,7 @@ class UbahPendudukAuth extends UbahPenduduk
             if ($data['user']['tipeAkun'] == 1) {
                 // if RT officer logged in
                 if ($data['penduduk']['rw'] == $data['user']['rw'] && $data['penduduk']['rt'] == $data['user']['rt']) {
-                    $data['disabled'] = 'disabled';
+                    $data['disabledRT'] = $data['disabledRW'] = 'disabled';
                     $this->view('templates/navPengguna');
                 } else {
                     header('Location: ' . BASEURL);
@@ -40,7 +40,7 @@ class UbahPendudukAuth extends UbahPenduduk
             } else if ($data['user']['tipeAkun'] == 2) {
                 // When RW officer logged in
                 if ($data['penduduk']['rw'] == $data['user']['rw']) {
-                    $data['disabled'] = 'disabled';
+                    $data['disabledRW'] = 'disabled';
                     $this->view('templates/navPengguna');
                 } else {
                     header('Location: ' . BASEURL);

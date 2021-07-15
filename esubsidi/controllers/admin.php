@@ -32,10 +32,10 @@ class AdminAuth extends Admin
             $this->view('templates/navAdmin', $data);
             $this->view('admin/index', $data);
             $this->view('admin/tabel', $data);
+            $this->view('templates/footer', $data);
         } else {
-            header('Location: ' . BASEURL);
+            $this->handlePrivilege();
         }
-        $this->view('templates/footer', $data);
     }
 
     public function updateStatusRegistrasi()
