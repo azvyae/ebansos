@@ -23,8 +23,8 @@
 
 </div>
 </div>
-<div class="row overflow-scroll">
-    <div id='tabel-container'>
+<div class="row overflow-auto">
+    <div id='tabel-container' class='mt-3 w-100'>
 
     </div>
     <span id='message'></span>

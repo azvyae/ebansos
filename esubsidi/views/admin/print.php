@@ -1,4 +1,4 @@
-<div id='wadahTabel' style='width: 50%;' class="mt-5 container">
+<div id='wadahTabel' style='width: 50%;' class="container position-relative">
     <h1 id='cetakTabel' class='fs-5'>Cetak Tabel Pengguna</h1>
     <p class='fs-6'>Petugas :</p>
     <table class="table table-striped table-bordered table-sm">

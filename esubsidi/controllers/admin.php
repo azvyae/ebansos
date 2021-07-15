@@ -19,6 +19,7 @@ class AdminAuth extends Admin
         $data['user'] = $_SESSION['user'];
         if ($data['user']['tipeAkun'] == 5) {
             $data['judul'] = 'Administrasi';
+            $data['navActive'] = 'administrasi';
             $data['statusRegister'] = $this->model('AdministrasiModel')->getStatusRegister()['registrasi'];
             if ($data['statusRegister'] == 'true') {
                 $data['checked'] = 'checked';

@@ -22,16 +22,18 @@ $(function() {
             })
     });
 
-    $('#password, #passwordVerify').on('keyup', function() {
-        if ($('#password').val().length >= 8) {
-            if ($('#password').val() == $('#passwordVerify').val()) {
-                $('#message').html('Password Sama!').css('color', 'green');
+    $('#passwordVerify').val(function () {
+        $('#passwordVerify').on('blur', function () {
+            if ($('#password').val().length >= 8) {
+                if ($('#password').val() == $('#passwordVerify').val()) {
+                    $('#message').html('Password Sama!').css('color', 'green');
+                } else {
+                    $('#message').html('Password Berbeda!').css('color', 'red');
+                }
             } else {
-                $('#message').html('Password Berbeda!').css('color', 'red');
+                $('#message').html('Minimal 8 karakter').css('color', 'red');
             }
-        } else {
-            $('#message').html('Minimal 8 karakter').css('color', 'red');
-        }
-    });
+        });
+    })
 
 })

@@ -20,4 +20,5 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 
-<body class="d-flex flex-column bd-highlight h-100">
+<body class="d-flex flex-column bd-highlight h-100 w-100">
+<div id="particles-js"></div>

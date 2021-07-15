@@ -45,10 +45,10 @@ function tampilkanTabelUser(q = '', tipeAkunParams = null, halaman = 1, init = 0
     })
         .done(function (data) {
             if (data.length > 0) {
-                top = `<table class='table table-striped overflow-auto'>
+                top = `<table class='table table-striped table-bordered overflow-auto'>
                 <thead>
                     <tr>
-                        <th scope='col' style='min-width:2.68%; max-width:2.68%; width:2.68%;'><input class='form-check-input pilih-semua usercheckbox' type='checkbox'></th>
+                        <th class='text-center' scope='col' style='min-width:2.68%; max-width:2.68%; width:2.68%;'><input class='form-check-input pilih-semua usercheckbox' type='checkbox'></th>
                         <th scope='col' style='min-width:18%; max-width:18%; width:18%;'>User ID</th>
                         <th scope='col' style='min-width:30%; max-width:30%; width:30%;'>Nama</th>
                         <th scope='col' style='min-width:39.82%; max-width:39.82%; width:39.82%;'>Jenis Akun</th>
@@ -86,7 +86,7 @@ function tampilkanTabelUser(q = '', tipeAkunParams = null, halaman = 1, init = 0
                             break;
                     }
                     mid += `<tr class='align-middle'>
-                            <th scope='row'><input class='form-check-input tabel-check usercheckbox' type='checkbox' value='` + data.userId + `' name='user[]'></th>
+                            <th class='text-center' scope='row'><input class='form-check-input tabel-check usercheckbox' type='checkbox' value='` + data.userId + `' name='user[]'></th>
                             <td>` + data.userId + `</td>
                             <td>` + data.nama + `</td>
                             <td>` + tipeAkunTampilan + `</td>

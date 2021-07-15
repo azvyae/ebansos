@@ -6,23 +6,22 @@ use Esubsidi\core\Flasher;
 
 <script type="text/javascript" src="<?= BASEURL ?>/js/admin.js" defer>
 </script>
-
 <div class="container-fluid">
     <div class="row">
-        <div class="border border-3 p-5 mb-1 col-lg-8 col mx-auto mt-5 bg-light rounded-32 ">
-            <div class="container py-2">
+        <div class="col-lg-8 mx-auto">
+            <div class="container">
                 <?php Flasher::flash(); ?>
                 <div class="container px-4 py-5" id="hanging-icons">
-                    <h1 class="display-5 text-center fw-bold my-3">Administrasi Petugas</h1>
+                    <h1 class="display-5 text-center fw-bold mb-3 position-relative">Administrasi Petugas</h1>
                     <hr>
-                    <div class="row ms-2 form-check form-switch">
+                    <div class="row ms-2 form-check form-switch position-relative">
                         <form action="<?= BASEURL ?>/admin/updateStatusRegistrasi" id='updateStatusRegistrasi' method="post">
                             <input class="form-check-input" name='statusRegistrasi' <?= $data['checked'] ?> value='true' type="checkbox" id="aktifkanRegistrasi">
                             <label class="form-check-label" for="aktifkanRegistrasi">Registrasi Petugas Umum</label>
                         </form>
 
                     </div>
-                    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3 position-relative">
                         <div class="col d-flex align-items-start">
                             <div class="icon-square bg-light text-dark flex-shrink-0 rounded mx-3">
                                 <i class="bi bi-file-earmark-person fs-2 mx-1 text-info"></i>

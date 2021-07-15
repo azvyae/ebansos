@@ -7,7 +7,8 @@ class Register extends Controller
 {
     public function index()
     {
-        $data['judul'] = 'Login';
+        $data['judul'] = 'Registrasi';
+        $data['navActive'] = 'register';
         $data['statusRegistrasi'] = $this->model('AdministrasiModel')->getStatusRegister()['registrasi'];
         if ($data['statusRegistrasi'] == 'true') {
             $this->view('templates/header', $data);

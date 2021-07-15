@@ -11,4 +11,4 @@ define('DB_NAME', 'esubsidi_dummy');
 define('KECAMATAN', 'Sukasari');
 define('KELURAHAN', 'Sarijadi');
 // Version
-define('VERSION', '1.0');
+define('VERSION', '1.1');

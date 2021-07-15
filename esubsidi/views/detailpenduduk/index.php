@@ -4,10 +4,10 @@ $penduduk = $data['penduduk'];
 
 <div class="container">
     <div class="row">
-        <div class="border border-3 p-5 mb-5 col-lg-8 col mx-auto mt-5 bg-light rounded-32 ">
-            <div class="container py-2 overflow-auto">
-                <h1 class="display-5 text-center fw-bold my-3 ">Data Penerima Subsidi</h1>
-                <table class="table table-hover ">
+        <div class="col-lg-8 col mx-auto position-relative">
+            <div class="container overflow-auto">
+                <h1 class="display-5 text-center fw-bold mb-3 ">Data Penerima Subsidi</h1>
+                <table class="table table-hover table-bordered overflow-auto">
                     <thead>
                         <tr>
                             <th colspan="2" scope="col">Berikut merupakan data penerima subsidi</th>
@@ -23,7 +23,7 @@ $penduduk = $data['penduduk'];
                             <td><?= $penduduk['nama'] ?></td>
                         </tr>
                         <tr>
-                            <th scope="row">Tempat Lahir / Tanggal Lahir</th>
+                            <th scope="row">TTL</th>
                             <td><?= $penduduk['tempatLahir'] ?> / <?= $penduduk['tanggalLahir'] ?></td>
                         </tr>
                         <tr>
@@ -31,7 +31,7 @@ $penduduk = $data['penduduk'];
                             <td><?= $penduduk['jenisKelamin'] ?></td>
                         </tr>
                         <tr>
-                            <th scope="row">Alamat Rumah</th>
+                            <th scope="row">Alamat Tinggal</th>
                             <td><?= $penduduk['alamatRumah'] ?></td>
                         </tr>
                         <tr>
@@ -60,11 +60,11 @@ $penduduk = $data['penduduk'];
                         </tr>
                         <tr>
                             <th scope="row">Terakhir Menerima Subsidi</th>
-                            <td><span class="badge bg-secondary"><?= $penduduk['tanggalMenerima'] ?></span></td>
+                            <td><?= $penduduk['tanggalMenerima'] ?></td>
                         </tr>
                         <tr>
                             <th scope="row">Jenis Subsidi</th>
-                            <td><span class="badge bg-secondary"><?= $penduduk['jenisSubsidi'] ?></span></td>
+                            <td><?= $penduduk['jenisSubsidi'] ?></td>
                         </tr>
                     </tbody>
                 </table>

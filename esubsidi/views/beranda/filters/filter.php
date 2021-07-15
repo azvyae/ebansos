@@ -6,11 +6,11 @@
 
 <div class="row justify-content-between">
     <div class="col-lg-2 mb-2">
-        <select hidden class="form-select filter mb-2" id="rw" name='rw'>
+        <select hidden class="form-select filter" id="rw" name='rw'>
         </select>
     </div>
-    <div id="filterRT" class="col-lg-2 mb-2">
-        <select hidden class="form-select filter mb-2" id="rt" name='rt'>
+    <div id="filterRT" class="col-lg-2 d-none mb-2">
+        <select hidden class="form-select filter " id="rt" name='rt'>
         </select>
     </div>
     

@@ -16,6 +16,7 @@ class RiwayatAuth extends Riwayat
     public function index()
     {
         $data['user'] = $_SESSION['user'];
+        $data['navActive'] = 'riwayat';
         if ($data['user']['tipeAkun'] == 3 || $data['user']['tipeAkun'] == 5) {
             $data['judul'] = 'Riwayat Aktivitas';
 

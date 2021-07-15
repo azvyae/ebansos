@@ -1,8 +1,12 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="border border-3 p-5 mb-5 col-lg-8 col mx-auto mt-5 bg-light rounded-32 ">
-            <form action="<?= BASEURL ?>/admin/hapus" method="post">
-                <div class="row justify-content-between">
+
+        <div class="col-lg-8 mx-auto">
+            <div class="mb-3 text-center">
+                <h2 class="display-5 d-inline position-relative">Tabel Pengguna</h2>
+            </div>
+            <form action="<?= BASEURL ?>/admin/hapus" method="post" class="position-relative">
+                <div class="row justify-content-between ">
                     <div class="col-lg-3 mb-2">
                         <select class="form-select filter mb-2" id="tipeAkun" name='tipeAkun'>
                             <option selected value=''>Semua Akun</option>

@@ -45,12 +45,14 @@ function siapkanFilterRT(rw = '') {
                         bot += `<option value="` + data['rt'] + `">RT ` + data['rt'] + `</option>`
                     })
                     $('#rt').prop('hidden', false);
+                    $('#filterRT').removeClass('d-none');
                 } else {
-
+                    $('#filterRT').addClass('d-none');
                     $('#rt').prop('hidden', true);
                 }
                 $('#rt').prepend(top + bot);
             } else {
+                $('#filterRT').addClass('d-none');
                 $('#rt').prop('hidden', true);
             }
             periksaChecklist();
@@ -108,20 +110,20 @@ function tampilkanTabelPenduduk(q = '', rw = null, rt = null, halaman = 1, init 
         })
         .done(function(data) {
             if (data.length > 0) {
-                top = `<table class='table table-striped overflow-auto'>
+                top = `<table class='table table-striped table-bordered table-hover overflow-auto'>
                         <thead>
                             <tr>
-                                <th scope='col' style='min-width:2.68%; max-width:2.68%; width:2.68%;'><input class='form-check-input pilih-semua' type='checkbox'></th>
-                                <th scope='col' style='min-width:15%; max-width:15%; width:15%;'>NIK</th>
-                                <th scope='col' style='min-width:21%; max-width:21%; width:21%;'>Nama</th>
-                                <th scope='col' style='min-width:51.82%; max-width:51.82%; width:51.82%;'>Alamat</th>
-                                <th scope='col' style='min-width:9.5%; max-width:9.5%; width:9.5%;'>Opsi</th>
+                                <th class='text-center' scope='col' style='min-width:2.68%; max-width:2.68%; width:2.68%;'><input class='form-check-input pilih-semua' type='checkbox'></th>
+                                <th class='text-center' scope='col' style='min-width:15%; max-width:15%; width:15%;'>NIK</th>
+                                <th class='text-center' scope='col' style='min-width:21%; max-width:21%; width:21%;'>Nama</th>
+                                <th class='text-center' scope='col' style='min-width:51.82%; max-width:51.82%; width:51.82%;'>Alamat</th>
+                                <th class='text-center' scope='col' style='min-width:9.5%; max-width:9.5%; width:9.5%;'>Opsi</th>
                             </tr>
                         </thead>
                         <tbody>`;
                 $.each(data, function(i, data) {
                     mid += `<tr class='align-middle'>
-                            <th scope='row'><input class='form-check-input tabel-check' type='checkbox' value='` + data.hashId + `' name='penduduk[]'></th>
+                            <th class='text-center' scope='row'><input class='form-check-input tabel-check' type='checkbox' value='` + data.hashId + `' name='penduduk[]'></th>
                             <td>` + data.nik + `</td>
                             <td>` + data.nama + `</td>
                             <td>` + data.alamatRumah + `</td>

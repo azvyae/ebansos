@@ -8,6 +8,7 @@ class Login extends Controller
     public function index()
     {
         $data['judul'] = 'Login';
+        $data['navActive'] = 'login';
         $data['uname'] = '';
         $data['statusRegistrasi'] = $this->model('AdministrasiModel')->getStatusRegister()['registrasi'];
         if (isset($_SESSION['input']['userId'])) {

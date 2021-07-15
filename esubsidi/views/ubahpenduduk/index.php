@@ -13,9 +13,10 @@ $penduduk = $data['penduduk'];
 </script>
 <div class="container">
     <div class="row">
-        <div class="border border-3 p-5 mb-5 col-lg-8 col mx-auto mt-5 bg-light rounded-32 ">
-            <div class="container py-2">
-                <h1 class="display-5 text-center fw-bold my-3 ">Ubah Data Penerima Subsidi</h1>
+        <div class="col-lg-8 col mx-auto position-relative">
+            <div class="container">
+                <h1 class="display-5 text-center fw-bold mb-3 ">Ubah Data Penerima Subsidi</h1>
+                <hr>
                 <p class="text-center">Isi identitas calon penerima subsidi berdasarkan <b><u>data tempat tinggal saat ini.</u></b> Tidak boleh ada kolom yang dikosongkan</p>
                 <form action="<?= BASEURL ?>/ubahpenduduk/ubahdata/<?= $data['hashId'] ?>" method="POST" class="row g-3 mx-auto">
                     <div class="col-lg-12 d-block">

@@ -9,6 +9,7 @@ class Beranda extends Controller
     public function index()
     {
         $data['judul'] = $this->judul;
+        $data['navActive'] = 'beranda';
         $data['nikVal'] =  $data['hhVal'] = $data['bbVal'] = $data['ttttVal'] = '';
         $data['statusRegistrasi'] = $this->model('AdministrasiModel')->getStatusRegister()['registrasi'];
         if (isset($_SESSION['input'])) {
@@ -73,6 +74,7 @@ class BerandaAuth extends Beranda
     public function index()
     {
         $data['judul'] = $this->judul;
+        $data['navActive'] = 'beranda';
         $data['distrik'] = '';
         $data['lebar-cari'] = 'col-lg-3';
         $data['user'] = $_SESSION['user'];
