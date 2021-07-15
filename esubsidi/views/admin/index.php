@@ -15,7 +15,7 @@ use Esubsidi\core\Flasher;
                     <h1 class="display-5 text-center fw-bold mb-3 position-relative">Administrasi Petugas</h1>
                     <hr>
                     <div class="row ms-2 form-check form-switch position-relative">
-                        <form action="<?= BASEURL ?>/admin/updateStatusRegistrasi" id='updateStatusRegistrasi' method="post">
+                        <form action="<?= BASEURL ?>/admin/updateStatusRegistrasi" class='position-relative' id='updateStatusRegistrasi' method="post">
                             <input class="form-check-input" name='statusRegistrasi' <?= $data['checked'] ?> value='true' type="checkbox" id="aktifkanRegistrasi">
                             <label class="form-check-label" for="aktifkanRegistrasi">Registrasi Petugas Umum</label>
                         </form>
