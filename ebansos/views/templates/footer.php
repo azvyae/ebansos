@@ -1,8 +1,11 @@
 </main>
 <footer class="footer mt-auto py-3 bg-white fixed-bottom">
-    <div class=" d-flex justify-content-between ">
-        <span class="text-muted ms-3">© <?= date("Y") ?> V<?= VERSION ?></span>
-        <span class="text-muted me-3">Made With <i class="bi bi-heart-fill"></i> By <a target="_blank" href="https://twitter.com/erstevn" class="text-decoration-none text-muted">Erstevn</a>
+    <div class=" d-flex ">
+        <span class="text-muted mx-2">
+            <span class="text-muted ">© <?= date("Y") ?> V<?= VERSION ?></span> | Vector by
+            <a href="https://www.freepik.com/vectors/people" class="text-muted text-decoration-none">Freepik</a> | UI mockup by
+            <a target="_blank" href="https://instagram.com/taufanmuham" class="text-decoration-none text-muted">Taifun</a> | Made With <i class="bi bi-heart-fill"></i> By
+            <a target="_blank" href="https://twitter.com/erstevn" class="text-decoration-none text-muted">Erstevn</a></span>
     </div>
 </footer>
 

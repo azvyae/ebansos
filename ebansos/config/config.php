@@ -2,6 +2,7 @@
 
 // BASE
 define('BASEURL', 'https://ebansos.dev');
+// define('BASEURL', 'https://localhost/ebansos/public'); USED FOR LOCAL TEST ONLY
 define('APPNAME', 'Baso Metal');
 define('LOGOURL', 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Lambang_Kota_Bandung.svg');
 // DB
@@ -13,4 +14,4 @@ define('DB_NAME', 'ebansos_dummy');
 define('KECAMATAN', 'Sukasari');
 define('KELURAHAN', 'Sarijadi');
 // Version
-define('VERSION', '1.1');
+define('VERSION', '1.2');

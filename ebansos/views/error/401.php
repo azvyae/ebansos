@@ -9,9 +9,8 @@
             </p>
         </main>
 
-        <footer class="mt-auto text-white-50 position-relative">
-            <p>Copyright <?= date("Y") ?> | Made With <i class="bi bi-heart-fill"></i> by
-                <a target="_blank" href="https://twitter.com/erstevn" class="text-white">Erstevn</a>
+        <footer class="mt-auto text-white position-relative">
+            <p>Copyright <?= date("Y") ?> | <span class="text-white me-3"><a href="https://www.freepik.com/vectors/people" class="text-white text-decoration-none">Vector by Freepik</a> | UI mockup by <a target="_blank" href="https://instagram.com/taufanmuham" class="text-decoration-none text-white">Taifun</a> | Made With <i class="bi bi-heart-fill"></i> By <a target="_blank" href="https://twitter.com/erstevn" class="text-decoration-none text-white">Erstevn</a></span>
             </p>
         </footer>
     </div>
