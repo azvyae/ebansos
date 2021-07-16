@@ -1,4 +1,4 @@
-<nav class="w-100 px-3 mb-4 fixed-top border-bottom navbar navbar-expand-md navbar-light bg-light">
+<nav class="w-100 px-3 mb-4 fixed-top shadow-sm navbar navbar-expand-md navbar-light bg-light">
     <a class="navbar-brand my-2 fw-bold" href="<?= BASEURL ?>">
     <img src="<?= LOGOURL ?>" alt="logo" height="32">
         <?= APPNAME ?> <?= KELURAHAN ?>
