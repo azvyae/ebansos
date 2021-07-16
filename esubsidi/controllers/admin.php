@@ -119,6 +119,7 @@ class AdminAuth extends Admin
         if (!empty($_POST) && ($data['user']['tipeAkun'] == 5)) {
             $data['validity'] = $_SESSION['adminGenerator'] = hash('sha256', time());
             $data['jumlahRW'] = (int)$_POST['jumlahRW'];
+            $arrayData = [];
             for ($i = 1; $i <= $data['jumlahRW']; $i++) {
                 $val = $i;
                 if ($val < 10) {
@@ -132,8 +133,6 @@ class AdminAuth extends Admin
                 $data['rt'] = null;
                 if ($this->model('UserModel')->cekUserRW($data) == 0) {
                     $arrayData[$i - 1] = $this->tambahkanUser($data['nama'], $data['userId'], $data['password'], $data['tipeAkun'], $data['rw'], $data['rt']);
-                } else {
-                    $arrayData = [];
                 }
             }
             if (!empty($arrayData)) {
@@ -158,6 +157,7 @@ class AdminAuth extends Admin
             if ($data['nomorRW'] < 10) {
                 $data['nomorRW'] = '0'.$data['nomorRW'];
             }
+            $arrayData = [];
             for ($i = 1; $i <= $data['jumlahRT']; $i++) {
                 $val = $i;
                 if ($val < 10) {
@@ -171,8 +171,6 @@ class AdminAuth extends Admin
                 $data['rt'] = $val;
                 if ($this->model('UserModel')->cekUserRT($data) == 0) {
                     $arrayData[$i - 1] = $this->tambahkanUser($data['nama'], $data['userId'], $data['password'], $data['tipeAkun'], $data['rw'], $data['rt']);
-                } else {
-                    $arrayData = [];
                 }
             }
             if (!empty($arrayData)) {
@@ -201,15 +199,14 @@ class AdminAuth extends Admin
             $data['rw'] = null;
             $data['rt'] = null;
             $data['additionalMessage'] = '';
+            $arrayData = [];
             if ($this->model('UserModel')->getUserId($data['userId']) == 0) {
                 if ($this->model('UserModel')->cekUserSubsidi($data) < 3) {
                     $arrayData[0] = $this->tambahkanUser($data['nama'], $data['userId'], $data['password'], $data['tipeAkun'], $data['rw'], $data['rt']);
                 } else {
                     $data['additionalMessage'] = ' karena jumlah petugas/acara subsidi sudah lebih dari 3, silakan hapus terlebih dahulu';
                 }
-            } else {
-                $arrayData = [];
-            }
+            } 
             if (!empty($arrayData)) {
                 $this->registerRiwayat($data['user'], 'Membuat Event Subsidi', 'Kegiatan ' . $data['nama']);
                 Flasher::setFlash('Anda berhasil', 'menambahkan ' . count($arrayData) . ' acara ' . $data['nama'], 'success');
