@@ -12,7 +12,7 @@ use Ebansos\core\Flasher;
         <div class="col-sm-6 mx-auto position-relative"><?php Flasher::flash(); ?></div>
     </div>
     <div class="row px-5">
-        <form action="<?= BASEURL ?>/beranda/cekdata" method="POST" class="col col-md-6 mx-auto">
+        <form action="<?= BASEURL ?>/beranda/cekdata" method="POST" class="col-md-6 mx-auto">
             <div class="my-3 row">
                 <div class="col-sm-12 mb-3">
                     <label for="nik" class="form-label ms-2 fw-bold position-relative">Nomor Induk Kependudukan</label>
