@@ -3,10 +3,10 @@ $(function() {
         $('form').attr('action', 'beranda/cekdata')
     });
 
-    $("#tambahSubsidi").on("click", function() {
-        $('form').attr('action', 'beranda/tambahsubsidi')
+    $("#tambahBansos").on("click", function() {
+        $('form').attr('action', 'beranda/tambahbansos')
         if ($('#nik').val() && $('#hari').val() && $('#bulan').val() && $('#tahun').val()) {
-            confirm('Validasi penerimaan subsidi untuk peserta subsidi tersebut?')
+            confirm('Validasi penerimaan bansos untuk peserta bansos tersebut?')
         }
     });
 

@@ -68,10 +68,10 @@ function tampilkanTabelUser(q = '', tipeAkunParams = null, halaman = 1, init = 0
                             tipeAkunTampilan = 'Petugas RW';
                             break;
                         case '3':
-                            tipeAkunTampilan = 'Petugas Kelurahan/Khusus';
+                            tipeAkunTampilan = 'Petugas Umum';
                             break;
                         case '4':
-                            tipeAkunTampilan = 'Petugas Pemrosesan Subsidi';
+                            tipeAkunTampilan = 'Petugas Pemrosesan Bansos';
                             break;
                         default:
                             tipeAkunTampilan = 'Pendaftar';
@@ -218,14 +218,14 @@ function tampilkanFormPetugasRW() {
         `);
 }
 
-function tampilkanFormPetugasSubsidi() {
-    $('#judulModal').html('Tambahkan Petugas Subsidi');
-    $('.modal-content form').attr('action', 'admin/generatesubsidi')
+function tampilkanFormPetugasBansos() {
+    $('#judulModal').html('Tambahkan Petugas Bansos');
+    $('.modal-content form').attr('action', 'admin/generatebansos')
     $('#isianInput').html(`
         <div class="my-3 row">
             <div class="col-sm-12 mb-3">
-                <label for="namaSubsidi" class="form-label fw-bold">Nama Subsidi</label>
-                <input type="text" autocomplete="off" class="form-control" id="namaSubsidi" name='namaSubsidi' placeholder="Subsidi ABC" required>
+                <label for="namaBansos" class="form-label fw-bold">Nama Bansos</label>
+                <input type="text" autocomplete="off" class="form-control" id="namaBansos" name='namaBansos' placeholder="Bansos ABC" required>
             </div>
         </div>`);
 
@@ -246,8 +246,8 @@ $(function () {
         tampilkanFormPetugasRT();
     })
 
-    $('.generateSubsidi').on('click', function () {
-        tampilkanFormPetugasSubsidi();
+    $('.generateBansos').on('click', function () {
+        tampilkanFormPetugasBansos();
     })
 
 
