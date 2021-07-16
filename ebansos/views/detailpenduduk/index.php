@@ -6,11 +6,11 @@ $penduduk = $data['penduduk'];
     <div class="row">
         <div class="col-lg-8 col mx-auto position-relative">
             <div class="container overflow-auto">
-                <h1 class="display-5 text-center fw-bold mb-3 ">Data Penerima Subsidi</h1>
+                <h1 class="display-5 text-center fw-bold mb-3 ">Data Penerima Bansos</h1>
                 <table class="table table-hover table-bordered overflow-auto">
                     <thead>
                         <tr>
-                            <th colspan="2" scope="col">Berikut merupakan data penerima subsidi</th>
+                            <th colspan="2" scope="col">Berikut merupakan data penerima bansos</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,12 +59,12 @@ $penduduk = $data['penduduk'];
                             <td><?= $penduduk['pekerjaan'] ?></td>
                         </tr>
                         <tr>
-                            <th scope="row">Terakhir Menerima Subsidi</th>
+                            <th scope="row">Terakhir Menerima Bansos</th>
                             <td><?= $penduduk['tanggalMenerima'] ?></td>
                         </tr>
                         <tr>
-                            <th scope="row">Jenis Subsidi</th>
-                            <td><?= $penduduk['jenisSubsidi'] ?></td>
+                            <th scope="row">Jenis Bansos</th>
+                            <td><?= $penduduk['jenisBansos'] ?></td>
                         </tr>
                     </tbody>
                 </table>

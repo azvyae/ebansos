@@ -14,7 +14,7 @@
                             <option value="1">Petugas RT</option>
                             <option value="2">Petugas RW</option>
                             <option value="3">Super Admin</option>
-                            <option value="4">Petugas Subsidi</option>
+                            <option value="4">Petugas Bansos</option>
                         </select>
                     </div>
                     <div class="col-lg-5 mb-2">

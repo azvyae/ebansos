@@ -1,5 +1,5 @@
 <?php 
-use Esubsidi\core\Database;
+use Ebansos\core\Database;
 
 class UserModel {
     private $db, $table;
@@ -38,7 +38,7 @@ class UserModel {
         return $this->db->rowCount();
     }
 
-    public function cekUserSubsidi()
+    public function cekUserBansos()
     {
         $query = "SELECT userId FROM {$this->table} WHERE tipeAkun = 4";
         $this->db->query($query);

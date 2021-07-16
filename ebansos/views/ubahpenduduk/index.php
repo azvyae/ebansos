@@ -1,6 +1,6 @@
 <?php
 
-use Esubsidi\core\Flasher;
+use Ebansos\core\Flasher;
 $penduduk = $data['penduduk'];
 
 ?>
