@@ -8,14 +8,14 @@ This project was initiated by Annisa and her friends, who are currently majoring
 
 Made by Azvya Erstevan I and UI Mockup by Muhammad Taufan Z.
 
-This project coincided with its release in mid-July with an application owned by the Ministry of Social Affairs. You can check it at [Cek Bansos Kemensos](https://cekbansos.kemensos.go.id/)
+This project coincided with its release in mid-July with an application owned by the Ministry of Social Affairs. You can check it at [Cek Bansos Kemensos](https://cekbansos.kemensos.go.id/).
 
 ## Features
 
 ### General Features
-- Crud
-- Login/Registration
-- Admin Rights Privileges (For example, RW 01 officers cannot view other RW residents data, even though if we input the resident detail URL manually)
+- CRUD,
+- Login/Registration,
+- Admin Rights Privileges (For example, RW 01 officers cannot view other RW residents data, even though if we input the resident detail URL manually),
 - History admin activity.
 
 ### Error Control & Privilege
@@ -31,29 +31,29 @@ This project coincided with its release in mid-July with an application owned by
 NIK : 1114966709060280
 Birthdate : 15 - 12 - 1971
 ```
-**Account types**
+**Account types.**
 
-_1. Village Officers (View user activity history, manage residents and officers data)_
+_1. Village Officers (View user activity history, manage residents and officers data)._
 ``` 
 Username : superadmin
 Password : 12345678
 ```
 
-_2. RW officer (Can only manage RW resident data)_
+_2. RW officer (Can only manage RW resident data)._
 ```
 Username : Sarijadi01
 Password : Maimunah@245
 ```
-_3. Social Assistance Officer (Input social assistance data)_
+_3. Social Assistance Officer (Input social assistance data)._
 ```
 Username : BansosTest
 Password : Fitriani@646
 ```
 ## Tech Used
 
-- HTML CSS JS
-- Jquery
-- PHP 8 Native
-- Bootstrap 5
-- Faker (create a readable password generator)
-- Particles JS (just for fun)
+- HTML CSS JS,
+- Jquery,
+- PHP 8 Native,
+- Bootstrap 5,
+- Faker (create a readable password generator),
+- Particles JS (just for fun).
