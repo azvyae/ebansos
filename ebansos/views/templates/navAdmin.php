@@ -10,7 +10,7 @@ use Ebansos\core\App;
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse overflow-hidden" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
             <li class="nav-item ms-1 me-3 my-auto text-center">
                 <span class="nav-link active p-3">Halo, <?= $_SESSION['user']['namaAkun'] ?> <i class="bi bi-emoji-smile"></i></span>
