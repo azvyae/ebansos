@@ -44,7 +44,14 @@ _2. RW officer (Can only manage RW resident data)._
 Username : Sarijadi01
 Password : Maimunah@245
 ```
-_3. Social Assistance Officer (Input social assistance data)._
+
+_3. RT officer (Can only manage RT resident data)._
+```
+Username : Sarijadi0101
+Password : Cinta@367
+```
+
+_4. Social Assistance Officer (Input social assistance data)._
 ```
 Username : BansosTest
 Password : Fitriani@646
