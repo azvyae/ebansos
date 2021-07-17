@@ -2,6 +2,12 @@
 
 **Ebansos** (Electronic Social Assistance) is a web application that provides citizen data management who will receive social assistance to avoid misdirection assistance from public service/government and this application already uses the MVC.
 
+Here are the links:
+
+- [E Bansos Application](https://ebansos.erstevn.com) 💙
+
+- [E Bansos for Testing](https://ebansostest.erstevn.com) 💚
+
 ## Preliminary
 
 This project was initiated by Annisa and her friends, who are currently majoring in State Development Administration, to examine the effectiveness of using information systems to implement subsidy distribution in the local district.
