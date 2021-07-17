@@ -3,7 +3,7 @@
 // BASE
 define('BASEURL', 'https://ebansos.dev');
 // define('BASEURL', 'https://localhost/ebansos/public'); USED FOR LOCAL TEST ONLY
-define('APPNAME', 'Baso Metal');
+define('APPNAME', 'Ebansos');
 define('LOGOURL', 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Lambang_Kota_Bandung.svg');
 // DB
 define('DB_HOST', 'localhost');

@@ -7,7 +7,7 @@ use Ebansos\core\Flasher;
         <div class="col-lg-6 mb-5">
             <div class="row d-block justify-content-center">
                 <div class="col-sm-12 mx-auto" style="max-width: 768px !important;">
-                    <h1 hidden class='hidden'>Baso Metal (Bantuan Sosial melalui Media Digital)</h1>
+                    <h1 hidden class='hidden'><?= APPNAME ?> (Bantuan Sosial melalui Media Digital)</h1>
                     <h2 class="display-5 position-relative text-center fw-bold">Data Penerima Bansos</h2>
                     <p class='fs-5 position-relative text-center my-3'>Masukkan NIK dan tanggal lahir anda, lalu tekan tombol konfirmasi untuk mengetahui apakah warga tersebut sudah terdaftar.</p>
                 </div>
@@ -45,9 +45,9 @@ use Ebansos\core\Flasher;
 
         <div class="col-lg-6">
             <div class="col-sm-12 mx-auto text-center" style="max-width: 768px">
-                <h2 class="display-5 position-relative fw-bold mb-5">Apa itu Baso Metal?</h2>
+                <h2 class="display-5 position-relative fw-bold mb-5">Apa itu <?= APPNAME ?>?</h2>
                 <img src="<?= BASEURL ?>/img/people.svg" class='my-3 position-relative w-75' alt="ilustrasi">
-                <p class="fs-5 position-relative"><strong>Baso Metal</strong> (Bantuan Sosial melalui Media Digital) merupakan aplikasi pendataan dan pencatatan bantuan sosial secara elektronik, efisien, transparan dan tepat sasaran.</p>
+                <p class="fs-5 position-relative"><strong><?= APPNAME ?></strong> (Bantuan Sosial melalui Media Digital) merupakan aplikasi pendataan dan pencatatan bantuan sosial secara elektronik, efisien, transparan dan tepat sasaran.</p>
             </div>
         </div>
     </div>
