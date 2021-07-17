@@ -5,11 +5,11 @@ use Ebansos\core\Flasher;
 
 <div class="container-fluid" style="max-width:1400px">
     <div class="row d-block justify-content-center">
-        <div class="col-sm-6 mx-auto position-relative">
+        <div class="col-sm-12 mx-auto position-relative">
             <h1 class="display-5 text-center fw-bold my-3">Input Penerimaan Bansos</h1>
             <p class="fs-5 text-center">Masukkan NIK dan tanggal lahir anda, lalu tekan tombol konfirmasi untuk mengetahui apakah warga tersebut sudah terdaftar. Lalu tekan tombol tambahkan bansos untuk memvalidasi penerimaan bansos.</p>
         </div>
-        <div class="col-sm-6 mx-auto position-relative"><?php Flasher::flash(); ?></div>
+        <div class="col-sm-8 mx-auto position-relative"><?php Flasher::flash(); ?></div>
     </div>
     <div class="row px-5">
         <form action="<?= BASEURL ?>/beranda/cekdata" class='col-md-6 mx-auto' method="POST">
