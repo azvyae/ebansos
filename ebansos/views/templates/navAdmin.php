@@ -39,9 +39,9 @@ use Ebansos\core\App;
                                                     } ?>" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <b class="bi bi-clock-history fw-bold fs-5"></b>
                 </a>
-                <ul class="dropdown-menu overflow-scroll dropdown-menu-end mw-75" aria-labelledby="navbarDropdown">
+                <ul class="dropdown-menu overflow-scroll dropdown-menu-end" style="min-width:25vw; max-width:100vw !important" aria-labelledby="navbarDropdown">
                     <?php foreach ($data['riwayat']  as $r) : ?>
-                        <li class="dropdown-item "><?= "{$r['userId']} {$r['aksi']}" ?><br><span style="font-size:0.8em"><?= $r['timestamp'] ?? '' ?></span></li>
+                        <li class="dropdown-item text-wrap"><?= "{$r['userId']} {$r['aksi']}" ?><br><span style="font-size:0.8em"><?= $r['timestamp'] ?? '' ?></span></li>
                     <?php endforeach ?>
                     <li>
 
