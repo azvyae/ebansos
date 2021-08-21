@@ -5,7 +5,7 @@
             <span class="text-muted ">© <?= date("Y") ?> V<?= VERSION ?></span> | Vector by
             <a href="https://www.freepik.com/vectors/people" class="text-muted text-decoration-none">Freepik</a> | UI mockup by
             <a target="_blank" href="https://instagram.com/taufanmuham" class="text-decoration-none text-muted">Taifun</a> | Made With <i class="bi bi-heart-fill"></i> By
-            <a target="_blank" href="https://twitter.com/erstevn" class="text-decoration-none text-muted">Erstevn</a></span>
+            <a target="_blank" href="https://instagram.com/erstevn" class="text-decoration-none text-muted">Erstevn</a></span>
     </div>
 </footer>
 
