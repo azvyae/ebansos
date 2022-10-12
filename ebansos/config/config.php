@@ -1,8 +1,8 @@
 <?php
 
 // BASE
-define('BASEURL', 'https://localhost/public');
-define('APPNAME', 'Ebansos');
+define('BASEURL', 'https://esubsidi.web.id');
+define('APPNAME', 'Esubsidi');
 define('LOGOURL', 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Lambang_Kota_Bandung.svg');
 // DB
 define('DB_HOST', 'localhost');
