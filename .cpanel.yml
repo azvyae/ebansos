@@ -1,9 +1,10 @@
 ---
 deployment:
   tasks:
-    - /bin/cp -R ebansos /home/esubsidi
-    - /bin/cp -R public/* /home/esubsidi/public_html
-    - /bin/cp -R vendor /home/esubsidi
-    - /bin/cp composer.json /home/esubsidi
-    - /bin/cp composer.lock /home/esubsidi
-    - /bin/cp LICENSE /home/esubsidi
+    - export REPO=/home/esubsidi/repositories/ebansos
+    - /bin/cp -R $REPO/ebansos /home/esubsidi
+    - /bin/cp -R $REPO/public/* /home/esubsidi/public_html
+    - /bin/cp -R $REPO/vendor /home/esubsidi
+    - /bin/cp $REPO/composer.json /home/esubsidi
+    - /bin/cp $REPO/composer.lock /home/esubsidi
+    - /bin/cp $REPO/LICENSE /home/esubsidi
